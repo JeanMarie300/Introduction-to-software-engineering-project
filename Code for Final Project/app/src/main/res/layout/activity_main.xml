@@ -23,8 +23,17 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPostalAddress"
-                android:text="Postal Code"
+                android:hint="Postal Code"
                 tools:text="postal code" />
+
+            <EditText
+                android:id="@+id/UserType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPostalAddress"
+                android:hint="User type"
+                tools:text="User Type" />
 
             <EditText
                 android:id="@+id/userProfile"
@@ -32,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="user"
+                android:hint="username"
                 tools:text="User profile" />
 
             <EditText
@@ -40,15 +49,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:hint="password"
                 android:inputType="textPassword"
-                android:text="Password"
                 tools:text="Password" />
 
             <Button
                 android:id="@+id/buttonFinish"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="buttonFinish"
+                android:onClick="OnFinish"
+                android:text="Finished"
                 tools:text="Finish" />
         </LinearLayout>
 
@@ -64,8 +74,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:hint="Last name"
                 android:inputType="textPersonName"
-                android:text="Name"
                 tools:text="Last name" />
 
             <EditText
@@ -73,9 +83,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Name"
+                android:hint="First Name"
                 android:inputType="textPersonName"
-                android:text="FirstName"
                 tools:text="First name" />
 
             <EditText
@@ -83,8 +92,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:hint="Birthday"
                 android:inputType="date"
-                android:text="Birthday"
                 tools:text="Birthday" />
         </LinearLayout>
 
@@ -104,7 +113,7 @@
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView "
+                android:text="Create your account"
                 tools:text="services app" />
 
         </LinearLayout>
