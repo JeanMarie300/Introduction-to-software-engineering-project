@@ -3,10 +3,14 @@ package com.example.siaedgard.finalproject;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class WelcomePage extends AppCompatActivity {
@@ -15,6 +19,10 @@ public class WelcomePage extends AppCompatActivity {
     private static final String[] ActionBarForAdmin = {"List of service provider", "Create service", "Modify rate"};
     private static final String[] ActionBarForHomeOwner = {"Search for service", "Book a service", "Rate a service"};
     private static final String[] ActionBarForServiceProvider = {"Modify profil", "Associate with service", "Enter Availabilities"};
+    DatabaseReference usersInformation;
+    List<User> users = new ArrayList<>();
+    ListView listViewUsers;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +44,22 @@ public class WelcomePage extends AppCompatActivity {
                 Button ButtonAction3 = findViewById(R.id.Action3);
                 ButtonAction3.setText(ActionBarForAdmin[2]);
                 String getName = "Welcome "+(String) bd.get("FIRST_NAME")+ " " + bd.get("LAST_NAME");
+                /*usersInformation.addValueEventListener(new ValueEventListener() {
+
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                            User user = postSnapshot.getValue(User.class);
+                            users.add(user);
+                        }
+                        UserList productsAdapter = new UserList(WelcomePage.this, users);
+                        listViewUsers.setAdapter(productsAdapter);
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });*/
                 FirsttxtView.setText(adminSession);
                 SecondtxtView.setText(getName);
             } else if (bd.get("USER_TYPE").equals(MainActivity.paths[1])) {
@@ -61,12 +85,5 @@ public class WelcomePage extends AppCompatActivity {
             }
         }
     }
-
-    public void Action1Click(View view) {
-        ;
-    }
-
-
-
 
 }

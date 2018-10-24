@@ -11,6 +11,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+
 public class MainActivity extends AppCompatActivity {
 
     EditText LastName, FirstName ,Birthday , PostalCode, userProfile,Password;
@@ -19,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     private Spinner spinner;
     private String [] answers = new String [7];
     public static final String[] paths = {"Admin", "Home owner", "Service provider"};
+    HashMap<String, String> userInfo = new HashMap<String, String>();
+    DatabaseReference loginInformations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         FirstName = (EditText) findViewById(R.id.FirstName);
         LastName = (EditText) findViewById(R.id.LastName);
 
+        loginInformations = FirebaseDatabase.getInstance().getReference("Project");
 
     }
 
@@ -67,13 +75,26 @@ public class MainActivity extends AppCompatActivity {
             alert.setPositiveButton("OK",null);
             alert.show();
         } else{
+            userInfo.put("FirstName",answers[1]);
+            userInfo.put("LastName",answers[0]);
+            userInfo.put("Birthday",answers[2]);
+            userInfo.put("PostalCode",answers[3]);
+            userInfo.put("UserType",answers[4]);
+            userInfo.put("UserName",answers[5]);
+            userInfo.put("Password",answers[6]);
+            addUserInformation();
             Intent intent = new Intent(this, WelcomePage.class);
-            intent.putExtra("USER_TYPE", answers[4]);
-            intent.putExtra("FIRST_NAME",  answers[1]);
-            intent.putExtra("LAST_NAME", answers[0]);
+            intent.putExtra("USER_TYPE",  userInfo.get("UserType"));
+            intent.putExtra("FIRST_NAME",  userInfo.get("FirstName"));
+            intent.putExtra("LAST_NAME", userInfo.get("LastName"));
             startActivity(intent);
         }
 
+    }
+    private void addUserInformation() {
+        String id = loginInformations.push().getKey();
+        User user = new User(id, userInfo.get("FirstName"), userInfo.get("LastName"), userInfo.get("Birthday"), userInfo.get("PostalCode"), userInfo.get("UserType"), userInfo.get("UserName"), userInfo.get("Password"));
+        loginInformations.child(id).setValue(user);
     }
 
 }
