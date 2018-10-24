@@ -26,14 +26,12 @@
                 android:hint="Postal Code"
                 tools:text="postal code" />
 
-            <EditText
-                android:id="@+id/UserType"
+            <Spinner
+                android:id="@+id/DropDown1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPostalAddress"
-                android:hint="User type"
-                tools:text="User Type" />
+                android:background="@android:drawable/btn_dropdown"
+                android:spinnerMode="dropdown"/>
 
             <EditText
                 android:id="@+id/userProfile"
@@ -92,7 +90,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Birthday"
+                android:hint="Birthday (YYYY-MM-DD)"
                 android:inputType="date"
                 tools:text="Birthday" />
         </LinearLayout>
@@ -114,7 +112,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Create your account"
-                tools:text="services app" />
+                android:textSize="32dp"
+                tools:text="Create your account" />
 
         </LinearLayout>
 
