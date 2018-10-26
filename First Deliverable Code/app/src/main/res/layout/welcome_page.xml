@@ -39,7 +39,7 @@
                 android:layout_height="match_parent"
                 android:background= "#228B22"
                 android:layout_weight="1"
-                android:onClick="Action1Click" />
+                />
 
             <Button
                 android:id="@+id/Action2"

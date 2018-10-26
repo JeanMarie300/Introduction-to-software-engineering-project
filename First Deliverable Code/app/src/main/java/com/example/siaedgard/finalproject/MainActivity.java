@@ -58,17 +58,15 @@ public class MainActivity extends AppCompatActivity {
         answers[5] = userProfile.getText().toString();
         answers[6] =Password.getText().toString();
         boolean invalid = false;
-        TextView text = (TextView)findViewById(R.id.textView);
         int i =0;
-        while(invalid == false && i<answers.length ) {
+        while(!invalid && i<answers.length ) {
             if (answers[i].isEmpty()) {
                 invalid = true;
             }
             i++;
         }
-        if( invalid == true){
+        if( invalid){
 
-            // check the other conditions in the loop above
             AlertDialog.Builder  alert = new AlertDialog.Builder(this);
             alert.setTitle("Empty field alert");
             alert.setMessage("You need to fill up all the field");
