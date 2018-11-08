@@ -6,26 +6,20 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText LastName, FirstName ,Birthday , PostalCode, userProfile,Password;
+    EditText LastName, FirstName ,Birthday , PostalCode, UserName, Password;
     TextView result;
-    Button ButtonFinish;
     private Spinner spinner;
     private String [] answers = new String [7];
     public static final String[] paths = {"Admin", "Home owner", "Service provider"};
     HashMap<String, String> userInfo = new HashMap<String, String>();
-    DatabaseReference loginInformations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,18 +28,19 @@ public class MainActivity extends AppCompatActivity {
         spinner = (Spinner)findViewById(R.id.DropDown1);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this,
                 android.R.layout.simple_spinner_item,paths);
-
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         Password = (EditText) findViewById(R.id.Password);
-        userProfile = (EditText) findViewById(R.id.userProfile);
+        UserName = (EditText) findViewById(R.id.userProfile);
         PostalCode = (EditText) findViewById(R.id.PostalCode);
         Birthday = (EditText) findViewById(R.id.Birthday);
         FirstName = (EditText) findViewById(R.id.FirstName);
         LastName = (EditText) findViewById(R.id.LastName);
-
-        loginInformations = FirebaseDatabase.getInstance().getReference("Project");
-
+    }
+    public void newUser () {
+        User user = new User(userInfo.get("FirstName"),userInfo.get("LastName"), userInfo.get("Birthday"), userInfo.get("PostalCode"), userInfo.get("UserType"), userInfo.get("UserName"), userInfo.get("Password"));
+        MyDBHandler dbHandler = new MyDBHandler(this);
+        dbHandler.addUsers(user);
     }
 
     public void OnFinish(View view) {
@@ -55,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         answers[2] = Birthday.getText().toString();
         answers[3] = PostalCode.getText().toString();
         answers[4] = spinner.getSelectedItem().toString();
-        answers[5] = userProfile.getText().toString();
+        answers[5] = UserName.getText().toString();
         answers[6] =Password.getText().toString();
         boolean invalid = false;
         int i =0;
@@ -65,8 +60,7 @@ public class MainActivity extends AppCompatActivity {
             }
             i++;
         }
-        if( invalid){
-
+        if(invalid){
             AlertDialog.Builder  alert = new AlertDialog.Builder(this);
             alert.setTitle("Empty field alert");
             alert.setMessage("You need to fill up all the field");
@@ -80,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
             userInfo.put("UserType",answers[4]);
             userInfo.put("UserName",answers[5]);
             userInfo.put("Password",answers[6]);
-            addUserInformation();
+            newUser();
             Intent intent = new Intent(this, WelcomePage.class);
             intent.putExtra("USER_TYPE",  userInfo.get("UserType"));
             intent.putExtra("FIRST_NAME",  userInfo.get("FirstName"));
@@ -88,11 +82,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-    }
-    private void addUserInformation() {
-        String id = loginInformations.push().getKey();
-        User user = new User(id, userInfo.get("FirstName"), userInfo.get("LastName"), userInfo.get("Birthday"), userInfo.get("PostalCode"), userInfo.get("UserType"), userInfo.get("UserName"), userInfo.get("Password"));
-        loginInformations.child(id).setValue(user);
     }
 
 }

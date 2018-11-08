@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".WelcomePage">
 
     <LinearLayout
         android:id="@+id/mainLayout"
@@ -37,14 +37,16 @@
                 android:id="@+id/Action1"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:background= "#228B22"
                 android:layout_weight="1"
+                android:background="#228B22"
+                android:onClick="OnFinish"
                 />
 
             <Button
                 android:id="@+id/Action2"
                 android:layout_width="wrap_content"
                 android:background= "#228B22"
+                android:onClick="OnFinish2"
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
 

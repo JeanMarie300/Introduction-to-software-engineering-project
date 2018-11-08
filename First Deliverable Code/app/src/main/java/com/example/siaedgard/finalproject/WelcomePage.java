@@ -3,6 +3,7 @@ package com.example.siaedgard.finalproject;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -10,7 +11,7 @@ import android.widget.TextView;
 public class WelcomePage extends AppCompatActivity {
 
 
-    private static final String[] ActionBarForAdmin = {"List of service provider", "Create service", "Modify rate"};
+    private static final String[] ActionBarForAdmin = {"Create a service", "Modify a service", "Delete a service", "List of service" };
     private static final String[] ActionBarForHomeOwner = {"Search for service", "Book a service", "Rate a service"};
     private static final String[] ActionBarForServiceProvider = {"Modify profil", "Associate with service", "Enter Availabilities"};
 
@@ -23,8 +24,6 @@ public class WelcomePage extends AppCompatActivity {
         TextView FirsttxtView = findViewById(R.id.sessionText);
         TextView SecondtxtView = findViewById(R.id.welcomeText);
         Intent intent = getIntent();
-
-
         Bundle bd = intent.getExtras();
         if(bd != null)
         {
@@ -38,7 +37,7 @@ public class WelcomePage extends AppCompatActivity {
                 ButtonAction3.setText(ActionBarForAdmin[2]);
                 String getName = "Welcome "+(String) bd.get("FIRST_NAME")+ " " + bd.get("LAST_NAME");
                 FirsttxtView.setText(sessionType);
-               SecondtxtView.setText(getName);
+                SecondtxtView.setText(getName);
             } else if (bd.get("USER_TYPE").equals(MainActivity.paths[1])) {
                 Button ButtonAction1 = findViewById(R.id.Action1);
                 ButtonAction1.setText(ActionBarForHomeOwner[0]);
@@ -61,6 +60,16 @@ public class WelcomePage extends AppCompatActivity {
                 SecondtxtView.setText(getName);
             }
         }
+    }
+
+    public void OnFinish(View view) {
+        Intent intent = new Intent(this, AdminCreateService.class);
+        startActivity(intent);
+    }
+
+    public void OnFinish2(View view) {
+        Intent intent = new Intent(this, AdminUpdateService.class);
+        startActivity(intent);
     }
 
 }

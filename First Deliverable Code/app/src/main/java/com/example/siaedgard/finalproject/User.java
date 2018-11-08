@@ -1,10 +1,9 @@
 package com.example.siaedgard.finalproject;
 
 public class User {
-     private String id,firstName, lastName, birthday, postalCode, userType, username, password;
+     private String firstName, lastName, birthday, postalCode, userType, username, password;
 
-     public User(String id, String firstName, String lastName, String birthday, String postalCode, String userType, String username, String password) {
-         this.id = id;
+     public User(String firstName, String lastName, String birthday, String postalCode, String userType, String username, String password) {
          this.firstName = firstName;
          this.lastName = lastName;
          this.birthday = birthday;
