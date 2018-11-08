@@ -14,7 +14,7 @@ public class WelcomePage extends AppCompatActivity {
     private static final String[] ActionBarForAdmin = {"Create a service", "Modify a service", "Delete a service", "List of service" };
     private static final String[] ActionBarForHomeOwner = {"Search for service", "Book a service", "Rate a service"};
     private static final String[] ActionBarForServiceProvider = {"Modify profil", "Associate with service", "Enter Availabilities"};
-
+    private String Name, lastName, userType;
 
 
     @Override
@@ -35,6 +35,9 @@ public class WelcomePage extends AppCompatActivity {
                 ButtonAction2.setText(ActionBarForAdmin[1]);
                 Button ButtonAction3 = findViewById(R.id.Action3);
                 ButtonAction3.setText(ActionBarForAdmin[2]);
+                Name = bd.get("FIRST_NAME").toString();
+                lastName = bd.get("LAST_NAME").toString();
+                userType = bd.get("USER_TYPE").toString();
                 String getName = "Welcome "+(String) bd.get("FIRST_NAME")+ " " + bd.get("LAST_NAME");
                 FirsttxtView.setText(sessionType);
                 SecondtxtView.setText(getName);
@@ -64,6 +67,9 @@ public class WelcomePage extends AppCompatActivity {
 
     public void OnFinish(View view) {
         Intent intent = new Intent(this, AdminCreateService.class);
+        intent.putExtra("USER_TYPE",  userType);
+        intent.putExtra("FIRST_NAME",  Name);
+        intent.putExtra("LAST_NAME", lastName);
         startActivity(intent);
     }
 

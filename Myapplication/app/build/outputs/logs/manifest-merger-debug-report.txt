@@ -1,0 +1,154 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/siaedgard/Desktop/project1/Myapplication/app/src/main/AndroidManifest.xml:2:1-21:12
+INJECTED from /Users/siaedgard/Desktop/project1/Myapplication/app/src/main/AndroidManifest.xml:2:1-21:12
+INJECTED from /Users/siaedgard/Desktop/project1/Myapplication/app/src/main/AndroidManifest.xml:2:1-21:12
+INJECTED from /Users/siaedgard/Desktop/project1/Myapplication/app/src/main/AndroidManifest.xml:2:1-21:12
+MERGED from [com.android.support:appcompat-v7:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/2fc9ab560787679462056b7510da4006/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/6108ef4645c0304d9a7afef17c0a6095/AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support:support-fragment:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/438d615ada294c8bbaea1ec7afe3738b/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/5b200f04f1f7b991f7b01f3cdf63b556/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/a21ee92a89676f2747cfda9cf50a370f/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0.aar/1c7c32d9af9832118cd4dee57f37aea3/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/1b8665e121a5de6c17b4d0da951dad30/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:loader:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/loader-28.0.0.aar/eaea04676193a94af12e7ce1204f8ce1/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:viewpager:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0.aar/37c959622ac50650f83e08df35bfaa61/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0.aar/e373cd20a7650e51538f6a0bc7c06e19/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:drawerlayout:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0.aar/f10621cf0f26ad04815e3747c55698b9/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0.aar/42857ee5c74092ceff860fed1fe52e07/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:customview:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/customview-28.0.0.aar/6ff00538b78ef78083601af868cbcb8e/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0.aar/44b8dc19e97cf4691dc484ef029be2ce/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/b074d9f8d75c2e6f71780f5702a16316/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/5881ffa7002d4d1442f622e69900fe63/AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/0228dabdf1c396f8f07c6e557689c696/AndroidManifest.xml:17:1-25:12
+MERGED from [com.android.support:cursoradapter:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/eda4db11c20fa9d64176c20434852996/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/2ab2b865c90c64756a11e9c146bb1255/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:documentfile:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/4ae7522f15895df1ef0c1e92469e4f06/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/d848e8a19d1107b5a9a79d54b53b1c54/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:print:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/7a878836b1ff6591fc5d7025662b50b4/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/be872fd7b0f21513f289d0f1bde9c781/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/7c0c90c3eb987345b49fc79acc068aec/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/ce5b3800f87bb8e58ff1c2476cd9af9a/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.1] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/8947bcdc9c31bcc84d7f8d3f7c14cbc3/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:interpolator:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/c195df72022472d56792bd379cd02b0c/AndroidManifest.xml:17:1-22:12
+INJECTED from /Users/siaedgard/Desktop/project1/Myapplication/app/src/main/AndroidManifest.xml:2:1-21:12
+INJECTED from /Users/siaedgard/Desktop/project1/Myapplication/app/src/main/AndroidManifest.xml:2:1-21:12
+INJECTED from /Users/siaedgard/Desktop/project1/Myapplication/app/src/main/AndroidManifest.xml:2:1-21:12
+	package
+		ADDED from /Users/siaedgard/Desktop/project1/Myapplication/app/src/main/AndroidManifest.xml:3:5-50
+		INJECTED from /Users/siaedgard/Desktop/project1/Myapplication/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/siaedgard/Desktop/project1/Myapplication/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/siaedgard/Desktop/project1/Myapplication/app/src/main/AndroidManifest.xml
+		ADDED from /Users/siaedgard/Desktop/project1/Myapplication/app/src/main/AndroidManifest.xml:2:1-21:12
+		INJECTED from /Users/siaedgard/Desktop/project1/Myapplication/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/siaedgard/Desktop/project1/Myapplication/app/src/main/AndroidManifest.xml
+		ADDED from /Users/siaedgard/Desktop/project1/Myapplication/app/src/main/AndroidManifest.xml:2:1-21:12
+		INJECTED from /Users/siaedgard/Desktop/project1/Myapplication/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/siaedgard/Desktop/project1/Myapplication/app/src/main/AndroidManifest.xml:2:11-69
+application
+ADDED from /Users/siaedgard/Desktop/project1/Myapplication/app/src/main/AndroidManifest.xml:5:5-19:19
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/6108ef4645c0304d9a7afef17c0a6095/AndroidManifest.xml:9:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/6108ef4645c0304d9a7afef17c0a6095/AndroidManifest.xml:9:5-20
+MERGED from [com.android.support:support-compat:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/5881ffa7002d4d1442f622e69900fe63/AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:support-compat:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/5881ffa7002d4d1442f622e69900fe63/AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/0228dabdf1c396f8f07c6e557689c696/AndroidManifest.xml:22:5-23:19
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/0228dabdf1c396f8f07c6e557689c696/AndroidManifest.xml:22:5-23:19
+	android:appComponentFactory
+		ADDED from [com.android.support:support-compat:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/5881ffa7002d4d1442f622e69900fe63/AndroidManifest.xml:22:18-91
+	android:supportsRtl
+		ADDED from /Users/siaedgard/Desktop/project1/Myapplication/app/src/main/AndroidManifest.xml:10:9-35
+	android:label
+		ADDED from /Users/siaedgard/Desktop/project1/Myapplication/app/src/main/AndroidManifest.xml:8:9-41
+	android:roundIcon
+		ADDED from /Users/siaedgard/Desktop/project1/Myapplication/app/src/main/AndroidManifest.xml:9:9-54
+	android:icon
+		ADDED from /Users/siaedgard/Desktop/project1/Myapplication/app/src/main/AndroidManifest.xml:7:9-43
+	android:allowBackup
+		ADDED from /Users/siaedgard/Desktop/project1/Myapplication/app/src/main/AndroidManifest.xml:6:9-35
+	android:theme
+		ADDED from /Users/siaedgard/Desktop/project1/Myapplication/app/src/main/AndroidManifest.xml:11:9-40
+activity#com.example.siaedgard.myapplication.addServices
+ADDED from /Users/siaedgard/Desktop/project1/Myapplication/app/src/main/AndroidManifest.xml:12:9-18:20
+	android:name
+		ADDED from /Users/siaedgard/Desktop/project1/Myapplication/app/src/main/AndroidManifest.xml:12:19-46
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /Users/siaedgard/Desktop/project1/Myapplication/app/src/main/AndroidManifest.xml:13:13-17:29
+action#android.intent.action.MAIN
+ADDED from /Users/siaedgard/Desktop/project1/Myapplication/app/src/main/AndroidManifest.xml:14:17-69
+	android:name
+		ADDED from /Users/siaedgard/Desktop/project1/Myapplication/app/src/main/AndroidManifest.xml:14:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/siaedgard/Desktop/project1/Myapplication/app/src/main/AndroidManifest.xml:16:17-77
+	android:name
+		ADDED from /Users/siaedgard/Desktop/project1/Myapplication/app/src/main/AndroidManifest.xml:16:27-74
+uses-sdk
+INJECTED from /Users/siaedgard/Desktop/project1/Myapplication/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/siaedgard/Desktop/project1/Myapplication/app/src/main/AndroidManifest.xml
+INJECTED from /Users/siaedgard/Desktop/project1/Myapplication/app/src/main/AndroidManifest.xml
+MERGED from [com.android.support:appcompat-v7:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/2fc9ab560787679462056b7510da4006/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/2fc9ab560787679462056b7510da4006/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/6108ef4645c0304d9a7afef17c0a6095/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/6108ef4645c0304d9a7afef17c0a6095/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:support-fragment:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/438d615ada294c8bbaea1ec7afe3738b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/438d615ada294c8bbaea1ec7afe3738b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/5b200f04f1f7b991f7b01f3cdf63b556/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/5b200f04f1f7b991f7b01f3cdf63b556/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/a21ee92a89676f2747cfda9cf50a370f/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/a21ee92a89676f2747cfda9cf50a370f/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0.aar/1c7c32d9af9832118cd4dee57f37aea3/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0.aar/1c7c32d9af9832118cd4dee57f37aea3/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/1b8665e121a5de6c17b4d0da951dad30/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/1b8665e121a5de6c17b4d0da951dad30/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/loader-28.0.0.aar/eaea04676193a94af12e7ce1204f8ce1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/loader-28.0.0.aar/eaea04676193a94af12e7ce1204f8ce1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0.aar/37c959622ac50650f83e08df35bfaa61/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0.aar/37c959622ac50650f83e08df35bfaa61/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0.aar/e373cd20a7650e51538f6a0bc7c06e19/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0.aar/e373cd20a7650e51538f6a0bc7c06e19/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0.aar/f10621cf0f26ad04815e3747c55698b9/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0.aar/f10621cf0f26ad04815e3747c55698b9/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0.aar/42857ee5c74092ceff860fed1fe52e07/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0.aar/42857ee5c74092ceff860fed1fe52e07/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/customview-28.0.0.aar/6ff00538b78ef78083601af868cbcb8e/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/customview-28.0.0.aar/6ff00538b78ef78083601af868cbcb8e/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0.aar/44b8dc19e97cf4691dc484ef029be2ce/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0.aar/44b8dc19e97cf4691dc484ef029be2ce/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/b074d9f8d75c2e6f71780f5702a16316/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/b074d9f8d75c2e6f71780f5702a16316/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/5881ffa7002d4d1442f622e69900fe63/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/5881ffa7002d4d1442f622e69900fe63/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/0228dabdf1c396f8f07c6e557689c696/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/0228dabdf1c396f8f07c6e557689c696/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/eda4db11c20fa9d64176c20434852996/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/eda4db11c20fa9d64176c20434852996/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/2ab2b865c90c64756a11e9c146bb1255/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/2ab2b865c90c64756a11e9c146bb1255/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/4ae7522f15895df1ef0c1e92469e4f06/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/4ae7522f15895df1ef0c1e92469e4f06/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/d848e8a19d1107b5a9a79d54b53b1c54/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/d848e8a19d1107b5a9a79d54b53b1c54/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/7a878836b1ff6591fc5d7025662b50b4/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/7a878836b1ff6591fc5d7025662b50b4/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/be872fd7b0f21513f289d0f1bde9c781/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/be872fd7b0f21513f289d0f1bde9c781/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/7c0c90c3eb987345b49fc79acc068aec/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/7c0c90c3eb987345b49fc79acc068aec/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/ce5b3800f87bb8e58ff1c2476cd9af9a/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/ce5b3800f87bb8e58ff1c2476cd9af9a/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/8947bcdc9c31bcc84d7f8d3f7c14cbc3/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/8947bcdc9c31bcc84d7f8d3f7c14cbc3/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/c195df72022472d56792bd379cd02b0c/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] /Users/siaedgard/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/c195df72022472d56792bd379cd02b0c/AndroidManifest.xml:20:5-44
+INJECTED from /Users/siaedgard/Desktop/project1/Myapplication/app/src/main/AndroidManifest.xml
+INJECTED from /Users/siaedgard/Desktop/project1/Myapplication/app/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/siaedgard/Desktop/project1/Myapplication/app/src/main/AndroidManifest.xml
+		ADDED from /Users/siaedgard/Desktop/project1/Myapplication/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/siaedgard/Desktop/project1/Myapplication/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/siaedgard/Desktop/project1/Myapplication/app/src/main/AndroidManifest.xml
+		ADDED from /Users/siaedgard/Desktop/project1/Myapplication/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/siaedgard/Desktop/project1/Myapplication/app/src/main/AndroidManifest.xml
