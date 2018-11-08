@@ -6,9 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class MyDBHandler extends SQLiteOpenHelper {
@@ -93,24 +91,11 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
     public Map findServices(){
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SERVICES);
-        db.execSQL(TABLE_1);
-        db.execSQL(TABLE_2);
-
         String query = "Select * FROM "+ TABLE_SERVICES;
         Cursor cursor = db.rawQuery(query,null);
-        Map<String, List<String>> tableInfo = new HashMap<String, List<String>>();
-        tableInfo.put(COLUMN_SERVICENAME,new ArrayList<String>());
-        tableInfo.put(COLUMN_SERVICERATE,new ArrayList<String>());
-        Cursor cursori = cursor;
-        String var = cursor.getString(cursor.getColumnIndex(COLUMN_SERVICENAME));
-        String vari =cursor.getString(cursor.getColumnIndex(COLUMN_SERVICERATE));
-        System.out.print(1);
-
+        Map<String, String> tableInfo = new HashMap<String, String>();
         while(cursor.moveToNext()){
-            tableInfo.get(COLUMN_SERVICENAME).add(cursor.getString(cursor.getColumnIndex(COLUMN_SERVICENAME)));
-            tableInfo.get(COLUMN_SERVICERATE).add(cursor.getString(cursor.getColumnIndex(COLUMN_SERVICERATE)));
+            tableInfo.put(cursor.getString(cursor.getColumnIndex(COLUMN_SERVICENAME)), cursor.getString(cursor.getColumnIndex(COLUMN_SERVICERATE)));
         }
         return tableInfo;
     }
@@ -135,6 +120,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
     }
 
 
+
    /* public User findUsers(String productName){
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -155,21 +141,21 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
     }*/
 
-   /* public boolean deleteUsers (String productName){
+    public boolean deleteUsers (String serviceName){
         boolean result = false;
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "Select * FROM "+ TABLE_PRODUCTS + " WHERE " +
-                COLUMN_PRODUCTNAME + " = \"" + productName + "\"";
+        String query = "Select * FROM "+ TABLE_SERVICES + " WHERE " +
+                COLUMN_SERVICENAME + " = \"" + serviceName + "\"";
 
         Cursor cursor = db.rawQuery(query,null);
 
         if (cursor.moveToFirst()) {
             String idStr = cursor.getString(0);
-            db.delete(TABLE_PRODUCTS, COLUMN_ID + " = " + idStr, null);
+            db.delete(TABLE_SERVICES, COLUMN_ID + " = " + idStr, null);
             cursor.close();
             result = true;
         }
         db.close();
         return result;
-    }*/
+    }
 }

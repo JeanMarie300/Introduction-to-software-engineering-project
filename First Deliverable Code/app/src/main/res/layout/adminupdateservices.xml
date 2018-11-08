@@ -40,7 +40,7 @@
                 tools:text="Update services" />
 
             <ListView
-                android:id="@+id/listViewProducts"
+                android:id="@+id/listViewServices"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/textView">
