@@ -121,25 +121,15 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
 
 
-   /* public User findUsers(String productName){
+    public void updateServices (String serviceName, String serviceRate ){
         SQLiteDatabase db = this.getWritableDatabase();
 
-        String query = "Select * FROM "+ TABLE_PRODUCTS+
-                 "";
-        Cursor cursor = db.rawQuery(query,null);
-        Product product = new Product();
-        if (cursor.moveToFirst()){
-            product.setID(Integer.parseInt(cursor.getString(0)));
-            product.setProductName(cursor.getString(1));
-            product.setSku(Integer.parseInt(cursor.getString(2)));
-            cursor.close();
-        } else {
-            product = null;
-        }
-        db.close();
-        return product;
+        ContentValues newValues = new ContentValues();
+        newValues.put(COLUMN_SERVICENAME, serviceName);
+        newValues.put(COLUMN_SERVICERATE, serviceRate);
 
-    }*/
+        db.update(TABLE_SERVICES, newValues, COLUMN_SERVICENAME+" = "+serviceName, null);
+    }
 
     public boolean deleteUsers (String serviceName){
         boolean result = false;

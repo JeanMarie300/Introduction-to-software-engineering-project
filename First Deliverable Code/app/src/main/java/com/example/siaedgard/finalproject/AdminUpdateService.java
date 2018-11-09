@@ -3,6 +3,7 @@ package com.example.siaedgard.finalproject;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -32,10 +33,10 @@ public class AdminUpdateService extends AppCompatActivity {
         ServiceHourRate = (TextView) findViewById(R.id.HourlyRate);
         listViewServices = (ListView) findViewById(R.id.listViewServices);
         MyDBHandler dbHandler = new MyDBHandler(this);
-        Map<String, String> map = dbHandler.findServices();;
-        for (Map.Entry<String, String> entry : map.entrySet())
-        {
-            Services service =new Services(entry.getKey(), entry.getValue());
+        Map<String, String> map = dbHandler.findServices();
+        ;
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            Services service = new Services(entry.getKey(), entry.getValue());
             services.add(service);
         }
         ServiceList productsAdapter = new ServiceList(AdminUpdateService.this, services);
@@ -58,7 +59,7 @@ public class AdminUpdateService extends AppCompatActivity {
         final View dialogView = inflater.inflate(R.layout.update_service_dialog, null);
         dialogBuilder.setView(dialogView);
         serviceNameField = (EditText) dialogView.findViewById(R.id.editTextServiceName);
-        this.servicePrice  = (EditText) dialogView.findViewById(R.id.editTextServicePrice);
+        this.servicePrice = (EditText) dialogView.findViewById(R.id.editTextServicePrice);
         final Button buttonUpdate = (Button) dialogView.findViewById(R.id.buttonUpdateProduct);
         final Button buttonDelete = (Button) dialogView.findViewById(R.id.buttonDeleteProduct);
         final String name = serviceName;
@@ -67,42 +68,48 @@ public class AdminUpdateService extends AppCompatActivity {
         final AlertDialog b = dialogBuilder.create();
         b.show();
 
-      /*  buttonUpdate.setOnClickListener(new View.OnClickListener() {
+        buttonUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name = editTextServiceName.getText().toString().trim();
-                double price = Double.parseDouble(String.valueOf(editTextPrice.getText().toString()));
+                String name = serviceNameField.getText().toString().trim();
+                String rate = servicePrice.getText().toString().trim();
+                double price = Double.parseDouble(String.valueOf(servicePrice.getText().toString()));
                 if (!TextUtils.isEmpty(name)) {
-                    updateProduct(name, price);
+                    updateServices(view,name, rate);
                     b.dismiss();
                 }
             }
-        });*/
+        });
 
         buttonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 removeProduct(view, name);
                 b.dismiss();
-                startActivity(getIntent());
             }
         });
     }
 
-    public void removeProduct (View view, String serviceName) {
+    public void removeProduct(View view, String serviceName) {
 
         MyDBHandler dbHandler = new MyDBHandler(this);
 
 
-        boolean result = dbHandler.deleteUsers(serviceName);
+        boolean result = dbHandler.deleteServices(serviceName);
 
         if (result) {
             idView.setText("Record Deleted");
             this.serviceNameField.setText("");
             servicePrice.setText("");
-        }
-        else
+        } else
             idView.setText("No Match Found");
+    }
+
+    public void updateServices(View view, String serviceName, String serviceRate) {
+
+        MyDBHandler dbHandler = new MyDBHandler(this);
+
+        dbHandler.updateServices(serviceName, serviceRate);
     }
 }
 
