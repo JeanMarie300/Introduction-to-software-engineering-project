@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WelcomePage">
+
+    <LinearLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/Result"
+            android:layout_width="match_parent"
+            android:layout_height="71dp"
+            android:background="#228B22"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/sessionText"
+                android:layout_width="match_parent"
+                android:layout_height="242dp"
+                android:textSize="32dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ButtonRow1"
+            android:layout_width="match_parent"
+            android:layout_height="106dp"
+            android:background= "#228B22"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/Action1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#228B22"
+                android:onClick="OnFinish"
+                />
+
+            <Button
+                android:id="@+id/Action2"
+                android:layout_width="wrap_content"
+                android:background= "#228B22"
+                android:onClick="OnFinish2"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/Action3"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#228B22" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/Equalsign"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/welcomeText"
+                android:layout_width="match_parent"
+                android:layout_height="242dp"
+                android:gravity="center"
+                android:text="Welcome !!!"
+                android:textSize="55dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

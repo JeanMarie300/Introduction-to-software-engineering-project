@@ -11,7 +11,6 @@ import static org.junit.Assert.*;
 
 public class SecondDeliverableTest {
 
-
     @Test
     public void checkServiceName() {
         Services service = new Services("plumber", "10");
@@ -62,18 +61,5 @@ public class SecondDeliverableTest {
         }
 
     }
-
-   /* @Test
-    public void checkProductId() {
-        Product aProduct = new Product("1", "DELL MONITOR", 180);
-        assertEquals("Check the id of the product", "1", aProduct.getId());
-    }
-
-    @Test
-    public void checkProductPrice() {
-        // I am making this test to fail
-        Product aProduct = new Product("1", "DELL MONITOR", 180);
-        assertEquals(180.0, aProduct.getPrice(), 0.1);
-    }*/
 
 }

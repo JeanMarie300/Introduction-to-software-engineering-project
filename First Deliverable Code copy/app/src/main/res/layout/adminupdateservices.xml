@@ -17,24 +17,6 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/Name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Service Name"
-                android:inputType="textPersonName"
-                tools:text="Service name" />
-
-            <EditText
-                android:id="@+id/HourlyRate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:digits="0123456789$"
-                android:hint="100$"
-                android:inputType="phone"
-                tools:text="HourlyRate" />
         </LinearLayout>
 
         <LinearLayout
@@ -53,26 +35,17 @@
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Create a new service"
+                android:text="Services list"
                 android:textSize="32dp"
-                tools:text="Create a new service" />
+                tools:text="Update services" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/vertical_Layout3"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="bottom"
-            android:orientation="vertical">
-
-            <Button
-                android:id="@+id/buttonFinish"
+            <ListView
+                android:id="@+id/listViewServices"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="OnFinish"
-                android:text="Finished"
-                tools:text="Create" />
+                android:layout_height="match_parent"
+                android:layout_below="@+id/textView">
+            </ListView>
+
         </LinearLayout>
 
     </RelativeLayout>

@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:digits="0123456789$"
-                android:hint="100$"
+                android:hint="Service hour rate"
                 android:inputType="phone"
                 tools:text="HourlyRate" />
         </LinearLayout>

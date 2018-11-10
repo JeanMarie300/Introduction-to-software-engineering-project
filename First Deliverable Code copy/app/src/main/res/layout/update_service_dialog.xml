@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/editTextServicePrice"
         android:digits="0123456789$"
-        android:hint="120$" />
+        android:hint="Service Rate" />
 
     <LinearLayout
         android:layout_width="match_parent"
