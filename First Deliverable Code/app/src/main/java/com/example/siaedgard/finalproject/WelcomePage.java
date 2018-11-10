@@ -11,9 +11,9 @@ import android.widget.TextView;
 public class WelcomePage extends AppCompatActivity {
 
 
-    private static final String[] ActionBarForAdmin = {"Create a service", "Modify a service", "Delete a service", "List of service" };
-    private static final String[] ActionBarForHomeOwner = {"Search for service", "Book a service", "Rate a service"};
-    private static final String[] ActionBarForServiceProvider = {"Modify profil", "Associate with service", "Enter Availabilities"};
+    public static final String[] ActionBarForAdmin = {"Create a service", "Modify a service", "Delete a service", "List of service" };
+    public static final String[] ActionBarForHomeOwner = {"Search for service", "Book a service", "Rate a service"};
+    public static final String[] ActionBarForServiceProvider = {"Modify profil", "Associate with service", "Enter Availabilities"};
     private String Name, lastName, userType;
 
 
