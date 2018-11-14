@@ -18,6 +18,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public static final String COLUMN_LASTNAME = "lastname";
     public static final String COLUMN_USERNAME = "username";
     public static final String COLUMN_PASSWORD = "password";
+    public static final String COLUMN_BIRTHDAY = "birthday";
     public static final String COLUMN_USERTYPE = "usertype";
     public static final String COLUMN_POSTALCODE = "postal_code";
 
@@ -26,17 +27,19 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public static final String COLUMN_SERVICENAME = "servicename";
     public static final String COLUMN_SERVICERATE = "servicerate";
 
+
     public static final  String  TABLE_1 = "CREATE TABLE " +
-    TABLE_USERS + "("
+            TABLE_USERS + "("
             + COLUMN_ID + " INTEGER PRIMARY KEY," + COLUMN_FIRSTNAME
-                + " TEXT," + COLUMN_LASTNAME + " TEXT," +COLUMN_USERNAME +
-            " TEXT," +COLUMN_PASSWORD + " TEXT," + COLUMN_USERTYPE + " TEXT," +
-    COLUMN_POSTALCODE + " TEXT" + ")";
+            + " TEXT," + COLUMN_LASTNAME + " TEXT," +COLUMN_BIRTHDAY +
+            " TEXT," +COLUMN_POSTALCODE + " TEXT," + COLUMN_USERTYPE + " TEXT," +
+            COLUMN_USERNAME + " TEXT,"  +
+            COLUMN_PASSWORD + " TEXT" + ")";
 
     public static  String TABLE_2 = "CREATE TABLE " +
-    TABLE_SERVICES + "("
+            TABLE_SERVICES + "("
             + COLUMN_IDSERVICES + " INTEGER PRIMARY KEY," + COLUMN_SERVICENAME
-                + " TEXT," + COLUMN_SERVICERATE + " TEXT" + ")";
+            + " TEXT," + COLUMN_SERVICERATE + " TEXT" + ")";
 
     public MyDBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -46,6 +49,28 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(TABLE_1);
         db.execSQL(TABLE_2);
+    }
+
+    public User findUser(String username) {
+        String query = "Select * FROM " + TABLE_USERS + " WHERE " +
+                COLUMN_USERNAME + " = \"" + username + "\"";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        User user = null;
+
+        if (cursor.moveToFirst()) {
+            user = new User(cursor.getString(1), cursor.getString(2), cursor.getString(3),
+                    cursor.getString(4), cursor.getString(5),
+                    cursor.getString(6), cursor.getString(7));
+            cursor.close();
+        } else {
+            user = null;
+        }
+        db.close();
+        return user;
     }
 
     @Override
@@ -77,8 +102,9 @@ public class MyDBHandler extends SQLiteOpenHelper {
         values.put(COLUMN_LASTNAME,user.getLastName());
         values.put(COLUMN_USERNAME, user.getUsername());
         values.put(COLUMN_PASSWORD,user.getPassword());
+        values.put(COLUMN_BIRTHDAY,user.getBirthday());
         values.put(COLUMN_USERTYPE, user.getUserType());
-        values.put(COLUMN_POSTALCODE, user.getUserType());
+        values.put(COLUMN_POSTALCODE, user.getPostalCode());
         db.insert(TABLE_USERS,null,values);
         db.close();
     }

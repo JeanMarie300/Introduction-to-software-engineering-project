@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         Password = (EditText) findViewById(R.id.Password);
-        UserName = (EditText) findViewById(R.id.userProfile);
+        UserName = (EditText) findViewById(R.id.userName);
         PostalCode = (EditText) findViewById(R.id.PostalCode);
         Birthday = (EditText) findViewById(R.id.Birthday);
         FirstName = (EditText) findViewById(R.id.FirstName);
