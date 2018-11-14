@@ -1,0 +1,4 @@
+#Wed Nov 07 20:18:55 EST 2018
+base.0=/Users/siaedgard/Desktop/project1/First Deliverable Code/app/build/intermediates/transforms/dexMerger/debug/7
+path.0=classes.dex
+renamed.0=classes.dex
