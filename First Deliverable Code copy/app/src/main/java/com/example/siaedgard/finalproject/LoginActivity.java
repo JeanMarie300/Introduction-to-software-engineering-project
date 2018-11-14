@@ -1,6 +1,5 @@
 package com.example.siaedgard.finalproject;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -41,24 +40,12 @@ public class LoginActivity extends AppCompatActivity {
             alert.show();
         }
         else if (invalidAuthentification) {
+            AlertDialog.Builder  alert = new AlertDialog.Builder(this);
+            alert.setTitle("Wrong information");
+            alert.setMessage("You entered a wrong password or email");
+            alert.setPositiveButton("OK",null);
+            alert.show();
 
-            final Intent intent = new Intent(this, MainActivity.class);
-            DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    switch (which){
-                        case DialogInterface.BUTTON_POSITIVE:
-                            startActivity(intent);
-                            break;
-                        case DialogInterface.BUTTON_NEGATIVE:
-                            break;
-                    }
-                }
-            };
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("You entered a wrong username or password, click yes if you want to open a new account" +
-                    " click no to try again").setPositiveButton("Yes", dialogClickListener)
-                    .setNegativeButton("No", dialogClickListener).show();
         }
         else {
             Intent intent = new Intent(this, WelcomePage.class);
@@ -67,5 +54,11 @@ public class LoginActivity extends AppCompatActivity {
             intent.putExtra("LAST_NAME", userFound.getLastName());
             startActivity(intent);
         }
+    }
+
+    public void OnNewUser(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".LoginActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -18,12 +18,12 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/buttonFinish"
+                android:id="@+id/newToApp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="OnFinish"
-                android:text="LOG IN"
-                tools:text="LOG IN" />
+                android:onClick="OnNewUser"
+                android:text="new user"
+                tools:text="new user" />
         </LinearLayout>
 
         <LinearLayout
@@ -50,6 +50,14 @@
                 android:hint="password"
                 android:inputType="textPassword"
                 tools:text="Password" />
+
+            <Button
+                android:id="@+id/buttonNewToApp"
+                android:layout_width="212dp"
+                android:layout_height="wrap_content"
+                android:onClick="OnFinish"
+                android:text="LOG IN"
+                tools:text="LOG IN" />
 
         </LinearLayout>
 
