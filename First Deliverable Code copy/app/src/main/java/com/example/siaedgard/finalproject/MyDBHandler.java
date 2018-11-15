@@ -27,6 +27,19 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public static final String COLUMN_SERVICENAME = "servicename";
     public static final String COLUMN_SERVICERATE = "servicerate";
 
+    public static final String TABLE_SERVICE_PROVIDER_INFO = "service_provider";
+    public static final String COLUMN_FORMID = "_id";
+    public static final String COLUMN_COMPANYNAME = "companyname";
+    public static final String COLUMN_LICENSE = "license";
+    public static final String COLUMN_EXPERTISE = "expertise";
+    public static final String COLUMN_EXPERIENCEYEARS = "experienceyears";
+    public static final String COLUMN_PHONENUMBER = "phonenumber";
+    public static final String COLUMN_USERID = "userid";
+
+    public static final String TABLE_SERVICE_PROVIDER_SERVICES = "service_provider_services";
+    public static final String COLUMN_IDTABLE = "_id";
+    public static final String COLUMN_SERVICEID = "service";
+    public static final String USERID = "userID";
 
     public static final  String  TABLE_1 = "CREATE TABLE " +
             TABLE_USERS + "("
@@ -41,6 +54,25 @@ public class MyDBHandler extends SQLiteOpenHelper {
             + COLUMN_IDSERVICES + " INTEGER PRIMARY KEY," + COLUMN_SERVICENAME
             + " TEXT," + COLUMN_SERVICERATE + " TEXT" + ")";
 
+    public static final  String  TABLE_3 = "CREATE TABLE " +
+            TABLE_SERVICE_PROVIDER_INFO + "("
+            + COLUMN_FORMID + " INTEGER PRIMARY KEY," + COLUMN_COMPANYNAME
+            + " TEXT," + COLUMN_LICENSE + " TEXT,"+ COLUMN_EXPERTISE + " TEXT,"
+            + COLUMN_EXPERIENCEYEARS +
+            " TEXT,"+ COLUMN_PHONENUMBER +
+            " TEXT," +COLUMN_USERID + " TEXT," + " FOREIGN KEY ("+COLUMN_USERID+") " +
+            "REFERENCES "+TABLE_USERS+"("+COLUMN_ID+"));";
+
+    public static final  String  TABLE_4 = "CREATE TABLE " +
+            TABLE_SERVICE_PROVIDER_SERVICES + "("
+            + COLUMN_IDTABLE + " INTEGER PRIMARY KEY," +
+            COLUMN_SERVICEID + " TEXT," + " FOREIGN KEY ("+COLUMN_SERVICEID+") " +
+            "REFERENCES "+TABLE_SERVICES+"("+COLUMN_IDSERVICES+") " + USERID +
+            " TEXT," + " FOREIGN KEY ("+USERID+") " +
+            "REFERENCES "+TABLE_USERS+"("+COLUMN_ID+"));";
+
+
+
     public MyDBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -49,6 +81,19 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(TABLE_1);
         db.execSQL(TABLE_2);
+        db.execSQL(TABLE_3);
+        db.execSQL(TABLE_4);
+
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion,
+                          int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SERVICES);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SERVICE_PROVIDER_INFO);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SERVICE_PROVIDER_SERVICES);
+        onCreate(db);
     }
 
     public User findUser(String username) {
@@ -73,16 +118,6 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return user;
     }
 
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion,
-                          int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SERVICES);
-        onCreate(db);
-    }
-
-    //Insert a new service in the database
-
     public void addServices (Services services){
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -93,10 +128,15 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-    //Insert a new user in the database
 
-    public void addUsers (User user){
+    public long addUsers (User user){
         SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SERVICES);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SERVICE_PROVIDER_INFO);
+        db.execSQL(TABLE_1);
+        db.execSQL(TABLE_2);
+        db.execSQL(TABLE_3);
         ContentValues values = new ContentValues();
         values.put(COLUMN_FIRSTNAME, user.getFirstName());
         values.put(COLUMN_LASTNAME,user.getLastName());
@@ -105,11 +145,22 @@ public class MyDBHandler extends SQLiteOpenHelper {
         values.put(COLUMN_BIRTHDAY,user.getBirthday());
         values.put(COLUMN_USERTYPE, user.getUserType());
         values.put(COLUMN_POSTALCODE, user.getPostalCode());
-        db.insert(TABLE_USERS,null,values);
+        long id = db.insert(TABLE_USERS,null,values);
         db.close();
+        return id;
     }
 
-    //Fetch all the services from the database
+    public void ServiceProviderInfo (ServiceProvider serviceProvider, String serviceProviderId){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_COMPANYNAME, serviceProvider.getCompanyName());
+        values.put(COLUMN_EXPERIENCEYEARS,serviceProvider.getexperienceYears());
+        values.put(COLUMN_LICENSE, serviceProvider.getLicenseName());
+        values.put(COLUMN_PHONENUMBER,serviceProvider.getPhoneNumber());
+        values.put(COLUMN_USERID,serviceProviderId);
+        db.insert(TABLE_SERVICE_PROVIDER_INFO,null,values);
+        db.close();
+    }
 
 
     public Map findServices(){

@@ -16,12 +16,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".WelcomePage" />
+        <activity android:name=".AdminWelcomePage" />
         <activity android:name=".AdminCreateService" />
         <activity android:name=".AdminUpdateService" />
         <activity android:name=".MainActivity" />
         <activity android:name=".user_Type" />
-        <activity android:name=".ServiceProvider"></activity>
+        <activity android:name=".ServiceProviderForm"></activity>
+        <activity android:name=".ServiceProviderWelcomePage" />
+        <activity android:name=".ServiceProviderAddServices" />
+        <activity android:name=".ServiceProviderDeleteServices" />
     </application>
 
 </manifest>

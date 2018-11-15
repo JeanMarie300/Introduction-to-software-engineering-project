@@ -48,16 +48,17 @@ public class LoginActivity extends AppCompatActivity {
 
         }
         else {
-            Intent intent = new Intent(this, WelcomePage.class);
+            Intent intent = new Intent(this, AdminWelcomePage.class);
             intent.putExtra("USER_TYPE",  userFound.getUserType());
             intent.putExtra("FIRST_NAME",  userFound.getFirstName());
             intent.putExtra("LAST_NAME", userFound.getLastName());
             startActivity(intent);
+            finish();
         }
     }
 
     public void OnNewUser(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, user_Type.class);
         startActivity(intent);
         finish();
     }

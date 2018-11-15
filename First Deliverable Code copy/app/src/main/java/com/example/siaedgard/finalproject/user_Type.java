@@ -1,14 +1,12 @@
 package com.example.siaedgard.finalproject;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-
-import static com.example.siaedgard.finalproject.MainActivity.paths;
 
 public class user_Type extends AppCompatActivity {
     private Spinner spinner;
@@ -28,17 +26,21 @@ public class user_Type extends AppCompatActivity {
         spinner.setAdapter(adapter);
     }
 
-
-
     public void OnNext(View view) {
         String test=  spinner.getSelectedItem().toString();
-        if(test.equals(paths[0]) || (test.equals(paths[1]))){
+        if(test.equals(paths[0])){
             Intent intent = new Intent(this,MainActivity.class);
+            intent.putExtra("USER_TYPE",  paths[0]);
             startActivity(intent);
             finish();
-        }
-        else {
-            Intent intent = new Intent(this, ServiceProvider.class);
+        }else if ((test.equals(paths[1]))) {
+            Intent intent = new Intent(this,MainActivity.class);
+            intent.putExtra("USER_TYPE",  paths[1]);
+            startActivity(intent);
+            finish();
+        } else {
+            Intent intent = new Intent(this, ServiceProviderForm.class);
+            intent.putExtra("USER_TYPE",  paths[2]);
             startActivity(intent);
             finish();
         }

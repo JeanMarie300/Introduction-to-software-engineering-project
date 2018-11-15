@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
@@ -43,6 +45,20 @@ public class MainActivity extends AppCompatActivity {
         dbHandler.addUsers(user);
     }
 
+    boolean isLegalDate(String date) {
+        SimpleDateFormat sdfrmt = new SimpleDateFormat("yyyy/MM/dd");
+        sdfrmt.setLenient(false);
+        try
+        {
+            sdfrmt.parse(date);
+        }
+        catch (ParseException e)
+        {
+            return false;
+        }
+        return true;
+    }
+
     public void OnFinish(View view) {
 
         answers[0] = LastName.getText().toString();
@@ -53,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         answers[5] = UserName.getText().toString();
         answers[6] =Password.getText().toString();
         boolean invalid = false;
+        boolean isValidDate = false;
         int i =0;
         while(!invalid && i<answers.length ) {
             if (answers[i].isEmpty()) {
@@ -60,10 +77,21 @@ public class MainActivity extends AppCompatActivity {
             }
             i++;
         }
+
+        if (!invalid) {
+            isValidDate = isLegalDate(Birthday.getText().toString());
+        }
+
         if(invalid){
             AlertDialog.Builder  alert = new AlertDialog.Builder(this);
             alert.setTitle("Empty field alert");
             alert.setMessage("You need to fill up all the field");
+            alert.setPositiveButton("OK",null);
+            alert.show();
+        }else if (!isValidDate ) {
+            AlertDialog.Builder  alert = new AlertDialog.Builder(this);
+            alert.setTitle("Invalid date");
+            alert.setMessage("Please enter a valid birthday");
             alert.setPositiveButton("OK",null);
             alert.show();
         } else{
@@ -75,11 +103,12 @@ public class MainActivity extends AppCompatActivity {
             userInfo.put("UserName",answers[5]);
             userInfo.put("Password",answers[6]);
             newUser();
-            Intent intent = new Intent(this, WelcomePage.class);
+            Intent intent = new Intent(this, AdminWelcomePage.class);
             intent.putExtra("USER_TYPE",  userInfo.get("UserType"));
             intent.putExtra("FIRST_NAME",  userInfo.get("FirstName"));
             intent.putExtra("LAST_NAME", userInfo.get("LastName"));
             startActivity(intent);
+            finish();
         }
 
     }
