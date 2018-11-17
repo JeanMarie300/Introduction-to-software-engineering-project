@@ -6,6 +6,6 @@
     <android.support.v7.widget.AppCompatCheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-    
+
     <TextView android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/textViewRate" android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" android:text=""/>
 </LinearLayout>

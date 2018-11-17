@@ -25,6 +25,7 @@
         <activity android:name=".ServiceProviderWelcomePage" />
         <activity android:name=".ServiceProviderAddServices" />
         <activity android:name=".ServiceProviderDeleteServices" />
+        <activity android:name=".ServiceProviderAvailabilities" />
     </application>
 
 </manifest>

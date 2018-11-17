@@ -39,7 +39,15 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public static final String TABLE_SERVICE_PROVIDER_SERVICES = "service_provider_services";
     public static final String COLUMN_IDTABLE = "_id";
     public static final String COLUMN_SERVICEID = "service";
-    public static final String USERID = "userID";
+    public static final String USERID = "user_id";
+
+    public static final String TABLE_SERVICE_PROVIDER_AVAILABILITIES = "service_provider_availabilities";
+    public static final String AVAILABILITIES_ID = "_id";
+    public static final String COLUMN_INITIAL_DATE = "initial_date";
+    public static final String COLUMN_FINAL_DATE = "final_date";
+    public static final String COLUMN_INITIAL_TIME = "initial_time";
+    public static final String FINAL_TIME = "final_time";
+    public static final String SERVICEPROVIDERD = "userID";
 
     public static final  String  TABLE_1 = "CREATE TABLE " +
             TABLE_USERS + "("
@@ -63,12 +71,21 @@ public class MyDBHandler extends SQLiteOpenHelper {
             " TEXT," +COLUMN_USERID + " TEXT," + " FOREIGN KEY ("+COLUMN_USERID+") " +
             "REFERENCES "+TABLE_USERS+"("+COLUMN_ID+"));";
 
+
     public static final  String  TABLE_4 = "CREATE TABLE " +
             TABLE_SERVICE_PROVIDER_SERVICES + "("
             + COLUMN_IDTABLE + " INTEGER PRIMARY KEY," +
-            COLUMN_SERVICEID + " TEXT," + " FOREIGN KEY ("+COLUMN_SERVICEID+") " +
-            "REFERENCES "+TABLE_SERVICES+"("+COLUMN_IDSERVICES+") " + USERID +
-            " TEXT," + " FOREIGN KEY ("+USERID+") " +
+            COLUMN_SERVICEID + " TEXT," +
+            USERID +  " TEXT," + " FOREIGN KEY ("+COLUMN_SERVICEID+")" +
+            " REFERENCES "+ TABLE_SERVICES+ " ("+COLUMN_IDSERVICES+"), " + " FOREIGN KEY ("+USERID+")" +
+            "REFERENCES "+TABLE_USERS+"("+COLUMN_ID+"));";
+
+    public static final  String  TABLE_5 = "CREATE TABLE " +
+            TABLE_SERVICE_PROVIDER_AVAILABILITIES + "("
+            + AVAILABILITIES_ID + " INTEGER PRIMARY KEY," + COLUMN_INITIAL_DATE
+            + " TEXT," + COLUMN_FINAL_DATE + " TEXT,"+ COLUMN_INITIAL_TIME + " TEXT,"
+            + FINAL_TIME +
+            " TEXT," + SERVICEPROVIDERD + " TEXT," + " FOREIGN KEY ("+SERVICEPROVIDERD+") " +
             "REFERENCES "+TABLE_USERS+"("+COLUMN_ID+"));";
 
 
@@ -83,7 +100,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.execSQL(TABLE_2);
         db.execSQL(TABLE_3);
         db.execSQL(TABLE_4);
-
+        db.execSQL(TABLE_5);
     }
 
     @Override
@@ -93,7 +110,20 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SERVICES);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SERVICE_PROVIDER_INFO);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SERVICE_PROVIDER_SERVICES);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SERVICE_PROVIDER_AVAILABILITIES);
         onCreate(db);
+    }
+
+    public void addAvailabilities (HashMap<String, String> dateInfo, int serviceProviderId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_INITIAL_DATE, dateInfo.get("initDate"));
+        values.put(COLUMN_FINAL_DATE,dateInfo.get("finalDate"));
+        values.put(COLUMN_INITIAL_TIME,dateInfo.get("initTime"));
+        values.put(FINAL_TIME,dateInfo.get("finalTime"));
+        values.put(SERVICEPROVIDERD,serviceProviderId);
+        db.insert(TABLE_SERVICE_PROVIDER_AVAILABILITIES,null,values);
+        db.close();
     }
 
     public User findUser(String username) {
@@ -107,7 +137,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         User user = null;
 
         if (cursor.moveToFirst()) {
-            user = new User(cursor.getString(1), cursor.getString(2), cursor.getString(3),
+            user = new User(cursor.getString(0),cursor.getString(1), cursor.getString(2), cursor.getString(3),
                     cursor.getString(4), cursor.getString(5),
                     cursor.getString(6), cursor.getString(7));
             cursor.close();

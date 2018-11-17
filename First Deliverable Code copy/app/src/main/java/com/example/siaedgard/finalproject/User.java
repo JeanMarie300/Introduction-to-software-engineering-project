@@ -1,9 +1,9 @@
 package com.example.siaedgard.finalproject;
 
 public class User {
-     private String firstName, lastName, birthday, postalCode, userType, username, password;
+     private String Id, firstName, lastName, birthday, postalCode, userType, username, password;
 
-     public User(String firstName, String lastName, String birthday, String postalCode, String userType, String username, String password) {
+     public User(String Id, String firstName, String lastName, String birthday, String postalCode, String userType, String username, String password) {
          this.firstName = firstName;
          this.lastName = lastName;
          this.birthday = birthday;
@@ -11,11 +11,14 @@ public class User {
          this.userType = userType;
          this.username = username;
          this.password = password;
+         this.Id = Id;
      }
 
     public String getFirstName() {
         return this.firstName;
     }
+    public String getId() {return this.Id;}
+    public void setId(String id ) {this.Id = id;}
     public String getLastName() {
         return this.lastName;
     }

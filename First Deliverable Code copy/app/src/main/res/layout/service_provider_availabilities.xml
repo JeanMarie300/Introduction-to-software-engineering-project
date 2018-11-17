@@ -23,20 +23,34 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:drawable/btn_dropdown"
-                android:onClick="Oninitial"
-                android:clickable="true"
-                android:spinnerMode="dropdown" />
+                android:focusable="false"
+                android:clickable="true" />
+            <EditText
+                android:id="@+id/InitTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="text"
+                android:focusable="false"
+                android:hint="Initial time interval" />
 
-            OnFinal
 
             <EditText
                 android:id="@+id/FinalTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:drawable/btn_dropdown"
-                android:onClick="OnFinal"
-                android:clickable="true"
-                android:spinnerMode="dropdown" />
+                android:focusable="false"
+                android:clickable="true" />
+
+            <EditText
+                android:id="@+id/EndTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:focusable="false"
+                android:hint="Final time interval"
+                android:inputType="text" />
 
             <Button
                 android:id="@+id/buttonFinish"

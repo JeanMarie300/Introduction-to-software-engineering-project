@@ -5,7 +5,7 @@ public class ServiceProvider extends User {
     private int experienceYears;
     // Create Add the informations related to a service provider in the database
     public ServiceProvider(User user, String phoneNumber, String companyName, String license, int experienceYears, String expertise) {
-        super(user.getFirstName(), user.getLastName(), user.getBirthday(), user.getPostalCode(), user.getUserType(),
+        super(user.getId(),user.getFirstName(), user.getLastName(), user.getBirthday(), user.getPostalCode(), user.getUserType(),
                 user.getUsername(),  user.getPassword());
         this.phoneNumber = phoneNumber;
         this.companyName = companyName;

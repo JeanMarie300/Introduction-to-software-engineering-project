@@ -55,9 +55,11 @@ public class ServiceProviderForm extends AppCompatActivity {
         bd = intent.getExtras();
     }
     public void newServiceProvider () {
-        User user = new User(userInfo.get("FirstName"),userInfo.get("LastName"), userInfo.get("Birthday"), userInfo.get("PostalCode"), userInfo.get("UserType"), userInfo.get("UserName"), userInfo.get("Password"));
+        User user = new User("1",userInfo.get("FirstName"),userInfo.get("LastName"), userInfo.get("Birthday"), userInfo.get("PostalCode"), userInfo.get("UserType"), userInfo.get("UserName"), userInfo.get("Password"));
         MyDBHandler dbHandler = new MyDBHandler(this);
         long userID = dbHandler.addUsers(user);
+        user.setId(Long.toString(userID));
+        userInfo.put("userId", Long.toString(userID));
         if (userInfo.get("experience_years").equals(paths[1])) {
             int noExperienceYears = 0;
             ServiceProvider newServiceProvider = new ServiceProvider(user, userInfo.get("PhoneNumber"),
@@ -133,6 +135,7 @@ public class ServiceProviderForm extends AppCompatActivity {
             intent.putExtra("USER_TYPE",  bd.get("USER_TYPE").toString());
             intent.putExtra("FIRST_NAME",  userInfo.get("FirstName"));
             intent.putExtra("LAST_NAME", userInfo.get("LastName"));
+            intent.putExtra("USER_ID", userInfo.get("userId"));
             startActivity(intent);
         }
     }

@@ -10,8 +10,9 @@ import android.widget.TextView;
 
 public class ServiceProviderWelcomePage extends AppCompatActivity {
 
-    private static  final String[] ActionBar = {"Add Services To profil", "Delete services from profile", "Enter Availabilities"};
+    private static  final String[] ActionBar = {"Enter Availabilities", "Delete services from profile", "Add Services To profil"};
     private String Name, lastName, userType;
+    String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,14 +34,16 @@ public class ServiceProviderWelcomePage extends AppCompatActivity {
             String getName = "Welcome "+(String) bd.get("FIRST_NAME")+ " " + bd.get("LAST_NAME");
             FirsttxtView.setText(sessionType);
             SecondtxtView.setText(getName);
+            userId = (String) bd.get("USER_ID");
         }
     }
 
     public void OnFinish(View view) {
-        Intent intent = new Intent(this, AdminCreateService.class);
+        Intent intent = new Intent(this, ServiceProviderAvailabilities.class);
         intent.putExtra("USER_TYPE",  userType);
         intent.putExtra("FIRST_NAME",  Name);
         intent.putExtra("LAST_NAME", lastName);
+        intent.putExtra("USER_ID", userId);
         startActivity(intent);
     }
 

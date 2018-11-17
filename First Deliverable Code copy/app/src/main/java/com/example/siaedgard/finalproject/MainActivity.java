@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     EditText LastName, FirstName ,Birthday , PostalCode, UserName, Password;
     TextView result;
+    String userId;
     private Spinner spinner;
     private String [] answers = new String [7];
     public static final String[] paths = {"Admin", "Home owner", "Service provider"};
@@ -40,9 +41,11 @@ public class MainActivity extends AppCompatActivity {
         LastName = (EditText) findViewById(R.id.LastName);
     }
     public void newUser () {
-        User user = new User(userInfo.get("FirstName"),userInfo.get("LastName"), userInfo.get("Birthday"), userInfo.get("PostalCode"), userInfo.get("UserType"), userInfo.get("UserName"), userInfo.get("Password"));
+        User user = new User("1",userInfo.get("FirstName"),userInfo.get("LastName"), userInfo.get("Birthday"), userInfo.get("PostalCode"), userInfo.get("UserType"), userInfo.get("UserName"), userInfo.get("Password"));
         MyDBHandler dbHandler = new MyDBHandler(this);
-        dbHandler.addUsers(user);
+        long userID = dbHandler.addUsers(user);
+        user.setId(Long.toString(userID));
+        userId = Long.toString(userID);
     }
 
     boolean isLegalDate(String date) {
@@ -107,6 +110,9 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("USER_TYPE",  userInfo.get("UserType"));
             intent.putExtra("FIRST_NAME",  userInfo.get("FirstName"));
             intent.putExtra("LAST_NAME", userInfo.get("LastName"));
+            intent.putExtra("USER_TYPE", userInfo.get("LastName"));
+            intent.putExtra("USER_ID", userId);
+
             startActivity(intent);
             finish();
         }

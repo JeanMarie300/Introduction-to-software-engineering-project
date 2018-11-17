@@ -1,82 +1,209 @@
 package com.example.siaedgard.finalproject;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TimePicker;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class ServiceProviderAvailabilities extends AppCompatActivity {
 
-    HashMap<String, Date> DateInput = new HashMap<String, Date>();
-    EditText initialDate, finalDate;
+    HashMap<String, String> dateInfo;
+    EditText initialDate, finalDate, InitTime, EndTime;
+    Calendar firstCalendar, secondCalendar, thirdCalendar, FourthCalendar;
+    String userId;
 
-    private int year; private int month; private int day;
+
+
+     DatePickerDialog.OnDateSetListener initialdate = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear,
+                              int dayOfMonth) {
+            firstCalendar.set(Calendar.YEAR, year);
+            firstCalendar.set(Calendar.MONTH, monthOfYear);
+            firstCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            updateFirstEditText();
+        }
+
+    };
+
+     DatePickerDialog.OnDateSetListener finaldate = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear,
+                              int dayOfMonth) {
+            secondCalendar.set(Calendar.YEAR, year);
+            secondCalendar.set(Calendar.MONTH, monthOfYear);
+            secondCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            updateSecondEditText();
+        }
+
+    };
+
+     TimePickerDialog.OnTimeSetListener  InitTimeListener = new TimePickerDialog.OnTimeSetListener() {
+                @Override
+                public void onTimeSet(TimePicker view, int hourOfDay,
+                                      int minute) {
+                    thirdCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                    thirdCalendar.set(Calendar.MINUTE, minute);
+                    updateThirdEditText();
+
+                }
+            };
+
+    TimePickerDialog.OnTimeSetListener  EndTimeListener = new TimePickerDialog.OnTimeSetListener() {
+                @Override
+                public void onTimeSet(TimePicker view, int hourOfDay,
+                                      int minute) {
+                    FourthCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                    FourthCalendar.set(Calendar.MINUTE, minute);
+                    updateFourthEditText();
+                }
+            };
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.service_provider_availabilities);
+        Intent intent = getIntent();
+        Bundle bd = intent.getExtras();
+        if(bd != null)
+        {
+            userId = (String) bd.get("USER_ID");
+        }
+
+        dateInfo = new HashMap<>();
+        dateInfo.put("userId",userId);
+
+
+
+        firstCalendar = Calendar.getInstance();
+        secondCalendar = Calendar.getInstance();
+        thirdCalendar = Calendar.getInstance();
+        FourthCalendar = Calendar.getInstance();
 
         initialDate = (EditText) findViewById(R.id.Begining);
         finalDate = (EditText) findViewById(R.id.FinalTime);
-        final Calendar c = Calendar.getInstance();
-        year = c.get(Calendar.YEAR);
-        month = c.get(Calendar.MONTH);
-        day = c.get(Calendar.DAY_OF_MONTH);
-        initialDate.setText(new StringBuilder().append(month + 1).append("-").append(day).append("-") .append(year).append(" "));
+        InitTime = (EditText) findViewById(R.id.InitTime);
+        EndTime = (EditText) findViewById(R.id.EndTime);
 
+
+
+        initialDate.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                new DatePickerDialog(ServiceProviderAvailabilities.this, initialdate, firstCalendar
+                        .get(Calendar.YEAR), firstCalendar.get(Calendar.MONTH),
+                        firstCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
+        finalDate.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                new DatePickerDialog(ServiceProviderAvailabilities.this, finaldate, secondCalendar
+                        .get(Calendar.YEAR), secondCalendar.get(Calendar.MONTH),
+                        secondCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
+        InitTime.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                new TimePickerDialog(ServiceProviderAvailabilities.this, InitTimeListener, thirdCalendar
+                        .get(Calendar.HOUR_OF_DAY), thirdCalendar.get(Calendar.MINUTE),
+                        false).show();
+            }
+        });
+
+        EndTime.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                new TimePickerDialog(ServiceProviderAvailabilities.this, EndTimeListener, FourthCalendar
+                        .get(Calendar.HOUR_OF_DAY), FourthCalendar.get(Calendar.MINUTE),
+                        false).show();
+            }
+        });
     }
 
-   /* Jean-Marie Part
+    public void updateFirstEditText() {
+        String myFormat = "yyyy/MM/dd";
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
-    public void Oninitial (View view) {
-         String initialDate = initialDate.toString();
-        @Override
-        protected Dialog onCreateDialog(int id) {
-            switch (id) {
-                case DATE_PICKER_ID:
-                    return new DatePickerDialog(this, pickerListener, year, month,day); } return null; } private DatePickerDialog.OnDateSetListener pickerListener = new DatePickerDialog.OnDateSetListener() {
-            public void onDateSet(
-                    DatePicker view, int selectedYear, int selectedMonth, int selectedDay) {
-                year = selectedYear;
-                month = selectedMonth;
-                day = selectedDay;
-                Output.setText(new StringBuilder().append(month + 1) .append("-").append(day).append("-").append(year) .append(" "));
-            }
-        };
-
-        showDialog(DATE_PICKER_ID);
-
+        initialDate.setText(sdf.format(firstCalendar.getTime()));
     }
 
-    public void OnFinal (View view) {
-        String initialDate = initialDate.toString();
-        @Override
-        protected Dialog onCreateDialog(int id) {
-            switch (id) {
-                case DATE_PICKER_ID:
-                    return new DatePickerDialog(this, pickerListener, year, month,day); } return null; } private DatePickerDialog.OnDateSetListener pickerListener = new DatePickerDialog.OnDateSetListener() {
-            public void onDateSet(
-                    DatePicker view, int selectedYear, int selectedMonth, int selectedDay) {
-                year = selectedYear;
-                month = selectedMonth;
-                day = selectedDay;
-                Output.setText(new StringBuilder().append(month + 1) .append("-").append(day).append("-").append(year) .append(" "));
-            }
-        };
+    public void updateSecondEditText() {
+        String myFormat = "yyyy/MM/dd";
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
-        showDialog(DATE_PICKER_ID);
+        finalDate.setText(sdf.format(secondCalendar.getTime()));
+    }
 
+    public void updateThirdEditText() {
+        String myFormat = "hh:mm a";
+        SimpleDateFormat sdf=new SimpleDateFormat(myFormat, Locale.US);
+        Date d=new Date();
+        InitTime.setText(sdf.format(thirdCalendar.getTime()));
+    }
+
+    public void updateFourthEditText() {
+        String myFormat = "hh:mm a";
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        EndTime.setText(sdf.format(FourthCalendar.getTime()));
     }
 
     public void OnNext (View view) {
-        finish();
-        startActivity(getIntent());
+        if (!isLegalDate(initialDate.getText().toString()) || !isLegalDate(finalDate.getText().toString())) {
+            AlertDialog.Builder  alert = new AlertDialog.Builder(this);
+            alert.setTitle("Invalid date");
+            alert.setMessage("Please enter a time slot that is greater than today");
+            alert.setPositiveButton("OK",null);
+            alert.show();
+        } else {
+            addAvailabilities (dateInfo,userId);
+            finish();
+            startActivity(getIntent());
+        }
+
     }
 
-     Jean-Marie part */
+    private boolean isLegalDate(String date) {
+
+            SimpleDateFormat sdfrmt = new SimpleDateFormat("yyyy/MM/dd");
+            SimpleDateFormat finalDate = new SimpleDateFormat("yyyy/MM/dd");
+
+
+        sdfrmt.setLenient(false);
+            boolean value = false;
+            try
+            {
+                sdfrmt.parse(date);
+                if (new Date().after(sdfrmt.parse(date))) {
+                    value = false;
+                } else {
+                    value = true;
+                }
+
+            }
+            catch (ParseException e)
+            {
+                value = false;
+                return value ;
+            }
+        return value;
+    }
+
+    public void addAvailabilities (HashMap<String, String> map, String Id) {
+        MyDBHandler dbHandler = new MyDBHandler(this);
+        //dbHandler.addUsers(user);
 
     }
+}

@@ -48,10 +48,11 @@ public class LoginActivity extends AppCompatActivity {
 
         }
         else {
-            Intent intent = new Intent(this, AdminWelcomePage.class);
+            Intent intent = userFound.getUserType().equals("Admin")? new Intent(this, AdminWelcomePage.class): new Intent(this, ServiceProviderWelcomePage.class);
             intent.putExtra("USER_TYPE",  userFound.getUserType());
             intent.putExtra("FIRST_NAME",  userFound.getFirstName());
             intent.putExtra("LAST_NAME", userFound.getLastName());
+            intent.putExtra("USER_ID", userFound.getId());
             startActivity(intent);
             finish();
         }
