@@ -139,5 +139,34 @@ public class ServiceProviderDeleteServices extends AppCompatActivity {
                 .setNegativeButton("No", dialogClickListener).show();
 
     }
+    public void showDeleteDialogForServiceProvider() {
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.delete_dialog, null);
+        dialogBuilder.setView(dialogView);
+        final android.app.AlertDialog.Builder  alert = new android.app.AlertDialog.Builder(this);
+
+        final Button buttonDelete = (Button) dialogView.findViewById(R.id.buttonDeleteService);
+
+        dialogBuilder.setTitle("");
+        final AlertDialog b = dialogBuilder.create();
+        b.show();
+
+
+        buttonDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String name = serviceNameField.getText().toString().trim();
+                String rate = servicePrice.getText().toString().trim();
+                if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(rate)) {
+
+                    removeProduct(view,name);
+                    b.dismiss();
+                }
+
+            }
+        });
+    }
 }
 
