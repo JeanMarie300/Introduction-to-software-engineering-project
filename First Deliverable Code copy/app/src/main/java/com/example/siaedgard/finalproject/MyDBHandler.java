@@ -43,8 +43,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
     public static final String TABLE_SERVICE_PROVIDER_AVAILABILITIES = "service_provider_availabilities";
     public static final String AVAILABILITIES_ID = "_id";
-    public static final String COLUMN_INITIAL_DATE = "initial_date";
-    public static final String COLUMN_FINAL_DATE = "final_date";
+    public static final String COLUMN_INITIAL_DATE = "date";
     public static final String COLUMN_INITIAL_TIME = "initial_time";
     public static final String FINAL_TIME = "final_time";
     public static final String SERVICEPROVIDERD = "userID";
@@ -83,8 +82,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public static final  String  TABLE_5 = "CREATE TABLE " +
             TABLE_SERVICE_PROVIDER_AVAILABILITIES + "("
             + AVAILABILITIES_ID + " INTEGER PRIMARY KEY," + COLUMN_INITIAL_DATE
-            + " TEXT," + COLUMN_FINAL_DATE + " TEXT,"+ COLUMN_INITIAL_TIME + " TEXT,"
-            + FINAL_TIME +
+            + " TEXT," + COLUMN_INITIAL_TIME + " TEXT,"+ FINAL_TIME +
             " TEXT," + SERVICEPROVIDERD + " TEXT," + " FOREIGN KEY ("+SERVICEPROVIDERD+") " +
             "REFERENCES "+TABLE_USERS+"("+COLUMN_ID+"));";
 
@@ -118,8 +116,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_INITIAL_DATE, dateInfo.get("initDate"));
-        values.put(COLUMN_FINAL_DATE,dateInfo.get("finalDate"));
-        values.put(COLUMN_INITIAL_TIME,dateInfo.get("initTime"));
+        values.put(COLUMN_INITIAL_TIME,dateInfo.get("finalDate"));
         values.put(FINAL_TIME,dateInfo.get("finalTime"));
         values.put(SERVICEPROVIDERD,serviceProviderId);
         db.insert(TABLE_SERVICE_PROVIDER_AVAILABILITIES,null,values);
@@ -131,7 +128,6 @@ public class MyDBHandler extends SQLiteOpenHelper {
                 COLUMN_USERNAME + " = \"" + username + "\"";
 
         SQLiteDatabase db = this.getWritableDatabase();
-
         Cursor cursor = db.rawQuery(query, null);
 
         User user = null;

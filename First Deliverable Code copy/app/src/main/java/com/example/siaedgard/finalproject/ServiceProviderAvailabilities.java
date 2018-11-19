@@ -22,7 +22,7 @@ public class ServiceProviderAvailabilities extends AppCompatActivity {
 
     HashMap<String, String> dateInfo;
     EditText initialDate, finalDate, InitTime, EndTime;
-    Calendar firstCalendar, secondCalendar, thirdCalendar, FourthCalendar;
+    Calendar firstCalendar, thirdCalendar, FourthCalendar;
     String userId;
 
 
@@ -39,17 +39,6 @@ public class ServiceProviderAvailabilities extends AppCompatActivity {
 
     };
 
-     DatePickerDialog.OnDateSetListener finaldate = new DatePickerDialog.OnDateSetListener() {
-        @Override
-        public void onDateSet(DatePicker view, int year, int monthOfYear,
-                              int dayOfMonth) {
-            secondCalendar.set(Calendar.YEAR, year);
-            secondCalendar.set(Calendar.MONTH, monthOfYear);
-            secondCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            updateSecondEditText();
-        }
-
-    };
 
      TimePickerDialog.OnTimeSetListener  InitTimeListener = new TimePickerDialog.OnTimeSetListener() {
                 @Override
@@ -89,12 +78,10 @@ public class ServiceProviderAvailabilities extends AppCompatActivity {
 
 
         firstCalendar = Calendar.getInstance();
-        secondCalendar = Calendar.getInstance();
         thirdCalendar = Calendar.getInstance();
         FourthCalendar = Calendar.getInstance();
 
         initialDate = (EditText) findViewById(R.id.Begining);
-        finalDate = (EditText) findViewById(R.id.FinalTime);
         InitTime = (EditText) findViewById(R.id.InitTime);
         EndTime = (EditText) findViewById(R.id.EndTime);
 
@@ -108,13 +95,6 @@ public class ServiceProviderAvailabilities extends AppCompatActivity {
             }
         });
 
-        finalDate.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                new DatePickerDialog(ServiceProviderAvailabilities.this, finaldate, secondCalendar
-                        .get(Calendar.YEAR), secondCalendar.get(Calendar.MONTH),
-                        secondCalendar.get(Calendar.DAY_OF_MONTH)).show();
-            }
-        });
 
         InitTime.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -140,13 +120,6 @@ public class ServiceProviderAvailabilities extends AppCompatActivity {
         initialDate.setText(sdf.format(firstCalendar.getTime()));
     }
 
-    public void updateSecondEditText() {
-        String myFormat = "yyyy/MM/dd";
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-
-        finalDate.setText(sdf.format(secondCalendar.getTime()));
-    }
-
     public void updateThirdEditText() {
         String myFormat = "hh:mm a";
         SimpleDateFormat sdf=new SimpleDateFormat(myFormat, Locale.US);
@@ -161,18 +134,26 @@ public class ServiceProviderAvailabilities extends AppCompatActivity {
     }
 
     public void OnNext (View view) {
-        if (!isLegalDate(initialDate.getText().toString()) || !isLegalDate(finalDate.getText().toString())) {
+        if (initialDate.getText().toString().matches("") || InitTime.getText().toString().matches("") || EndTime.getText().toString().matches("")) {
+            AlertDialog.Builder  alert = new AlertDialog.Builder(this);
+            alert.setTitle("Empty field");
+            alert.setMessage("You need to fill up all the empty fields");
+            alert.setPositiveButton("OK",null);
+            alert.show();
+        } else if (!isLegalDate(initialDate.getText().toString())) {
             AlertDialog.Builder  alert = new AlertDialog.Builder(this);
             alert.setTitle("Invalid date");
             alert.setMessage("Please enter a time slot that is greater than today");
             alert.setPositiveButton("OK",null);
             alert.show();
         } else {
+            dateInfo.put("initDate", initialDate.getText().toString());
+            dateInfo.put("initTime", InitTime.getText().toString());
+            dateInfo.put("finalTime", EndTime.getText().toString());
             addAvailabilities (dateInfo,userId);
             finish();
             startActivity(getIntent());
         }
-
     }
 
     private boolean isLegalDate(String date) {
@@ -201,9 +182,31 @@ public class ServiceProviderAvailabilities extends AppCompatActivity {
         return value;
     }
 
+    private boolean dateConflicting (String date1, String date2) {
+        SimpleDateFormat sdfrmt = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat finalDate = new SimpleDateFormat("yyyy/MM/dd");
+        boolean value = false;
+        try
+        {
+            sdfrmt.parse(date1);
+            sdfrmt.parse(date2);
+            if (sdfrmt.parse(date1).after(sdfrmt.parse(date2))) {
+                value = false;
+            } else {
+                value = true;
+            }
+        }
+        catch (ParseException e)
+        {
+            value = false;
+            return value ;
+        }
+        return value;
+    }
+
     public void addAvailabilities (HashMap<String, String> map, String Id) {
         MyDBHandler dbHandler = new MyDBHandler(this);
-        //dbHandler.addUsers(user);
+        dbHandler.addAvailabilities(map, Integer.parseInt(Id));
 
     }
 }
