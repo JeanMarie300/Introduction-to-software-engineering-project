@@ -18,20 +18,37 @@
             android:orientation="vertical">
 
             <EditText
+                android:id="@+id/LastName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Last name"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/FirstName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="First Name"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/Birthday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Birthday (YYYY-MM-DD)"
+                android:inputType="date" />
+
+            <EditText
                 android:id="@+id/PostalCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPostalAddress"
-                android:hint="Postal Code"
-                tools:text="postal code" />
+                android:hint="Postal Code" />
 
-            <Spinner
-                android:id="@+id/DropDown1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:drawable/btn_dropdown"
-                android:spinnerMode="dropdown"/>
 
             <EditText
                 android:id="@+id/userName"
@@ -39,8 +56,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:hint="username"
-                tools:text="User profile" />
+                android:hint="username" />
 
             <EditText
                 android:id="@+id/Password"
@@ -48,8 +64,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="password"
-                android:inputType="textPassword"
-                tools:text="Password" />
+                android:inputType="textPassword" />
 
             <Button
                 android:id="@+id/buttonFinish"
@@ -58,41 +73,6 @@
                 android:onClick="OnFinish"
                 android:text="Finished"
                 tools:text="Finish" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/vertical_Layout2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <EditText
-                android:id="@+id/LastName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Last name"
-                android:inputType="textPersonName"
-                tools:text="Last name" />
-
-            <EditText
-                android:id="@+id/FirstName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="First Name"
-                android:inputType="textPersonName"
-                tools:text="First name" />
-
-            <EditText
-                android:id="@+id/Birthday"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Birthday (YYYY-MM-DD)"
-                android:inputType="date"
-                tools:text="Birthday" />
         </LinearLayout>
 
         <LinearLayout

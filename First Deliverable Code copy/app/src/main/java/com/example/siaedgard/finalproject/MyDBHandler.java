@@ -157,23 +157,23 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
     public long addUsers (User user){
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SERVICES);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SERVICE_PROVIDER_INFO);
-        db.execSQL(TABLE_1);
-        db.execSQL(TABLE_2);
-        db.execSQL(TABLE_3);
-        ContentValues values = new ContentValues();
-        values.put(COLUMN_FIRSTNAME, user.getFirstName());
-        values.put(COLUMN_LASTNAME,user.getLastName());
-        values.put(COLUMN_USERNAME, user.getUsername());
-        values.put(COLUMN_PASSWORD,user.getPassword());
-        values.put(COLUMN_BIRTHDAY,user.getBirthday());
-        values.put(COLUMN_USERTYPE, user.getUserType());
-        values.put(COLUMN_POSTALCODE, user.getPostalCode());
-        long id = db.insert(TABLE_USERS,null,values);
-        db.close();
-        return id;
+        User tempUser = findUser(user.getUsername());
+        if (tempUser != null) {
+            return -2;
+        } else {
+            SQLiteDatabase db2 = this.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put(COLUMN_FIRSTNAME, user.getFirstName());
+            values.put(COLUMN_LASTNAME,user.getLastName());
+            values.put(COLUMN_USERNAME, user.getUsername());
+            values.put(COLUMN_PASSWORD,user.getPassword());
+            values.put(COLUMN_BIRTHDAY,user.getBirthday());
+            values.put(COLUMN_USERTYPE, user.getUserType());
+            values.put(COLUMN_POSTALCODE, user.getPostalCode());
+            long id = db2.insert(TABLE_USERS,null,values);
+            db2.close();
+            return id;
+        }
     }
 
     public void ServiceProviderInfo (ServiceProvider serviceProvider, String serviceProviderId){

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdminWelcomePage">
+    tools:context=".AdminCreateService">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -23,18 +23,16 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Service Name"
-                android:inputType="textPersonName"
-                tools:text="Service name" />
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/HourlyRate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
                 android:digits="0123456789$"
-                android:hint="Service hour rate"
-                android:inputType="phone"
-                tools:text="HourlyRate" />
+                android:ems="10"
+                android:hint="100$"
+                android:inputType="phone" />
         </LinearLayout>
 
         <LinearLayout

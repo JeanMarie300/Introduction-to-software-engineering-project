@@ -5,13 +5,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.Spinner;
 
 public class user_Type extends AppCompatActivity {
     private Spinner spinner;
-    Button Next;
-    private String [] answers = new String [2];
     public static final String[] paths = {"Admin", "Home owner", "Service provider"};
 
 
@@ -30,17 +27,17 @@ public class user_Type extends AppCompatActivity {
         String test=  spinner.getSelectedItem().toString();
         if(test.equals(paths[0])){
             Intent intent = new Intent(this,MainActivity.class);
-            intent.putExtra("USER_TYPE",  paths[0]);
+            intent.putExtra("USER_TYPE",  test.toString());
             startActivity(intent);
             finish();
         }else if ((test.equals(paths[1]))) {
             Intent intent = new Intent(this,MainActivity.class);
-            intent.putExtra("USER_TYPE",  paths[1]);
+            intent.putExtra("USER_TYPE",  test.toString());
             startActivity(intent);
             finish();
         } else {
             Intent intent = new Intent(this, ServiceProviderForm.class);
-            intent.putExtra("USER_TYPE",  paths[2]);
+            intent.putExtra("USER_TYPE",  test.toString());
             startActivity(intent);
             finish();
         }

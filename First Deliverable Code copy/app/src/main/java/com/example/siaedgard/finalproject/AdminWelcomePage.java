@@ -11,7 +11,7 @@ import android.widget.TextView;
 public class AdminWelcomePage extends AppCompatActivity {
 
 
-    private static  final String[] ActionBar = {"Modify profil", "Associate with service", "Enter Availabilities"};
+    private static  final String[] ActionBar = {"Create service", "Update and delete services"};
     private String Name, lastName, userType;
 
     @Override
