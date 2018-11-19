@@ -21,11 +21,12 @@
         <activity android:name=".AdminUpdateService" />
         <activity android:name=".MainActivity" />
         <activity android:name=".user_Type" />
-        <activity android:name=".ServiceProviderForm"></activity>
+        <activity android:name=".ServiceProviderForm" />
         <activity android:name=".ServiceProviderWelcomePage" />
         <activity android:name=".ServiceProviderAddServices" />
         <activity android:name=".ServiceProviderDeleteServices" />
         <activity android:name=".ServiceProviderAvailabilities" />
+        <activity android:name=".ConfirmationPage"></activity>
     </application>
 
 </manifest>
