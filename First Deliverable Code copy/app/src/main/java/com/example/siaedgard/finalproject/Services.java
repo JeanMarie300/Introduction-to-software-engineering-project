@@ -9,9 +9,7 @@ public class Services {
         this.hourRate = hourRate;
     }
 
-    public String getName() {
-        return this.Name;
-    }
+    public String getName() { return this.Name; }
     public String gethourRate() {
         return this.hourRate;
     }

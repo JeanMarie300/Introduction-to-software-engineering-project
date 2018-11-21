@@ -27,6 +27,7 @@
         <activity android:name=".ServiceProviderDeleteServices" />
         <activity android:name=".ServiceProviderAvailabilities" />
         <activity android:name=".ConfirmationPage"></activity>
+        <activity android:name=".ServiceProviderAvailabilitiesList" />
     </application>
 
 </manifest>

@@ -23,6 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:drawable/btn_dropdown"
+                android:hint = "Choose the day of availability"
                 android:focusable="false"
                 android:clickable="true" />
             <EditText

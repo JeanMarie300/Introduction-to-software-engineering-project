@@ -10,14 +10,14 @@ import android.widget.TextView;
 
 public class ServiceProviderWelcomePage extends AppCompatActivity {
 
-    private static  final String[] ActionBar = {"Enter Availabilities", "Delete services from profile", "Add Services To profil"};
+    private static  final String[] ActionBar = {"Enter Availabilities", "Add Services", "Delete services", "See availabilities"};
     private String Name, lastName, userType;
     String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.welcome_page);
+        setContentView(R.layout.service_provider_welcome_page);
         TextView FirsttxtView = findViewById(R.id.sessionText);
         TextView SecondtxtView = findViewById(R.id.welcomeText);
         Intent intent = getIntent();
@@ -31,10 +31,15 @@ public class ServiceProviderWelcomePage extends AppCompatActivity {
             ButtonAction2.setText(ActionBar[1]);
             Button ButtonAction3 = findViewById(R.id.Action3);
             ButtonAction3.setText(ActionBar[2]);
+            Button ButtonAction4 = findViewById(R.id.Action4);
+            ButtonAction4.setText(ActionBar[3]);
             String getName = "Welcome "+(String) bd.get("FIRST_NAME")+ " " + bd.get("LAST_NAME");
+            Name = (String) bd.get("FIRST_NAME");
+            lastName =(String) bd.get("LAST_NAME");
             FirsttxtView.setText(sessionType);
             SecondtxtView.setText(getName);
             userId = (String) bd.get("USER_ID");
+            userType = (String) bd.get("USER_TYPE");
         }
     }
 
@@ -48,7 +53,29 @@ public class ServiceProviderWelcomePage extends AppCompatActivity {
     }
 
     public void OnFinish2(View view) {
-        Intent intent = new Intent(this, AdminUpdateService.class);
+        Intent intent = new Intent(this, ServiceProviderAddServices.class);
+        intent.putExtra("USER_TYPE",  userType);
+        intent.putExtra("FIRST_NAME",  Name);
+        intent.putExtra("LAST_NAME", lastName);
+        intent.putExtra("USER_ID", userId);
+        startActivity(intent);
+    }
+
+    public void OnFinish3(View view) {
+        Intent intent = new Intent(this, ServiceProviderDeleteServices.class);
+        intent.putExtra("USER_TYPE",  userType);
+        intent.putExtra("FIRST_NAME",  Name);
+        intent.putExtra("LAST_NAME", lastName);
+        intent.putExtra("USER_ID", userId);
+        startActivity(intent);
+    }
+
+    public void OnFinish4(View view) {
+        Intent intent = new Intent(this, ServiceProviderAvailabilitiesList.class);
+        intent.putExtra("USER_TYPE",  userType);
+        intent.putExtra("FIRST_NAME", Name);
+        intent.putExtra("LAST_NAME", lastName);
+        intent.putExtra("USER_ID", userId);
         startActivity(intent);
     }
 

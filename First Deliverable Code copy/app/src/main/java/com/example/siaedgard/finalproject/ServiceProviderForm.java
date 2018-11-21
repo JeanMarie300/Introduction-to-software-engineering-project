@@ -15,10 +15,10 @@ import java.util.HashMap;
 public class ServiceProviderForm extends AppCompatActivity {
 
 
-    EditText LastName, FirstName ,Birthday , PostalCode, UserName, Password, PhoneNumber , Company_name ,  License , expertise;
+    EditText LastName, FirstName ,Birthday , PostalCode, UserName, Password, PhoneNumber , Company_name ,  License , expertise, address;
     TextView result;
     private Spinner spinner, secondSpinner;
-    private String [] answers = new String [11];
+    private String [] answers = new String [12];
     private Bundle bd;
     public static final String[] paths = {"Select your years of experience ...","Less than a year", "1", "2","3","4","5+"};
     public static final String [] yesOrNo = {"Are you licensed ?","yes","no"};
@@ -40,6 +40,7 @@ public class ServiceProviderForm extends AppCompatActivity {
         Company_name= (EditText) findViewById(R.id.Company_name);
         spinner = (Spinner)findViewById(R.id.experienceYears);
         secondSpinner = (Spinner)findViewById(R.id.License);
+        address = (EditText) findViewById(R.id.address);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(ServiceProviderForm.this,
                 android.R.layout.simple_spinner_item,paths);
@@ -55,7 +56,7 @@ public class ServiceProviderForm extends AppCompatActivity {
         bd = intent.getExtras();
     }
     public void newServiceProvider () {
-        User user = new User("1",userInfo.get("FirstName"),userInfo.get("LastName"), userInfo.get("Birthday"), userInfo.get("PostalCode"), userInfo.get("UserType"), userInfo.get("UserName"), userInfo.get("Password"));
+        User user = new User("1",userInfo.get("FirstName"),userInfo.get("LastName"), userInfo.get("Birthday"), userInfo.get("PostalCode"), userInfo.get("UserType"), userInfo.get("UserName"), userInfo.get("Password"), userInfo.get("address"));
         MyDBHandler dbHandler = new MyDBHandler(this);
         long userID = dbHandler.addUsers(user);
         user.setId(Long.toString(userID));
@@ -77,6 +78,16 @@ public class ServiceProviderForm extends AppCompatActivity {
         }
     }
 
+    private boolean verifyPostalCode(String postalCode) {
+        if (postalCode.length() > 6) {
+            return false;
+        }
+       else if (!Character.isLetter(postalCode.charAt(0)) || !Character.isLetter(postalCode.charAt(2)) || !Character.isLetter(postalCode.charAt(4))) {
+            return false;
+        } else
+            return Character.isDigit(postalCode.charAt(1)) && Character.isDigit(postalCode.charAt(3)) && Character.isDigit(postalCode.charAt(5));
+    }
+
     public void OnFinish(View view) {
 
         answers[0] = LastName.getText().toString();
@@ -90,7 +101,9 @@ public class ServiceProviderForm extends AppCompatActivity {
         answers[8] = UserName.getText().toString();
         answers[9] =Password.getText().toString();
         answers[10] = expertise.getText().toString();
+        answers[11] = address.getText().toString();
 
+        boolean truePostCode = verifyPostalCode(PostalCode.getText().toString());
         boolean invalid = false;
         int i =0;
         while(!invalid && i<answers.length ) {
@@ -117,7 +130,13 @@ public class ServiceProviderForm extends AppCompatActivity {
             alert.setMessage("You need to choose yes or no to determine if you are licensed or no");
             alert.setPositiveButton("OK",null);
             alert.show();
-        } else {
+        } else if (!truePostCode) {
+            AlertDialog.Builder  alert = new AlertDialog.Builder(this);
+            alert.setTitle("Invalid Postal Code");
+            alert.setMessage("You need to enter a postal code following this format A1A1A1");
+            alert.setPositiveButton("OK",null);
+            alert.show();
+        } else{
             userInfo.put("FirstName",answers[1]);
             userInfo.put("LastName",answers[0]);
             userInfo.put("Birthday",answers[2]);
@@ -130,6 +149,7 @@ public class ServiceProviderForm extends AppCompatActivity {
             userInfo.put("UserName",answers[8]);
             userInfo.put("Password",answers[9]);
             userInfo.put("expertise",answers[10]);
+            userInfo.put("address",answers[11]);
             newServiceProvider();
             Intent intent = new Intent(this, ServiceProviderWelcomePage.class);
             intent.putExtra("USER_TYPE",  bd.get("USER_TYPE").toString());

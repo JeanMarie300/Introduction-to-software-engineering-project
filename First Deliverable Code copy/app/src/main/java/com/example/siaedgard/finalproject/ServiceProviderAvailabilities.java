@@ -21,9 +21,9 @@ import java.util.Locale;
 public class ServiceProviderAvailabilities extends AppCompatActivity {
 
     HashMap<String, String> dateInfo;
-    EditText initialDate, finalDate, InitTime, EndTime;
+    EditText initialDate, InitTime, EndTime;
     Calendar firstCalendar, thirdCalendar, FourthCalendar;
-    String userId;
+    String userId, userType, Name, lastName;
 
 
 
@@ -70,12 +70,13 @@ public class ServiceProviderAvailabilities extends AppCompatActivity {
         if(bd != null)
         {
             userId = (String) bd.get("USER_ID");
+            userType = (String) bd.get("USER_TYPE");
+            Name = (String) bd.get("FIRST_NAME");
+            lastName = (String) bd.get("LAST_NAME");
         }
 
         dateInfo = new HashMap<>();
         dateInfo.put("userId",userId);
-
-
 
         firstCalendar = Calendar.getInstance();
         thirdCalendar = Calendar.getInstance();
@@ -152,7 +153,12 @@ public class ServiceProviderAvailabilities extends AppCompatActivity {
             dateInfo.put("finalTime", EndTime.getText().toString());
             addAvailabilities (dateInfo,userId);
             finish();
-            startActivity(getIntent());
+            Intent intent = new Intent(this, ConfirmationPage.class);
+            intent.putExtra("USER_TYPE",  userType);
+            intent.putExtra("FIRST_NAME",  Name);
+            intent.putExtra("LAST_NAME", lastName);
+            intent.putExtra("USER_ID", userId);
+            startActivity(intent);
         }
     }
 

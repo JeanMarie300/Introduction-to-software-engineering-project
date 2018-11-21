@@ -25,7 +25,6 @@ public class AdminCreateService extends AppCompatActivity {
     public void OnFinish(View view) {
         Services services = new Services(ServiceName.getText().toString(), ServiceHourRate.getText().toString());
         MyDBHandler dbHandler = new MyDBHandler(this);
-        dbHandler.addServices(services);
         String serviceNameField = ServiceName.getText().toString();
         String serviceRateField = ServiceHourRate.getText().toString();
         String  rateValue = "";
@@ -52,6 +51,7 @@ public class AdminCreateService extends AppCompatActivity {
             alert.show();
         }
         else {
+            dbHandler.addServices(services);
             finish();
             startActivity(getIntent());
         }

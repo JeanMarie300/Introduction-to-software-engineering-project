@@ -14,7 +14,7 @@ import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText LastName, FirstName ,Birthday , PostalCode, UserName, Password;
+    EditText LastName, FirstName ,Birthday , PostalCode, UserName, Password, address;
     TextView result;
     String userId, userType;
     private String [] answers = new String [7];
@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         Birthday = (EditText) findViewById(R.id.Birthday);
         FirstName = (EditText) findViewById(R.id.FirstName);
         LastName = (EditText) findViewById(R.id.LastName);
+        address = (EditText) findViewById(R.id.address);
+
         Intent intent = getIntent();
         Bundle bd = intent.getExtras();
         if (bd != null) {
@@ -37,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     public boolean newUser () {
-        User user = new User("1",userInfo.get("FirstName"),userInfo.get("LastName"), userInfo.get("Birthday"), userInfo.get("PostalCode"), userType, userInfo.get("UserName"), userInfo.get("Password"));
+        User user = new User("1",userInfo.get("FirstName"),userInfo.get("LastName"), userInfo.get("Birthday"), userInfo.get("PostalCode"), userType, userInfo.get("UserName"), userInfo.get("Password"),userInfo.get("address"));
         MyDBHandler dbHandler = new MyDBHandler(this);
         long userID = dbHandler.addUsers(user);
         if(userID == -2) {
@@ -69,12 +71,14 @@ public class MainActivity extends AppCompatActivity {
         answers[2] = Birthday.getText().toString();
         answers[3] = PostalCode.getText().toString();
         answers[4] = UserName.getText().toString();
-        answers[5] =Password.getText().toString();
+        answers[5] = Password.getText().toString();
+        answers[6] = address.getText().toString();
+
         boolean invalid = false;
         boolean isValidDate = false;
         boolean temp = false;
         int i =0;
-        while(!invalid && i<6 ) {
+        while(!invalid && i<7 ) {
             if (answers[i].isEmpty()) {
                 invalid = true;
             }
@@ -103,6 +107,8 @@ public class MainActivity extends AppCompatActivity {
             userInfo.put("PostalCode",answers[3]);
             userInfo.put("UserName",answers[4]);
             userInfo.put("Password",answers[5]);
+            userInfo.put("address",answers[6]);
+
             temp = newUser();
             if (!temp) {
                 AlertDialog.Builder  alert = new AlertDialog.Builder(this);

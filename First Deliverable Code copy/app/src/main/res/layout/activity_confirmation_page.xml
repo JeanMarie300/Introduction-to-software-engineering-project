@@ -21,7 +21,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="81dp"
                 android:gravity="center"
-                android:text="Your service has been created successfully" />
+                android:textStyle="bold"
+                android:textSize="25dp"
+                android:text="Your availabilities have been added successfully" />
         </LinearLayout>
 
         <LinearLayout
@@ -39,16 +41,16 @@
                 <Button
                     android:id="@+id/button4"
                     android:layout_width="wrap_content"
-                    android:layout_height="62dp"
+                    android:layout_height="wrap_content"
                     android:onClick="OncreatenewService"
-                    android:text="Create new service." />
+                    android:text="Enter availabilities." />
 
                 <Button
                     android:id="@+id/button2"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
                     android:onClick="OnreturntoWelcomepage"
-                    android:text="Retour à la page d'acceuil"
+                    android:text="Welcome page"
                     android:visibility="visible" />
             </LinearLayout>
 

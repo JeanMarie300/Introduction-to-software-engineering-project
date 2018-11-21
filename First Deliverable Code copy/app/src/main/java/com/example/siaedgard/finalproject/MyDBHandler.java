@@ -6,7 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MyDBHandler extends SQLiteOpenHelper {
@@ -20,6 +22,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public static final String COLUMN_PASSWORD = "password";
     public static final String COLUMN_BIRTHDAY = "birthday";
     public static final String COLUMN_USERTYPE = "usertype";
+    public static final String COLUMN_ADDRESS = "address";
     public static final String COLUMN_POSTALCODE = "postal_code";
 
     public static final String TABLE_SERVICES = "services";
@@ -38,7 +41,9 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
     public static final String TABLE_SERVICE_PROVIDER_SERVICES = "service_provider_services";
     public static final String COLUMN_IDTABLE = "_id";
-    public static final String COLUMN_SERVICEID = "service";
+    public static final String COLUMN_SERVICENAMEPROVIDERTABLE = "service_name";
+    public static final String COLUMN_SERVICEPRICEPROVIDERTABLE = "service_price";
+
     public static final String USERID = "user_id";
 
     public static final String TABLE_SERVICE_PROVIDER_AVAILABILITIES = "service_provider_availabilities";
@@ -53,7 +58,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
             + COLUMN_ID + " INTEGER PRIMARY KEY," + COLUMN_FIRSTNAME
             + " TEXT," + COLUMN_LASTNAME + " TEXT," +COLUMN_BIRTHDAY +
             " TEXT," +COLUMN_POSTALCODE + " TEXT," + COLUMN_USERTYPE + " TEXT," +
-            COLUMN_USERNAME + " TEXT,"  +
+            COLUMN_USERNAME + " TEXT,"  +COLUMN_ADDRESS + " TEXT,"+
             COLUMN_PASSWORD + " TEXT" + ")";
 
     public static  String TABLE_2 = "CREATE TABLE " +
@@ -74,9 +79,10 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public static final  String  TABLE_4 = "CREATE TABLE " +
             TABLE_SERVICE_PROVIDER_SERVICES + "("
             + COLUMN_IDTABLE + " INTEGER PRIMARY KEY," +
-            COLUMN_SERVICEID + " TEXT," +
-            USERID +  " TEXT," + " FOREIGN KEY ("+COLUMN_SERVICEID+")" +
-            " REFERENCES "+ TABLE_SERVICES+ " ("+COLUMN_IDSERVICES+"), " + " FOREIGN KEY ("+USERID+")" +
+            COLUMN_SERVICENAMEPROVIDERTABLE + " TEXT,"+ COLUMN_SERVICEPRICEPROVIDERTABLE + " TEXT," +
+            USERID +  " TEXT," + " FOREIGN KEY ("+COLUMN_SERVICENAMEPROVIDERTABLE+")" +
+            " REFERENCES "+ TABLE_SERVICES+ " ("+COLUMN_SERVICENAME+"), " +" FOREIGN KEY ("+COLUMN_SERVICEPRICEPROVIDERTABLE+")" +
+            " REFERENCES "+ TABLE_SERVICES+ " ("+COLUMN_SERVICERATE+"), "+ " FOREIGN KEY ("+USERID+")" +
             "REFERENCES "+TABLE_USERS+"("+COLUMN_ID+"));";
 
     public static final  String  TABLE_5 = "CREATE TABLE " +
@@ -116,11 +122,48 @@ public class MyDBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_INITIAL_DATE, dateInfo.get("initDate"));
-        values.put(COLUMN_INITIAL_TIME,dateInfo.get("finalDate"));
+        values.put(COLUMN_INITIAL_TIME,dateInfo.get("initTime"));
         values.put(FINAL_TIME,dateInfo.get("finalTime"));
         values.put(SERVICEPROVIDERD,serviceProviderId);
         db.insert(TABLE_SERVICE_PROVIDER_AVAILABILITIES,null,values);
         db.close();
+    }
+
+
+    public long addServicesToUser (Services services, int serviceProviderId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Services tempServices = findServices(services.getName());
+        if (tempServices != null) {
+            return -2;
+        } else {
+            SQLiteDatabase db2 = this.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put(COLUMN_SERVICENAMEPROVIDERTABLE, services.getName());
+            values.put(COLUMN_SERVICEPRICEPROVIDERTABLE, services.gethourRate());
+            values.put(USERID,serviceProviderId);
+            long rowId = db2.insert(TABLE_SERVICE_PROVIDER_SERVICES,null,values);
+            db2.close();
+            return rowId;
+        }
+    }
+
+    public Services findServices(String serviceName) {
+        String query = "Select * FROM " + TABLE_SERVICE_PROVIDER_SERVICES + " WHERE " +
+                COLUMN_SERVICENAMEPROVIDERTABLE + " = \"" + serviceName + "\"";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        Services services = null;
+
+        if (cursor.moveToFirst()) {
+            services = new Services(cursor.getString(1), cursor.getString(2));
+            cursor.close();
+        } else {
+            services = null;
+        }
+        db.close();
+        return services;
     }
 
     public User findUser(String username) {
@@ -130,28 +173,60 @@ public class MyDBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
 
+
         User user = null;
 
         if (cursor.moveToFirst()) {
             user = new User(cursor.getString(0),cursor.getString(1), cursor.getString(2), cursor.getString(3),
                     cursor.getString(4), cursor.getString(5),
-                    cursor.getString(6), cursor.getString(7));
+                    cursor.getString(6),cursor.getString(8),cursor.getString(7));
             cursor.close();
         } else {
             user = null;
         }
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
+        db.execSQL(TABLE_1);
         db.close();
         return user;
     }
 
-    public void addServices (Services services){
+    public Map findServiceProviderServices(int serviceProviderId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query =  "Select * FROM " + TABLE_SERVICE_PROVIDER_SERVICES + " WHERE " +
+                USERID + " = \"" + serviceProviderId + "\"";
+        Cursor cursor = db.rawQuery(query,null);
+        Map<String, String> tableInfo = new HashMap<String, String>();
+        while(cursor.moveToNext()){
+            tableInfo.put(cursor.getString(cursor.getColumnIndex(COLUMN_SERVICENAMEPROVIDERTABLE)), cursor.getString(cursor.getColumnIndex(COLUMN_SERVICEPRICEPROVIDERTABLE)));
+        }
+        return tableInfo;
+    }
+
+    public boolean deleteServiceProviderServices (String serviceName){
+        boolean result = false;
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "Select * FROM "+ TABLE_SERVICE_PROVIDER_SERVICES + " WHERE " +
+                COLUMN_SERVICENAMEPROVIDERTABLE + " = \"" + serviceName + "\"";
+        Cursor cursor = db.rawQuery(query,null);
+        if (cursor.moveToFirst()) {
+            String idStr = cursor.getString(0);
+            db.delete(TABLE_SERVICE_PROVIDER_SERVICES, COLUMN_ID + " = " + idStr, null);
+            cursor.close();
+            result = true;
+        }
+        db.close();
+        return result;
+    }
+
+    public long addServices (Services services){
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(COLUMN_SERVICENAME, services.getName());
         values.put(COLUMN_SERVICERATE,services.gethourRate());
-        db.insert(TABLE_SERVICES,null,values);
+        long id = db.insert(TABLE_SERVICES,null,values);
         db.close();
+        return id;
     }
 
 
@@ -170,6 +245,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
             values.put(COLUMN_BIRTHDAY,user.getBirthday());
             values.put(COLUMN_USERTYPE, user.getUserType());
             values.put(COLUMN_POSTALCODE, user.getPostalCode());
+            values.put(COLUMN_ADDRESS, user.getPostalCode());
             long id = db2.insert(TABLE_USERS,null,values);
             db2.close();
             return id;
@@ -188,7 +264,6 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-
     public Map findServices(){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "Select * FROM "+ TABLE_SERVICES;
@@ -198,6 +273,22 @@ public class MyDBHandler extends SQLiteOpenHelper {
             tableInfo.put(cursor.getString(cursor.getColumnIndex(COLUMN_SERVICENAME)), cursor.getString(cursor.getColumnIndex(COLUMN_SERVICERATE)));
         }
         return tableInfo;
+    }
+
+
+    public List<Availability> findAvailabilities(int serviceProviderId){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query =  "Select * FROM " + TABLE_SERVICE_PROVIDER_AVAILABILITIES + " WHERE " +
+                SERVICEPROVIDERD + " = \"" + serviceProviderId + "\"";
+        Cursor cursor = db.rawQuery(query,null);
+        List<Availability> availabities = new ArrayList<>();
+        while(cursor.moveToNext()){
+
+            Availability availability = new Availability(cursor.getString(1), cursor.getString(2),
+                    cursor.getString(3));
+            availabities.add(availability);
+        }
+        return availabities;
     }
 
     public void deleteServices (String serviceName){

@@ -2,26 +2,22 @@ package com.example.siaedgard.finalproject;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-public class ServiceProviderDeleteServices extends AppCompatActivity {
+public class ServiceProviderAvailabilitiesList extends AppCompatActivity {
     TextView ServiceName;
     TextView ServiceHourRate;
-    ListView listViewServices;
-    List<Services> services;
+    ListView listAvailabilities;
     int userId;
+    List<Availability> availabilities ;
     TextView idView;
     EditText serviceNameField;
     EditText servicePrice;
@@ -29,37 +25,32 @@ public class ServiceProviderDeleteServices extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.adminupdateservices);
+        setContentView(R.layout.service_provider_availabilities_list);
         Intent intent = getIntent();
-        services = new ArrayList<>();
-        ServiceName = (TextView) findViewById(R.id.textViewName);
-        ServiceHourRate = (TextView) findViewById(R.id.HourlyRate);
-        listViewServices = (ListView) findViewById(R.id.listViewServices);
-        MyDBHandler dbHandler = new MyDBHandler(this);
         Bundle bd = intent.getExtras();
         if (bd != null) {
-            userId = Integer.parseInt((String)bd.get("USER_ID"));
+            userId =Integer.parseInt (bd.get("USER_ID").toString());
         }
-        Map<String, String> map = dbHandler.findServiceProviderServices(userId);
+        availabilities = new ArrayList<>();
+        ServiceName = (TextView) findViewById(R.id.textViewName);
+        ServiceHourRate = (TextView) findViewById(R.id.HourlyRate);
+        listAvailabilities = (ListView) findViewById(R.id.listViewServices);
+        MyDBHandler dbHandler = new MyDBHandler(this);
+        availabilities = dbHandler.findAvailabilities(userId);
 
-        for (Map.Entry<String, String> entry : map.entrySet()) {
-            Services service = new Services(entry.getKey(), entry.getValue());
-            services.add(service);
-        }
-        ServiceList productsAdapter = new ServiceList(ServiceProviderDeleteServices.this, services);
-        listViewServices.setAdapter(productsAdapter);
+        AvailabilityList productsAdapter = new AvailabilityList(ServiceProviderAvailabilitiesList.this, availabilities);
+        listAvailabilities.setAdapter(productsAdapter);
 
-        listViewServices.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        listAvailabilities.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Services service = services.get(i);
-                showUpdateDeleteDialog(service);
+                Availability availability = availabilities.get(i);
                 return true;
             }
         });
     }
 
-    private void showUpdateDeleteDialog(final Services services) {
+ /*   private void showUpdateDeleteDialog(final Services services) {
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
@@ -68,8 +59,6 @@ public class ServiceProviderDeleteServices extends AppCompatActivity {
         final android.app.AlertDialog.Builder  alert = new android.app.AlertDialog.Builder(this);
         final Button buttonUpdate = (Button) dialogView.findViewById(R.id.yes);
         final Button buttonDelete = (Button) dialogView.findViewById(R.id.no);
-        final TextView dialogText = (TextView) dialogView.findViewById(R.id.editTextServiceName);
-        dialogText.setText("Are you sure you want to delete this service from your profile ?");
         dialogBuilder.setTitle(services.getName());
         final AlertDialog b = dialogBuilder.create();
         b.show();
@@ -77,7 +66,7 @@ public class ServiceProviderDeleteServices extends AppCompatActivity {
         buttonUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                removeService(view,services.getName());
+                OnConfirm(view,services);
                 b.dismiss();
             }
         });
@@ -89,12 +78,12 @@ public class ServiceProviderDeleteServices extends AppCompatActivity {
         });
     }
 
-    public void removeService(View view, final String serviceName) {
-        final MyDBHandler dbHandler = new MyDBHandler(this);
-        dbHandler.deleteServiceProviderServices(serviceName);
+    public void OnConfirm(View view,Services services) {
+        MyDBHandler dbHandler = new MyDBHandler(this);
+        int id = Integer.parseInt(userId);
+        dbHandler.addServicesToUser(services,id);
         finish();
         startActivity(getIntent());
-    }
-
+    }*/
 }
 
