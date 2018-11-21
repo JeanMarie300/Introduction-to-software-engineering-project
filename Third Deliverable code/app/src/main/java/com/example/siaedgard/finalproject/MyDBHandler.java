@@ -132,7 +132,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
     public long addServicesToUser (Services services, int serviceProviderId) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Services tempServices = findServices(services.getName());
+        Services tempServices = findServices(services.getName(), serviceProviderId );
         if (tempServices != null) {
             return -2;
         } else {
@@ -147,9 +147,9 @@ public class MyDBHandler extends SQLiteOpenHelper {
         }
     }
 
-    public Services findServices(String serviceName) {
+    public Services findServices(String serviceName, int serviceProviderId ) {
         String query = "Select * FROM " + TABLE_SERVICE_PROVIDER_SERVICES + " WHERE " +
-                COLUMN_SERVICENAMEPROVIDERTABLE + " = \"" + serviceName + "\"";
+                USERID+" = \""+ serviceProviderId + "\""+ "AND "+ COLUMN_SERVICENAMEPROVIDERTABLE + " = \"" + serviceName + "\"";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
@@ -173,7 +173,6 @@ public class MyDBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
 
-
         User user = null;
 
         if (cursor.moveToFirst()) {
@@ -184,8 +183,6 @@ public class MyDBHandler extends SQLiteOpenHelper {
         } else {
             user = null;
         }
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
-        db.execSQL(TABLE_1);
         db.close();
         return user;
     }
@@ -283,8 +280,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(query,null);
         List<Availability> availabities = new ArrayList<>();
         while(cursor.moveToNext()){
-
-            Availability availability = new Availability(cursor.getString(1), cursor.getString(2),
+            Availability availability = new Availability(cursor.getString(0),cursor.getString(1), cursor.getString(2),
                     cursor.getString(3));
             availabities.add(availability);
         }
@@ -302,6 +298,15 @@ public class MyDBHandler extends SQLiteOpenHelper {
             cursor.close();
         }
         db.close();
+    }
+
+    public void updateAvailability (HashMap<String, String> dateInfo, String availabilityId  ){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues newValues = new ContentValues();
+        newValues.put(COLUMN_INITIAL_DATE, dateInfo.get("initDate") );
+        newValues.put(COLUMN_INITIAL_TIME, dateInfo.get("initTime"));
+        newValues.put(FINAL_TIME, dateInfo.get("finalTime"));
+        db.update(TABLE_SERVICE_PROVIDER_AVAILABILITIES, newValues, AVAILABILITIES_ID + " = ?" , new String[]{availabilityId});
     }
 
 

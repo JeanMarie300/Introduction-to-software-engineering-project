@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 public class ServiceProviderWelcomePage extends AppCompatActivity {
 
-    private static  final String[] ActionBar = {"Enter Availabilities", "Add Services", "Delete services", "See availabilities"};
+    private static  final String[] ActionBar = {"Enter Availabilities", "Add Services", "Delete services", "See availabilities", "Edit availabilities"};
     private String Name, lastName, userType;
     String userId;
 
@@ -71,6 +71,15 @@ public class ServiceProviderWelcomePage extends AppCompatActivity {
     }
 
     public void OnFinish4(View view) {
+        Intent intent = new Intent(this, ServiceProviderAvailabilitiesList.class);
+        intent.putExtra("USER_TYPE",  userType);
+        intent.putExtra("FIRST_NAME", Name);
+        intent.putExtra("LAST_NAME", lastName);
+        intent.putExtra("USER_ID", userId);
+        startActivity(intent);
+    }
+
+    public void OnFinish5(View view) {
         Intent intent = new Intent(this, ServiceProviderAvailabilitiesList.class);
         intent.putExtra("USER_TYPE",  userType);
         intent.putExtra("FIRST_NAME", Name);

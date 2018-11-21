@@ -4,18 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".user_Type">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:id="@+id/vertical_Layout3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="bottom"
-            android:orientation="vertical">
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:visibility="visible">
 
             <EditText
                 android:id="@+id/LastName"
@@ -38,51 +39,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Birthday (YYYY-MM-DD)"
+                android:digits="0123456789/"
+                android:hint="Birthday format (YYYY/MM/DD)"
                 android:inputType="date" />
 
-            <EditText
-                android:id="@+id/address"
+            <Spinner
+                android:id="@+id/DropDown1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPostalAddress"
-                android:hint="Address" />
-
-            <EditText
-                android:id="@+id/PostalCode"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPostalAddress"
-                android:hint="Postal Code" />
-
-
-            <EditText
-                android:id="@+id/userName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:hint="username" />
-
-            <EditText
-                android:id="@+id/Password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="password"
-                android:inputType="textPassword" />
+                android:background="@android:drawable/btn_dropdown"
+                android:spinnerMode="dropdown" />
 
             <Button
                 android:id="@+id/buttonFinish"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="OnFinish"
-                android:text="Finished"
-                tools:text="Finish" />
+                android:onClick="OnNext"
+                android:text="Next"
+                tools:text="Next" />
         </LinearLayout>
-
         <LinearLayout
             android:id="@+id/vertical_Layout1"
             android:layout_width="match_parent"
@@ -99,9 +74,9 @@
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Create your account"
+                android:text="Personal information"
                 android:textSize="32dp"
-                tools:text="Create your account" />
+                tools:text="Personal information" />
 
         </LinearLayout>
 

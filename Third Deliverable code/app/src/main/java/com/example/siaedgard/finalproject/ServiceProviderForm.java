@@ -15,7 +15,8 @@ import java.util.HashMap;
 public class ServiceProviderForm extends AppCompatActivity {
 
 
-    EditText LastName, FirstName ,Birthday , PostalCode, UserName, Password, PhoneNumber , Company_name ,  License , expertise, address;
+    EditText PostalCode, UserName, Password, PhoneNumber , Company_name ,  License , expertise, address, number;
+    String LastName, FirstName ,Birthday, userType;
     TextView result;
     private Spinner spinner, secondSpinner;
     private String [] answers = new String [12];
@@ -32,15 +33,22 @@ public class ServiceProviderForm extends AppCompatActivity {
         Password = (EditText) findViewById(R.id.Password);
         UserName = (EditText) findViewById(R.id.userName);
         PostalCode = (EditText) findViewById(R.id.PostalCode);
-        Birthday = (EditText) findViewById(R.id.Birthday);
-        FirstName = (EditText) findViewById(R.id.FirstName);
-        LastName = (EditText) findViewById(R.id.LastName);
         expertise = (EditText) findViewById(R.id.expertise);
         PhoneNumber = (EditText) findViewById(R.id.PhoneNumber);
         Company_name= (EditText) findViewById(R.id.Company_name);
         spinner = (Spinner)findViewById(R.id.experienceYears);
         secondSpinner = (Spinner)findViewById(R.id.License);
-        address = (EditText) findViewById(R.id.address);
+        address = (EditText) findViewById(R.id.streetName);
+        number = (EditText) findViewById(R.id.number);
+        Intent intent = getIntent();
+        Bundle bd = intent.getExtras();
+        if(bd != null)
+        {
+            FirstName = bd.get("USER_FIRSTNAME").toString();
+            LastName = bd.get("USER_LASTNAME").toString();
+            Birthday = bd.get("USER_BIRTHDAY").toString();
+            userType = bd.get("USER_TYPE").toString();
+        }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(ServiceProviderForm.this,
                 android.R.layout.simple_spinner_item,paths);
@@ -52,8 +60,6 @@ public class ServiceProviderForm extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         secondSpinner.setAdapter(secondAdapter);
 
-        Intent intent = getIntent();
-        bd = intent.getExtras();
     }
     public void newServiceProvider () {
         User user = new User("1",userInfo.get("FirstName"),userInfo.get("LastName"), userInfo.get("Birthday"), userInfo.get("PostalCode"), userInfo.get("UserType"), userInfo.get("UserName"), userInfo.get("Password"), userInfo.get("address"));
@@ -90,9 +96,9 @@ public class ServiceProviderForm extends AppCompatActivity {
 
     public void OnFinish(View view) {
 
-        answers[0] = LastName.getText().toString();
-        answers[1]=  FirstName.getText().toString();
-        answers[2] = Birthday.getText().toString();
+        answers[0] = LastName.toString();
+        answers[1]=  FirstName.toString();
+        answers[2] = Birthday.toString();
         answers[3] = PostalCode.getText().toString();
         answers[4] =  PhoneNumber.getText().toString();
         answers[5] = Company_name.getText().toString();
@@ -101,9 +107,8 @@ public class ServiceProviderForm extends AppCompatActivity {
         answers[8] = UserName.getText().toString();
         answers[9] =Password.getText().toString();
         answers[10] = expertise.getText().toString();
-        answers[11] = address.getText().toString();
+        answers[11] =number.getText().toString() +  address.getText().toString();
 
-        boolean truePostCode = verifyPostalCode(PostalCode.getText().toString());
         boolean invalid = false;
         int i =0;
         while(!invalid && i<answers.length ) {
@@ -130,7 +135,7 @@ public class ServiceProviderForm extends AppCompatActivity {
             alert.setMessage("You need to choose yes or no to determine if you are licensed or no");
             alert.setPositiveButton("OK",null);
             alert.show();
-        } else if (!truePostCode) {
+        } else if (!verifyPostalCode(PostalCode.getText().toString())) {
             AlertDialog.Builder  alert = new AlertDialog.Builder(this);
             alert.setTitle("Invalid Postal Code");
             alert.setMessage("You need to enter a postal code following this format A1A1A1");
@@ -145,18 +150,19 @@ public class ServiceProviderForm extends AppCompatActivity {
             userInfo.put("Company_name",answers[5]);
             userInfo.put("experience_years",answers[6]);
             userInfo.put("license",answers[7]);
-            userInfo.put("UserType",bd.get("USER_TYPE").toString());
+            userInfo.put("UserType",userType);
             userInfo.put("UserName",answers[8]);
             userInfo.put("Password",answers[9]);
             userInfo.put("expertise",answers[10]);
             userInfo.put("address",answers[11]);
             newServiceProvider();
             Intent intent = new Intent(this, ServiceProviderWelcomePage.class);
-            intent.putExtra("USER_TYPE",  bd.get("USER_TYPE").toString());
+            intent.putExtra("USER_TYPE",  userType);
             intent.putExtra("FIRST_NAME",  userInfo.get("FirstName"));
             intent.putExtra("LAST_NAME", userInfo.get("LastName"));
             intent.putExtra("USER_ID", userInfo.get("userId"));
             startActivity(intent);
+            finish();
         }
     }
 }

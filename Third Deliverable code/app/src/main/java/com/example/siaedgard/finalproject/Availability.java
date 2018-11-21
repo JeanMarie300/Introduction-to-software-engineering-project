@@ -2,12 +2,13 @@ package com.example.siaedgard.finalproject;
 
 public class Availability {
 
-   private  String initialDate, initialTime, finalTime;
+   private  String initialDate, initialTime, finalTime, id;
 
-    public Availability(String initialDate, String initialTime, String finalTime) {
+    public Availability(String id, String initialDate, String initialTime, String finalTime) {
         this.initialDate = initialDate;
         this.initialTime = initialTime;
         this.finalTime = finalTime;
+        this.id = id;
     }
 
 
@@ -33,5 +34,13 @@ public class Availability {
 
     public void setFinalTime(String finalTime) {
         this.finalTime = finalTime;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

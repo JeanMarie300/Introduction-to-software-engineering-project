@@ -14,7 +14,7 @@ import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText LastName, FirstName ,Birthday , PostalCode, UserName, Password, address;
+    EditText LastName, FirstName ,Birthday , PostalCode, UserName, Password, address, number;
     TextView result;
     String userId, userType;
     private String [] answers = new String [7];
@@ -30,7 +30,8 @@ public class MainActivity extends AppCompatActivity {
         Birthday = (EditText) findViewById(R.id.Birthday);
         FirstName = (EditText) findViewById(R.id.FirstName);
         LastName = (EditText) findViewById(R.id.LastName);
-        address = (EditText) findViewById(R.id.address);
+        address = (EditText) findViewById(R.id.streetName);
+        number = (EditText) findViewById(R.id.number);
 
         Intent intent = getIntent();
         Bundle bd = intent.getExtras();
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         answers[3] = PostalCode.getText().toString();
         answers[4] = UserName.getText().toString();
         answers[5] = Password.getText().toString();
-        answers[6] = address.getText().toString();
+        answers[6] = number.getText().toString() + address.getText().toString();
 
         boolean invalid = false;
         boolean isValidDate = false;

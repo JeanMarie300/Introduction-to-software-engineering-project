@@ -18,36 +18,22 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/LastName"
+                android:id="@+id/number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Last name"
-                android:inputType="textPersonName" />
+                android:digits="0123456789"
+                android:inputType="textPersonName"
+                android:hint="Street Number" />
 
             <EditText
-                android:id="@+id/FirstName"
+                android:id="@+id/streetName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="First Name"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/Birthday"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Birthday"
-                android:inputType="date" />
-
-            <EditText
-                android:id="@+id/address"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="address"
-                android:inputType="textPersonName" />
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz "
+                android:inputType="textPostalAddress"
+                android:hint="Street Name" />
 
             <EditText
                 android:id="@+id/PostalCode"
@@ -55,6 +41,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint=" Postal code in form (A1A1A1)"
+                android:digits="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
                 android:inputType="textPostalAddress" />
 
             <EditText
@@ -62,6 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:digits="0123456789"
                 android:hint="Phone number"
                 android:inputType="phone" />
 
@@ -121,6 +109,8 @@
                 tools:text="Finish" />
 
         </LinearLayout>
+
+
 
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

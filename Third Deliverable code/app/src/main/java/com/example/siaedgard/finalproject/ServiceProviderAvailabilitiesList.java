@@ -17,6 +17,7 @@ public class ServiceProviderAvailabilitiesList extends AppCompatActivity {
     TextView ServiceHourRate;
     ListView listAvailabilities;
     int userId;
+    String Name, lastName, userType;
     List<Availability> availabilities ;
     TextView idView;
     EditText serviceNameField;
@@ -30,6 +31,10 @@ public class ServiceProviderAvailabilitiesList extends AppCompatActivity {
         Bundle bd = intent.getExtras();
         if (bd != null) {
             userId =Integer.parseInt (bd.get("USER_ID").toString());
+            Name = (String) bd.get("FIRST_NAME");
+            lastName =(String) bd.get("LAST_NAME");
+            userType = (String) bd.get("USER_TYPE");
+
         }
         availabilities = new ArrayList<>();
         ServiceName = (TextView) findViewById(R.id.textViewName);
@@ -45,45 +50,25 @@ public class ServiceProviderAvailabilitiesList extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Availability availability = availabilities.get(i);
+                editAvailability( availability);
                 return true;
             }
         });
     }
 
- /*   private void showUpdateDeleteDialog(final Services services) {
-
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-        LayoutInflater inflater = getLayoutInflater();
-        final View dialogView = inflater.inflate(R.layout.service_added_dialog, null);
-        dialogBuilder.setView(dialogView);
-        final android.app.AlertDialog.Builder  alert = new android.app.AlertDialog.Builder(this);
-        final Button buttonUpdate = (Button) dialogView.findViewById(R.id.yes);
-        final Button buttonDelete = (Button) dialogView.findViewById(R.id.no);
-        dialogBuilder.setTitle(services.getName());
-        final AlertDialog b = dialogBuilder.create();
-        b.show();
-
-        buttonUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                OnConfirm(view,services);
-                b.dismiss();
-            }
-        });
-        buttonDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                b.dismiss();
-            }
-        });
+    private void editAvailability(final Availability availability) {
+        Intent intent = new Intent(this, ServiceProviderEditAvailability.class);
+        intent.putExtra("INITIAL_DATE",  availability.getInitialDate());
+        intent.putExtra("INITIAL_TIME", availability.getInitialTime());
+        intent.putExtra("FINAL_TIME", availability.getFinalTime());
+        intent.putExtra("AVAILABILITY_ID", availability.getId());
+        intent.putExtra("USER_ID", userId);
+        intent.putExtra("USER_TYPE",  userType);
+        intent.putExtra("FIRST_NAME", Name);
+        intent.putExtra("LAST_NAME", lastName);
+        startActivity(intent);
+        finish();
     }
 
-    public void OnConfirm(View view,Services services) {
-        MyDBHandler dbHandler = new MyDBHandler(this);
-        int id = Integer.parseInt(userId);
-        dbHandler.addServicesToUser(services,id);
-        finish();
-        startActivity(getIntent());
-    }*/
 }
 
