@@ -134,6 +134,7 @@ public class AdminUpdateService extends AppCompatActivity {
                 }
             }
         };
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Are you sure ? Once deleted you wont be able to modify or see the  service").setPositiveButton("Yes", dialogClickListener)
                 .setNegativeButton("No", dialogClickListener).show();

@@ -34,16 +34,16 @@ public class AdminCreateService extends AppCompatActivity {
             rateValue=  rateValue + serviceRateField.charAt(i);
             i++;
         }
-        int min =10;
-        int max=1000;
-        if( serviceNameField.isEmpty() || serviceRateField.isEmpty()) {
+        int min = 10;
+        int max = 1000;
+        if(serviceNameField.isEmpty()||serviceRateField.isEmpty()){
             AlertDialog.Builder  alert = new AlertDialog.Builder(this);
             alert.setTitle("Empty field alert");
             alert.setMessage("You need to fill up all the field");
             alert.setPositiveButton("OK",null);
             alert.show();
         }
-        else if (Integer.parseInt(rateValue) < min  || Integer.parseInt(rateValue) > max ){
+        else if(Integer.parseInt(rateValue) < min  || Integer.parseInt(rateValue) > max ){
             AlertDialog.Builder  alert = new AlertDialog.Builder(this);
             alert.setTitle("Empty field alert");
             alert.setMessage("The hour rate is not between the acceptable boundaries");
