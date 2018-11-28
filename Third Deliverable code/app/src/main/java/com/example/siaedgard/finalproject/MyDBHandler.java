@@ -53,6 +53,16 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public static final String FINAL_TIME = "final_time";
     public static final String SERVICEPROVIDERD = "userID";
 
+    //create table for appointment
+
+    public static final String TABLE_FEEDBACK = "feedback";
+    public static final String RATING_ID = "_id";
+    public static final String COLUMN_COMMENTS = "comments";
+    public static final String COLUMN_RATING = "ratings";
+    public static final String HOMEWONERID = "home_owner";
+    public static final String SERVICEPROVIDER_ID = "service_provider";
+
+
     public static final  String  TABLE_1 = "CREATE TABLE " +
             TABLE_USERS + "("
             + COLUMN_ID + " INTEGER PRIMARY KEY," + COLUMN_FIRSTNAME
@@ -92,6 +102,14 @@ public class MyDBHandler extends SQLiteOpenHelper {
             " TEXT," + SERVICEPROVIDERD + " TEXT," + " FOREIGN KEY ("+SERVICEPROVIDERD+") " +
             "REFERENCES "+TABLE_USERS+"("+COLUMN_ID+"));";
 
+    public static final String TABLE_6 = "CREATE TABLE " +
+            TABLE_FEEDBACK + "("
+            + RATING_ID + " INTEGER PRIMARY KEY," + COLUMN_COMMENTS
+            + " TEXT," + COLUMN_RATING + " TEXT,"+ HOMEWONERID +
+            " TEXT," + SERVICEPROVIDER_ID + " TEXT," +" FOREIGN KEY ("+SERVICEPROVIDER_ID+")" +
+            " REFERENCES "+ TABLE_USERS+ " ("+COLUMN_ID+"), "+ " FOREIGN KEY ("+SERVICEPROVIDER_ID+")" +
+            "REFERENCES "+TABLE_USERS+"("+COLUMN_ID+"));";
+
 
 
     public MyDBHandler(Context context) {
@@ -105,6 +123,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.execSQL(TABLE_3);
         db.execSQL(TABLE_4);
         db.execSQL(TABLE_5);
+        db.execSQL(TABLE_6);
+
     }
 
     @Override
@@ -115,6 +135,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SERVICE_PROVIDER_INFO);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SERVICE_PROVIDER_SERVICES);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SERVICE_PROVIDER_AVAILABILITIES);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_FEEDBACK);
         onCreate(db);
     }
 
@@ -247,6 +268,44 @@ public class MyDBHandler extends SQLiteOpenHelper {
             db2.close();
             return id;
         }
+    }
+
+    public long addFeedback (Feedback feedback){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Feedback feedback1 = findFeedback(feedback);
+        if (feedback1 != null) {
+            return -2;
+        } else {
+            SQLiteDatabase db2 = this.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put(COLUMN_COMMENTS,feedback.getComments());
+            values.put(COLUMN_RATING, feedback.getRatings());
+            values.put(HOMEWONERID,feedback.getHome_owner_id());
+            values.put(SERVICEPROVIDER_ID,feedback.getService_provider_id());
+            long id = db2.insert(TABLE_FEEDBACK,null,values);
+            db2.close();
+            return id;
+        }
+    }
+
+    public Feedback findFeedback(Feedback feedback) {
+        String query = "Select * FROM " + TABLE_FEEDBACK + " WHERE " +
+                RATING_ID + " = \"" + feedback.getId() + "\"";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        Feedback feedback1 = null;
+
+        if (cursor.moveToFirst()) {
+            feedback1 = new Feedback(cursor.getString(0),cursor.getString(1), cursor.getString(2), cursor.getString(3),
+                    cursor.getString(4));
+            cursor.close();
+        } else {
+            feedback1 = null;
+        }
+        db.close();
+        return feedback1;
     }
 
     public void ServiceProviderInfo (ServiceProvider serviceProvider, String serviceProviderId){

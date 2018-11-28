@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 public class HomeOwnerWelcomePage extends AppCompatActivity {
     private static  final String[] ActionBar = {"Search a  service provider", "Rate a service provider"};
-    private String Name, lastName, userType;
+    private String Name, lastName, userType, userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +29,7 @@ public class HomeOwnerWelcomePage extends AppCompatActivity {
             Name = bd.get("FIRST_NAME").toString();
             lastName = bd.get("LAST_NAME").toString();
             userType = bd.get("USER_TYPE").toString();
+            userId = bd.get("USER_ID").toString();
             String getName = "Welcome "+(String) bd.get("FIRST_NAME")+ " " + bd.get("LAST_NAME");
             FirsttxtView.setText(sessionType);
             SecondtxtView.setText(getName);
@@ -40,11 +41,16 @@ public class HomeOwnerWelcomePage extends AppCompatActivity {
         intent.putExtra("USER_TYPE",  userType);
         intent.putExtra("FIRST_NAME",  Name);
         intent.putExtra("LAST_NAME", lastName);
+        intent.putExtra("USER_ID", userId);
         startActivity(intent);
     }
 
     public void OnFinish2(View view) {
         Intent intent = new Intent(this, HomeOwnerRating.class);
+        intent.putExtra("USER_TYPE",  userType);
+        intent.putExtra("FIRST_NAME",  Name);
+        intent.putExtra("LAST_NAME", lastName);
+        intent.putExtra("USER_ID", userId);
         startActivity(intent);
     }
 }

@@ -25,18 +25,21 @@
                 android:id="@+id/search_by_service"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="OnFinish"
                 android:text="Search by Service" />
 
             <Button
                 android:id="@+id/search_by_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="OnFinish"
                 android:text="Search by time" />
 
             <Button
                 android:id="@+id/search_by_rating"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="OnFinish"
                 android:text="Search by rating" />
         </LinearLayout>
     </LinearLayout>

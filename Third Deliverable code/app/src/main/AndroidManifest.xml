@@ -29,6 +29,8 @@
         <activity android:name=".ConfirmationPage"></activity>
         <activity android:name=".ServiceProviderAvailabilitiesList" />
         <activity android:name=".ServiceProviderEditAvailability" />
+        <activity android:name=".HomeOwnerRating" />
+        <activity android:name=".HomeOwnerSearchProvider" />
     </application>
 
 </manifest>
