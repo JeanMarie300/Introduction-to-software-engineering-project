@@ -26,11 +26,13 @@
         <activity android:name=".ServiceProviderAddServices" />
         <activity android:name=".ServiceProviderDeleteServices" />
         <activity android:name=".ServiceProviderAvailabilities" />
-        <activity android:name=".ConfirmationPage"></activity>
+        <activity android:name=".ConfirmationPage" />
         <activity android:name=".ServiceProviderAvailabilitiesList" />
         <activity android:name=".ServiceProviderEditAvailability" />
         <activity android:name=".HomeOwnerRating" />
         <activity android:name=".HomeOwnerSearchProvider" />
+        <activity android:name=".ServiceProviderList" />
+        <activity android:name=".ServiceProviderRatings"></activity>
     </application>
 
 </manifest>
