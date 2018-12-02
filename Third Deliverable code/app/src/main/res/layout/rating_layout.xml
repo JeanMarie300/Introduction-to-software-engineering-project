@@ -41,6 +41,13 @@
             android:textColor="@color/colorPrimary"
             android:text="Rating" />
 
+
+
+
+
+
+
+
         <EditText
             android:id="@+id/rating"
             android:layout_width="match_parent"

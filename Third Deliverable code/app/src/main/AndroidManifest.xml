@@ -32,13 +32,14 @@
         <activity android:name=".HomeOwnerRating" />
         <activity android:name=".HomeOwnerSearchProvider" />
         <activity android:name=".ServiceProviderList" />
-        <activity android:name=".ServiceProviderRatings"></activity>
+        <activity android:name=".ServiceProviderRatings" />
         <activity android:name=".HomeOwnerSearchByService" />
         <activity android:name=".HomeOwnerSearchByRatings" />
         <activity android:name=".HomeOwnerSearchByTime" />
         <activity android:name=".HomeOwnerWelcomePage" />
         <activity android:name=".User_Type_Selection" />
         <activity android:name=".ServiceProviderListByService" />
+        <activity android:name=".ServiceProviderInformation"></activity>
     </application>
 
 </manifest>
