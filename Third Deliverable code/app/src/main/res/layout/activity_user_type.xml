@@ -8,56 +8,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/vertical_Layout3"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:orientation="vertical"
-            android:visibility="visible">
-
-            <EditText
-                android:id="@+id/LastName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Last name"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/FirstName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="First Name"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/Birthday"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:digits="0123456789/"
-                android:hint="Birthday format (YYYY/MM/DD)"
-                android:inputType="date" />
-
-            <Spinner
-                android:id="@+id/DropDown1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:drawable/btn_dropdown"
-                android:spinnerMode="dropdown" />
-
-            <Button
-                android:id="@+id/buttonFinish"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="OnNext"
-                android:text="Next"
-                tools:text="Next" />
-        </LinearLayout>
         <LinearLayout
             android:id="@+id/vertical_Layout1"
             android:layout_width="match_parent"
@@ -74,10 +26,83 @@
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Personal information"
-                android:textSize="32dp"
-                tools:text="Personal information" />
+                android:text="Account creation"
+                android:textSize="32dp" />
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/vertical_Layout3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/FirstName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="First Name"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/Birthday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:digits="0123456789/"
+                android:ems="10"
+                android:hint="Birthday format (YYYY/MM/DD)"
+                android:inputType="date" />
+
+            <EditText
+                android:id="@+id/number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Street Number"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/streetName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Address"
+                android:inputType="textPostalAddress" />
+
+            <EditText
+                android:id="@+id/PostalCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Postal Code"
+                android:inputType="textPostalAddress" />
+
+
+            <EditText
+                android:id="@+id/userName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="username"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/Password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="password"
+                android:inputType="textPassword" />
+
+            <Button
+                android:id="@+id/buttonFinish"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="OnNext"
+                android:text="Finished"
+                tools:text="Finish" />
         </LinearLayout>
 
     </RelativeLayout>

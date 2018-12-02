@@ -19,9 +19,7 @@ public class HomeOwnerSearchProvider extends AppCompatActivity {
         Bundle bd = intent.getExtras();
         if(bd != null)
         {
-            String sessionType = bd.get("USER_TYPE") + " Session";
             Name = bd.get("FIRST_NAME").toString();
-            lastName = bd.get("LAST_NAME").toString();
             userType = bd.get("USER_TYPE").toString();
             userId = bd.get("USER_ID").toString();
         }
@@ -31,7 +29,6 @@ public class HomeOwnerSearchProvider extends AppCompatActivity {
         Intent intent = new Intent(this, HomeOwnerSearchByService.class);
         intent.putExtra("USER_TYPE",  userType);
         intent.putExtra("FIRST_NAME",  Name);
-        intent.putExtra("LAST_NAME", lastName);
         intent.putExtra("USER_ID", userId);
         startActivity(intent);
     }
@@ -40,7 +37,6 @@ public class HomeOwnerSearchProvider extends AppCompatActivity {
         Intent intent = new Intent(this, HomeOwnerSearchByTime.class);
         intent.putExtra("USER_TYPE",  userType);
         intent.putExtra("FIRST_NAME",  Name);
-        intent.putExtra("LAST_NAME", lastName);
         intent.putExtra("USER_ID", userId);
         startActivity(intent);
     }
@@ -49,7 +45,6 @@ public class HomeOwnerSearchProvider extends AppCompatActivity {
         Intent intent = new Intent(this, HomeOwnerSearchByRatings.class);
         intent.putExtra("USER_TYPE",  userType);
         intent.putExtra("FIRST_NAME",  Name);
-        intent.putExtra("LAST_NAME", lastName);
         intent.putExtra("USER_ID", userId);
         startActivity(intent);
     }

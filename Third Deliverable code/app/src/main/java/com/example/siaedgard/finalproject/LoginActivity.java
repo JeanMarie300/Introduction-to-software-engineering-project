@@ -45,7 +45,6 @@ public class LoginActivity extends AppCompatActivity {
             alert.setMessage("You entered a wrong password or email");
             alert.setPositiveButton("OK",null);
             alert.show();
-
         }
         else {
             if (userFound.getUserType().equals("Home owner")) {
@@ -69,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void OnNewUser(View view) {
-        Intent intent = new Intent(this, user_Type.class);
+        Intent intent = new Intent(this, User_Type_Selection.class);
         startActivity(intent);
     }
 }

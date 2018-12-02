@@ -30,24 +30,10 @@ public class HomeOwnerSearchByRatings extends AppCompatActivity {
             alert.setMessage("The service doesn't exist");
             alert.setPositiveButton("OK",null);
             alert.show();
-        }
-
-        else {
+        } else {
             Intent intent = new Intent(this, ServiceProviderRatings.class);
             startActivity(intent);
             finish();
-
         }
-
     }
-}
-
-
-
-
-
-
-
-
-
 }

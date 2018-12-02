@@ -1,13 +1,11 @@
 package com.example.siaedgard.finalproject;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
 public class HomeOwnerSearchByService extends AppCompatActivity {
 
@@ -16,29 +14,26 @@ public class HomeOwnerSearchByService extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_owner_search_by_service);
-        }
+        service = (EditText) findViewById(R.id.editText);
+    }
 
     public void OnFinish(View view) {
-
         String inputService = service.getText().toString();
         MyDBHandler dbHandler = new MyDBHandler(this);
-        User serviceFound = dbHandler.findUser( inputService);
+        Services serviceFound = dbHandler.findService( inputService);
         boolean invalidAuthentification = serviceFound == null;
-
         if (invalidAuthentification) {
             AlertDialog.Builder  alert = new AlertDialog.Builder(this);
-            alert.setTitle("Wrong information");
-            alert.setMessage("The service doesn't exist");
+            alert.setTitle("Service does not exist");
+            alert.setMessage("This service is not offered yet");
             alert.setPositiveButton("OK",null);
             alert.show();
             }
-
         else {
-            Intent intent = new Intent(this, ServiceProviderList.class);
+            Intent intent = new Intent(this, ServiceProviderListByService.class);
+            intent.putExtra("SERVICE_NAME",  inputService);
             startActivity(intent);
             finish();
-
-            }
-
-            }
+        }
+    }
 }

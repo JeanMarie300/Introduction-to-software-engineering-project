@@ -8,8 +8,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class HomeOwnerWelcomePage extends AppCompatActivity {
-    private static  final String[] ActionBar = {"Search a  service provider", "Rate a service provider"};
-    private String Name, lastName, userType, userId;
+    private static  final String[] ActionBar = {"Search for service provider", "Rate service provider"};
+    private String Name, userType, userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +27,9 @@ public class HomeOwnerWelcomePage extends AppCompatActivity {
             Button ButtonAction2 = findViewById(R.id.Action2);
             ButtonAction2.setText(ActionBar[1]);
             Name = bd.get("FIRST_NAME").toString();
-            lastName = bd.get("LAST_NAME").toString();
             userType = bd.get("USER_TYPE").toString();
             userId = bd.get("USER_ID").toString();
-            String getName = "Welcome "+(String) bd.get("FIRST_NAME")+ " " + bd.get("LAST_NAME");
+            String getName = "Welcome "+ Name;
             FirsttxtView.setText(sessionType);
             SecondtxtView.setText(getName);
         }
@@ -40,7 +39,6 @@ public class HomeOwnerWelcomePage extends AppCompatActivity {
         Intent intent = new Intent(this, HomeOwnerSearchProvider.class);
         intent.putExtra("USER_TYPE",  userType);
         intent.putExtra("FIRST_NAME",  Name);
-        intent.putExtra("LAST_NAME", lastName);
         intent.putExtra("USER_ID", userId);
         startActivity(intent);
     }
@@ -49,7 +47,6 @@ public class HomeOwnerWelcomePage extends AppCompatActivity {
         Intent intent = new Intent(this, HomeOwnerRating.class);
         intent.putExtra("USER_TYPE",  userType);
         intent.putExtra("FIRST_NAME",  Name);
-        intent.putExtra("LAST_NAME", lastName);
         intent.putExtra("USER_ID", userId);
         startActivity(intent);
     }

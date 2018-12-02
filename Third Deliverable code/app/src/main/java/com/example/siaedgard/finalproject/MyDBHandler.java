@@ -1,6 +1,7 @@
 package com.example.siaedgard.finalproject;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -42,7 +43,6 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public static final String COLUMN_IDTABLE = "_id";
     public static final String COLUMN_SERVICENAMEPROVIDERTABLE = "service_name";
     public static final String COLUMN_SERVICEPRICEPROVIDERTABLE = "service_price";
-
     public static final String USERID = "user_id";
 
     public static final String TABLE_SERVICE_PROVIDER_AVAILABILITIES = "service_provider_availabilities";
@@ -52,7 +52,6 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public static final String FINAL_TIME = "final_time";
     public static final String SERVICEPROVIDERD = "userID";
 
-    //create table for appointment
 
     public static final String TABLE_FEEDBACK = "feedback";
     public static final String RATING_ID = "_id";
@@ -110,11 +109,6 @@ public class MyDBHandler extends SQLiteOpenHelper {
             "REFERENCES "+TABLE_USERS+"("+COLUMN_ID+"));";
 
 
-
-    public MyDBHandler(ServiceProviderAvailabilities context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
-    }
-
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(TABLE_1);
@@ -123,7 +117,10 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.execSQL(TABLE_4);
         db.execSQL(TABLE_5);
         db.execSQL(TABLE_6);
+    }
 
+    public MyDBHandler(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
@@ -149,6 +146,29 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
+    public List<User> findServiceProviderByService(String serviceName){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String  query = "SELECT * FROM " + TABLE_USERS +
+                        " LEFT JOIN " + TABLE_SERVICE_PROVIDER_SERVICES + " ON "
+                        + TABLE_USERS + "." + COLUMN_ID + " = " +
+                TABLE_SERVICE_PROVIDER_SERVICES + "." +  USERID +
+                " WHERE " + TABLE_SERVICE_PROVIDER_SERVICES + "." + COLUMN_SERVICENAMEPROVIDERTABLE + " = \"" + serviceName + "\"";
+
+        Cursor cursor = db.rawQuery(query,null);
+        List<User> users = new ArrayList<>();
+        while(cursor.moveToNext()){
+            User user = new User(cursor.getString(0),cursor.getString(1), "", cursor.getString(3), cursor.getString(4),
+                    cursor.getString(5), cursor.getString(6),cursor.getString(7), cursor.getString(8)) ;
+            users.add(user);
+        }
+
+        db.close();
+
+        return users;
+    }
+
 
     public long addServicesToUser (Services services, int serviceProviderId) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -165,6 +185,26 @@ public class MyDBHandler extends SQLiteOpenHelper {
             db2.close();
             return rowId;
         }
+    }
+
+    public Services findService(String username) {
+        String query = "Select * FROM " + TABLE_SERVICES + " WHERE " +
+                COLUMN_SERVICENAME + " = \"" + username + "\"" + "OR "+
+                COLUMN_SERVICENAME + " = \"" + Character.toUpperCase(username.charAt(0)) + "\"";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        Services services = null;
+
+        if (cursor.moveToFirst()) {
+            services = new Services(cursor.getString(1), cursor.getString(2));
+            cursor.close();
+        } else {
+            services = null;
+        }
+        db.close();
+        return services;
     }
 
     public Services findServices(String serviceName, int serviceProviderId ) {

@@ -1,20 +1,10 @@
 package com.example.siaedgard.finalproject;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText LastName, FirstName ,Birthday , PostalCode, UserName, Password, address, number;
+/*    EditText LastName, FirstName ,Birthday , PostalCode, UserName, Password, address, number;
     TextView result;
     String userId, userType;
     private String [] answers = new String [7];
@@ -129,4 +119,5 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
+    */
 }
