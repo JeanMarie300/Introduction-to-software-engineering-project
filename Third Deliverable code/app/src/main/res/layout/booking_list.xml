@@ -5,4 +5,6 @@
     <TextView android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/textViewName" android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" android:text=""
         />
     <TextView android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/textViewDate" android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" android:text=""/>
+    <TextView android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/textViewRating" android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" android:text=""/>
+
 </LinearLayout>

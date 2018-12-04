@@ -2,6 +2,7 @@ package com.example.siaedgard.finalproject;
 
 public class ServiceProvider extends User {
     private String phoneNumber, companyName, licensed, expertise;
+    private double rating;
     private int experienceYears;
     public ServiceProvider(User user, String phoneNumber, String companyName, String license, int experienceYears, String expertise) {
         super(user.getId(),user.getFirstName(), user.getBirthday(), user.getPostalCode(), user.getUserType(),
@@ -11,6 +12,7 @@ public class ServiceProvider extends User {
         this.licensed = license;
         this.experienceYears = experienceYears;
         this.expertise = expertise;
+        this.rating = 0;
     }
     public String getPhoneNumber() {
         return this.phoneNumber;
@@ -35,4 +37,11 @@ public class ServiceProvider extends User {
         this.expertise = expertise;
     }
 
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public double getRating() {
+        return rating;
+    }
 }

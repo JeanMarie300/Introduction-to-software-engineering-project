@@ -34,9 +34,17 @@ public class ServiceProviderInformation extends AppCompatActivity {
             company_name_value.setText(serviceProviderInfo.get("CompanyName").toString());
             licensedvalue.setText(serviceProviderInfo.get("Licensed").toString());
             expertisevalue.setText(serviceProviderInfo.get("Expertise").toString());
-            experienceYearsValue.setText(serviceProviderInfo.get("ExperienceYears").toString());
+            if (serviceProviderInfo.get("ExperienceYears").toString().equals("0")) {
+                experienceYearsValue.setText("Less than a year");
+            } else {
+                experienceYearsValue.setText(serviceProviderInfo.get("ExperienceYears").toString());
+            }
             PhoneNumberValue.setText(serviceProviderInfo.get("PhoneNumber").toString());
-            RatingValue.setText(serviceProviderInfo.get("Rating").toString());
+            if (serviceProviderInfo.get("Rating").toString().equals("0.0")) {
+                RatingValue.setText("N/A");
+            } else {
+                RatingValue.setText(serviceProviderInfo.get("Rating").toString());
+            }
         }
 
     }

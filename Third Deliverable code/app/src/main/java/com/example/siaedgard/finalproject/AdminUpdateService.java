@@ -26,19 +26,25 @@ public class AdminUpdateService extends AppCompatActivity {
     TextView idView;
     EditText serviceNameField;
     EditText servicePrice;
+    String userId;
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.adminupdateservices);
         Intent intent = getIntent();
+        Bundle bd = intent.getExtras();
+        if(bd != null)
+        {
+            userId = bd.get("USER_ID").toString();
+        }
         services = new ArrayList<>();
         ServiceName = (TextView) findViewById(R.id.textViewName);
         ServiceHourRate = (TextView) findViewById(R.id.HourlyRate);
         listViewServices = (ListView) findViewById(R.id.listViewServices);
         MyDBHandler dbHandler = new MyDBHandler(this);
         Map<String, String> map = dbHandler.findServices();
-        ;
+
         for (Map.Entry<String, String> entry : map.entrySet()) {
             Services service = new Services(entry.getKey(), entry.getValue());
             services.add(service);

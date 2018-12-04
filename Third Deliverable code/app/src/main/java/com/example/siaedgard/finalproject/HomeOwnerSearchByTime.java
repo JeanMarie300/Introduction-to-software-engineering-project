@@ -154,9 +154,6 @@ public class HomeOwnerSearchByTime extends AppCompatActivity {
             Intent intent = new Intent(this, ServiceProviderAvailabilities.class);
             startActivity(intent);
             finish();
-
-
-
         }
     }
 

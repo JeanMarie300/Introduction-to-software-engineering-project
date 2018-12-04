@@ -10,6 +10,7 @@ import android.widget.EditText;
 public class AdminCreateService extends AppCompatActivity {
 
     EditText ServiceName, ServiceHourRate;
+    String userId;
 
 
 
@@ -20,6 +21,10 @@ public class AdminCreateService extends AppCompatActivity {
         ServiceHourRate = (EditText) findViewById(R.id.HourlyRate);
         Intent intent = getIntent();
         Bundle bd = intent.getExtras();
+        if(bd != null)
+        {
+            userId = bd.get("USER_ID").toString();
+        }
     }
 
     public void OnFinish(View view) {
@@ -52,8 +57,10 @@ public class AdminCreateService extends AppCompatActivity {
         }
         else {
             dbHandler.addServices(services);
+            Intent intent = new Intent(this, ConfirmServiceCreation.class);
+            intent.putExtra("USER_ID", userId);
+            startActivity(intent);
             finish();
-            startActivity(getIntent());
         }
 
     }

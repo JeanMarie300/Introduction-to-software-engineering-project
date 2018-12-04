@@ -23,7 +23,7 @@ public class ServiceProviderEditAvailability extends AppCompatActivity {
     HashMap<String, String> dateInfo;
     EditText initialDate, InitTime, EndTime;
     Calendar firstCalendar, thirdCalendar, FourthCalendar;
-    String userId, availabilityId, Name, lastName, userType;
+    String userId, availabilityId, Name, availabityId, userType;
 
 
 
@@ -70,6 +70,9 @@ public class ServiceProviderEditAvailability extends AppCompatActivity {
         if(bd != null)
         {
             userId =Integer.toString((int)bd.get("USER_ID"));
+
+            availabityId = bd.get("AVAILABILITY_ID").toString();
+
             initialDate = (EditText) findViewById(R.id.Begining);
             initialDate.setText((String)bd.get("INITIAL_DATE"));
             InitTime = (EditText) findViewById(R.id.InitTime);
@@ -77,9 +80,6 @@ public class ServiceProviderEditAvailability extends AppCompatActivity {
             EndTime = (EditText) findViewById(R.id.EndTime);
             EndTime.setText((String)bd.get("FINAL_TIME"));
             availabilityId = (String)bd.get("AVAILABILITY_ID");
-            Name = (String) bd.get("FIRST_NAME");
-            lastName =(String) bd.get("LAST_NAME");
-            userType = (String) bd.get("USER_TYPE");
         }
 
         dateInfo = new HashMap<>();
@@ -152,12 +152,9 @@ public class ServiceProviderEditAvailability extends AppCompatActivity {
             dateInfo.put("initDate", initialDate.getText().toString());
             dateInfo.put("initTime", InitTime.getText().toString());
             dateInfo.put("finalTime", EndTime.getText().toString());
-            addAvailabilities (dateInfo,userId);
+            addAvailabilities (dateInfo,availabityId);
             finish();
             Intent intent = new Intent(this, ConfirmationPage.class);
-            intent.putExtra("USER_TYPE",  userType);
-            intent.putExtra("FIRST_NAME",  Name);
-            intent.putExtra("LAST_NAME", lastName);
             intent.putExtra("USER_ID", userId);
             startActivity(intent);
         }

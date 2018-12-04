@@ -31,10 +31,6 @@ public class ServiceProviderAvailabilitiesList extends AppCompatActivity {
         Bundle bd = intent.getExtras();
         if (bd != null) {
             userId =Integer.parseInt (bd.get("USER_ID").toString());
-            Name = (String) bd.get("FIRST_NAME");
-            lastName =(String) bd.get("LAST_NAME");
-            userType = (String) bd.get("USER_TYPE");
-
         }
         availabilities = new ArrayList<>();
         ServiceName = (TextView) findViewById(R.id.textViewName);
@@ -63,9 +59,6 @@ public class ServiceProviderAvailabilitiesList extends AppCompatActivity {
         intent.putExtra("FINAL_TIME", availability.getFinalTime());
         intent.putExtra("AVAILABILITY_ID", availability.getId());
         intent.putExtra("USER_ID", userId);
-        intent.putExtra("USER_TYPE",  userType);
-        intent.putExtra("FIRST_NAME", Name);
-        intent.putExtra("LAST_NAME", lastName);
         startActivity(intent);
         finish();
     }

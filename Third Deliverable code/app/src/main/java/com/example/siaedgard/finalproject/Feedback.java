@@ -2,14 +2,15 @@ package com.example.siaedgard.finalproject;
 
 public class Feedback {
 
-    private  String Comments, id, Ratings,  home_owner_id, service_provider_id;
+    private  String Comments, id, Ratings,  home_owner_id, service_provider_id, bookingId;
 
-    public Feedback(String id, String comments, String ratings, String home_owner, String service_provider) {
+    public Feedback(String id, String comments, String ratings, String home_owner, String service_provider, String bookingid) {
         this.id = id;
         this.Comments = comments;
         this.Ratings = ratings;
         this.home_owner_id = home_owner;
         this.service_provider_id = service_provider;
+        this.bookingId = bookingid;
     }
 
     public String getComments() {
@@ -50,5 +51,13 @@ public class Feedback {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getBookingId() {
+        return bookingId;
+    }
+
+    public void setBookingId(String bookingId) {
+        this.bookingId = bookingId;
     }
 }

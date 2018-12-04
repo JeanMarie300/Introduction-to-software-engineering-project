@@ -1,5 +1,6 @@
 package com.example.siaedgard.finalproject;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -33,19 +34,30 @@ public class HomeOwnerBookingList extends AppCompatActivity {
                 @Override
                 public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                     Booking booking = bookings.get(i);
+                    showRatingForm (booking);
                     return true;
                 }
             });
         }
     }
 
-    private void showRatingForm ( final User user){
-        Intent intent = new Intent(this, ServiceProviderInformation.class);
-        intent.putExtra("USER_TYPE",  userType);
-        intent.putExtra("FIRST_NAME",  Name);
-        intent.putExtra("USER_ID", userId);
-        intent.putExtra("PROVIDER_ID", user.getId());
-        startActivity(intent);
+    private void showRatingForm ( final Booking booking){
+        MyDBHandler dbHandler = new MyDBHandler(this);
+        if (dbHandler.findFeedback(booking.getId()) == null) {
+            Intent intent = new Intent(this, HomeOwnerRating.class);
+            User userFound = dbHandler.findUserByName(booking.getService_provider_id());
+            intent.putExtra("USER_ID", userId);
+            intent.putExtra("PROVIDER_ID", userFound.getId());
+            intent.putExtra("BOOKING_ID", booking.getId());
+            startActivity(intent);
+        } else {
+            AlertDialog.Builder  alert = new AlertDialog.Builder(this);
+            alert.setTitle("Service already rated");
+            alert.setMessage("The service is already rated, you cant rate it twice");
+            alert.setPositiveButton("OK",null);
+            alert.show();
+        }
+
     }
 
 }

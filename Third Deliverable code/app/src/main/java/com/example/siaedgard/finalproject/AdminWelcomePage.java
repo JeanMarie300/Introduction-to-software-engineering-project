@@ -12,7 +12,8 @@ public class AdminWelcomePage extends AppCompatActivity {
 
 
     private static  final String[] ActionBar = {"Create service", "Update and delete services"};
-    private String Name, lastName, userType;
+    private String Name, lastName, userType, userId;
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,14 +25,16 @@ public class AdminWelcomePage extends AppCompatActivity {
         Bundle bd = intent.getExtras();
         if(bd != null)
         {
-            String sessionType = bd.get("USER_TYPE") + " Session";
+            userId = bd.get("USER_ID").toString();
+            MyDBHandler dbHandler = new MyDBHandler(this);
+            user = dbHandler.findUserById(userId);
+            String sessionType = user.getUserType() + " Session";
             Button ButtonAction1 = findViewById(R.id.Action1);
             ButtonAction1.setText(ActionBar[0]);
             Button ButtonAction2 = findViewById(R.id.Action2);
             ButtonAction2.setText(ActionBar[1]);
-            Name = bd.get("FIRST_NAME").toString();
-            userType = bd.get("USER_TYPE").toString();
-            String getName = "Welcome "+(String) bd.get("FIRST_NAME");
+            Name = user.getFirstName();
+            String getName = "Welcome "+Name;
             FirsttxtView.setText(sessionType);
             SecondtxtView.setText(getName);
         }
@@ -39,14 +42,13 @@ public class AdminWelcomePage extends AppCompatActivity {
 
     public void OnFinish(View view) {
         Intent intent = new Intent(this, AdminCreateService.class);
-        intent.putExtra("USER_TYPE",  userType);
-        intent.putExtra("FIRST_NAME",  Name);
-        intent.putExtra("LAST_NAME", lastName);
+        intent.putExtra("USER_ID",  user.getId());
         startActivity(intent);
     }
 
     public void OnFinish2(View view) {
         Intent intent = new Intent(this, AdminUpdateService.class);
+        intent.putExtra("USER_ID",  user.getId());
         startActivity(intent);
     }
 

@@ -1,9 +1,10 @@
 package com.example.siaedgard.finalproject;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class ConfirmBooking extends AppCompatActivity {
@@ -27,6 +28,8 @@ public class ConfirmBooking extends AppCompatActivity {
             User user = dbHandler.findUserById(userId);
             Name = user.getFirstName();
             userType = user.getUserType();
+            Button ButtonAction2 = findViewById(R.id.button4);
+            ButtonAction2.setText("Book another service provider");
         }
     }
 

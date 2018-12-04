@@ -30,6 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
+                android:textSize="18dp"
                 android:text="Company name:"
                 android:textAlignment="center" />
 
@@ -38,6 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
+                android:textSize="18dp"
                 android:text="Company name:"
                 android:textAlignment="center" />
         </LinearLayout>
@@ -54,6 +56,7 @@
                 android:layout_width="123dp"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
+                android:textSize="18dp"
                 android:text="Licensed :"
                 android:textAlignment="center" />
 
@@ -62,6 +65,7 @@
                 android:layout_width="123dp"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
+                android:textSize="18dp"
                 android:text="Licensed :"
                 android:textAlignment="center" />
 
@@ -79,6 +83,7 @@
                 android:layout_width="123dp"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
+                android:textSize="18dp"
                 android:text="Expertise :"
                 android:textAlignment="center" />
 
@@ -87,6 +92,7 @@
                 android:layout_width="123dp"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
+                android:textSize="18dp"
                 android:text="Expertise :"
                 android:textAlignment="center" />
 
@@ -104,6 +110,7 @@
                 android:layout_width="123dp"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
+                android:textSize="18dp"
                 android:text="Years of experience :"
                 android:textAlignment="center" />
 
@@ -112,6 +119,7 @@
                 android:layout_width="123dp"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
+                android:textSize="18dp"
                 android:text="Years of experience :"
                 android:textAlignment="center" />
         </LinearLayout>
@@ -128,6 +136,7 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:text="Phone number :"
+                android:textSize="18dp"
                 android:textAlignment="center" />
 
             <TextView
@@ -136,6 +145,7 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:text="Phone number :"
+                android:textSize="18dp"
                 android:textAlignment="center" />
         </LinearLayout>
 
@@ -152,6 +162,7 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:text="Rating:"
+                android:textSize="18dp"
                 android:textAlignment="center" />
 
 
@@ -161,6 +172,7 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:text="Rating:"
+                android:textSize="15dp"
                 android:textAlignment="center" />
         </LinearLayout>
 

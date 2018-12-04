@@ -70,9 +70,6 @@ public class ServiceProviderAvailabilities extends AppCompatActivity {
         if(bd != null)
         {
             userId = (String) bd.get("USER_ID");
-            userType = (String) bd.get("USER_TYPE");
-            Name = (String) bd.get("FIRST_NAME");
-            lastName = (String) bd.get("LAST_NAME");
         }
 
         dateInfo = new HashMap<>();
@@ -154,9 +151,6 @@ public class ServiceProviderAvailabilities extends AppCompatActivity {
             addAvailabilities (dateInfo,userId);
             finish();
             Intent intent = new Intent(this, ConfirmationPage.class);
-            intent.putExtra("USER_TYPE",  userType);
-            intent.putExtra("FIRST_NAME",  Name);
-            intent.putExtra("LAST_NAME", lastName);
             intent.putExtra("USER_ID", userId);
             startActivity(intent);
         }
@@ -185,28 +179,6 @@ public class ServiceProviderAvailabilities extends AppCompatActivity {
                 value = false;
                 return value ;
             }
-        return value;
-    }
-
-    private boolean dateConflicting (String date1, String date2) {
-        SimpleDateFormat sdfrmt = new SimpleDateFormat("yyyy/MM/dd");
-        SimpleDateFormat finalDate = new SimpleDateFormat("yyyy/MM/dd");
-        boolean value = false;
-        try
-        {
-            sdfrmt.parse(date1);
-            sdfrmt.parse(date2);
-            if (sdfrmt.parse(date1).after(sdfrmt.parse(date2))) {
-                value = false;
-            } else {
-                value = true;
-            }
-        }
-        catch (ParseException e)
-        {
-            value = false;
-            return value ;
-        }
         return value;
     }
 

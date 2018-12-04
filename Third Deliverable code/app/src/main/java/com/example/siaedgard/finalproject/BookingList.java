@@ -29,7 +29,7 @@ public class BookingList extends ArrayAdapter<Booking> {
         Booking booking= bookings.get(position);
         Date date = null;
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
         try
         {
             date = format.parse(booking.getDateOfBooking());
@@ -42,9 +42,16 @@ public class BookingList extends ArrayAdapter<Booking> {
         SimpleDateFormat formatter = new SimpleDateFormat("EEE MMM dd");
         String stringDate = formatter.format(date);
 
+
         TextView textViewName = (TextView) listViewItem.findViewById(R.id.textViewName);
         TextView textViewDate = (TextView) listViewItem.findViewById(R.id.textViewDate);
+        TextView textViewRating = (TextView) listViewItem.findViewById(R.id.textViewRating);
 
+        if (booking.getRating().equals("-1")) {
+            textViewRating.setText("Service not rated");
+        } else {
+            textViewRating.setText( "Service rate : "+booking.getRating() + " /5");
+        }
 
         textViewName.setText( "Booking with "+ booking.getService_provider_id());
 
