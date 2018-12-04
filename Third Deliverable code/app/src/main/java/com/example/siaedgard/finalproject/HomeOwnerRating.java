@@ -22,7 +22,6 @@ public class HomeOwnerRating extends AppCompatActivity {
         {
             sessionType = bd.get("USER_TYPE") + " Session";
             Name = bd.get("FIRST_NAME").toString();
-            lastName = bd.get("LAST_NAME").toString();
             userType = bd.get("USER_TYPE").toString();
             userId = bd.get("USER_ID").toString();
         }

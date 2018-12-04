@@ -30,9 +30,8 @@ public class AdminWelcomePage extends AppCompatActivity {
             Button ButtonAction2 = findViewById(R.id.Action2);
             ButtonAction2.setText(ActionBar[1]);
             Name = bd.get("FIRST_NAME").toString();
-            lastName = bd.get("LAST_NAME").toString();
             userType = bd.get("USER_TYPE").toString();
-            String getName = "Welcome "+(String) bd.get("FIRST_NAME")+ " " + bd.get("LAST_NAME");
+            String getName = "Welcome "+(String) bd.get("FIRST_NAME");
             FirsttxtView.setText(sessionType);
             SecondtxtView.setText(getName);
         }

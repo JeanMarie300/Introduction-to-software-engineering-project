@@ -14,7 +14,7 @@ public class UserList extends ArrayAdapter<User> {
     List<User> users;
 
     public UserList(Activity context, List<User> users) {
-        super(context, R.layout.servicelist, users);
+        super(context, R.layout.providerlist, users);
         this.context = context;
         this.users = users;
     }
@@ -22,7 +22,7 @@ public class UserList extends ArrayAdapter<User> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
-        View listViewItem = inflater.inflate(R.layout.servicelist, null, true);
+        View listViewItem = inflater.inflate(R.layout.providerlist, null, true);
 
         TextView textViewName = (TextView) listViewItem.findViewById(R.id.textViewName);
 

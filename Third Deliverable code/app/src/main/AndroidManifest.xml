@@ -40,6 +40,8 @@
         <activity android:name=".User_Type_Selection" />
         <activity android:name=".ServiceProviderListByService" />
         <activity android:name=".ServiceProviderInformation"></activity>
+        <activity android:name=".ConfirmBooking" />
+        <activity android:name=".HomeOwnerBookingList" />
     </application>
 
 </manifest>

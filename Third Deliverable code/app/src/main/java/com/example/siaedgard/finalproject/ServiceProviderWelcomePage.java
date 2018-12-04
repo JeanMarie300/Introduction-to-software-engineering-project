@@ -35,7 +35,6 @@ public class ServiceProviderWelcomePage extends AppCompatActivity {
             ButtonAction4.setText(ActionBar[3]);
             String getName = "Welcome "+(String) bd.get("FIRST_NAME")+ " " + bd.get("LAST_NAME");
             Name = (String) bd.get("FIRST_NAME");
-            lastName =(String) bd.get("LAST_NAME");
             FirsttxtView.setText(sessionType);
             SecondtxtView.setText(getName);
             userId = (String) bd.get("USER_ID");

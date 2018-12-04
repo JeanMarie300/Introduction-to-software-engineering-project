@@ -12,28 +12,27 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class AvailabilityList extends ArrayAdapter<Availability> {
+public class BookingList extends ArrayAdapter<Booking> {
     private Activity context;
-    List<Availability> availabilities;
+    List<Booking> bookings;
 
-    public AvailabilityList(Activity context, List<Availability> availabilities) {
-        super(context, R.layout.servicelist, availabilities);
+    public BookingList(Activity context, List<Booking> bookings) {
+        super(context, R.layout.providerlist, bookings);
         this.context = context;
-        this.availabilities = availabilities;
+        this.bookings = bookings;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
-        View listViewItem = inflater.inflate(R.layout.servicelist, null, true);
-        Availability availability = availabilities.get(position);
+        View listViewItem = inflater.inflate(R.layout.booking_list, null, true);
+        Booking booking= bookings.get(position);
         Date date = null;
-
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
         try
         {
-            date = format.parse(availability.getInitialDate());
+            date = format.parse(booking.getDateOfBooking());
         }
         catch (ParseException e)
         {
@@ -44,10 +43,13 @@ public class AvailabilityList extends ArrayAdapter<Availability> {
         String stringDate = formatter.format(date);
 
         TextView textViewName = (TextView) listViewItem.findViewById(R.id.textViewName);
-        TextView textViewRate = (TextView) listViewItem.findViewById(R.id.textViewRate);
+        TextView textViewDate = (TextView) listViewItem.findViewById(R.id.textViewDate);
 
-        textViewName.setText(stringDate);
-        textViewRate.setText(availability.getInitialTime() + " to " + availability.getFinalTime());
+
+        textViewName.setText( "Booking with "+ booking.getService_provider_id());
+
+        textViewDate.setText( "On  "+ stringDate);
+
         return listViewItem;
     }
 }

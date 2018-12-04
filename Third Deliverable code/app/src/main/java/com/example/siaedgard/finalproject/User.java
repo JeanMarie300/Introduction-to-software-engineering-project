@@ -1,11 +1,10 @@
 package com.example.siaedgard.finalproject;
 
 public class User {
-     private String Id, firstName, lastName, birthday, postalCode, userType, username, password, address;
+     private String Id, firstName, birthday, postalCode, userType, username, password, address;
 
-     public User(String Id, String firstName, String lastName, String birthday, String postalCode, String userType, String username, String password, String address) {
+     public User(String Id, String firstName, String birthday, String postalCode, String userType, String username, String password, String address) {
          this.firstName = firstName;
-         this.lastName = lastName;
          this.birthday = birthday;
          this.postalCode = postalCode;
          this.userType = userType;
@@ -20,9 +19,6 @@ public class User {
     }
     public String getId() {return this.Id;}
     public void setId(String id ) {this.Id = id;}
-    public String getLastName() {
-        return this.lastName;
-    }
     public String getBirthday() {
         return this.birthday;
     }

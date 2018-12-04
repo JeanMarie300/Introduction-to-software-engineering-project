@@ -44,7 +44,7 @@ public class HomeOwnerWelcomePage extends AppCompatActivity {
     }
 
     public void OnFinish2(View view) {
-        Intent intent = new Intent(this, HomeOwnerRating.class);
+        Intent intent = new Intent(this, HomeOwnerBookingList.class);
         intent.putExtra("USER_TYPE",  userType);
         intent.putExtra("FIRST_NAME",  Name);
         intent.putExtra("USER_ID", userId);

@@ -57,7 +57,7 @@ public class user_Type extends AppCompatActivity {
     }
 
     public boolean newUser () {
-        User user = new User("1",userInfo.get("FirstName"),"", userInfo.get("Birthday"), userInfo.get("PostalCode"), userType, userInfo.get("UserName"), userInfo.get("Password"),userInfo.get("address"));
+        User user = new User("1",userInfo.get("FirstName"), userInfo.get("Birthday"), userInfo.get("PostalCode"), userType, userInfo.get("UserName"), userInfo.get("Password"),userInfo.get("address"));
         MyDBHandler dbHandler = new MyDBHandler(this);
         long userID = dbHandler.addUsers(user);
         if(userID == -2) {
@@ -67,6 +67,16 @@ public class user_Type extends AppCompatActivity {
             userId = Long.toString(userID);
             return true;
         }
+    }
+
+    private boolean verifyPostalCode(String postalCode) {
+        if (postalCode.length() > 6) {
+            return false;
+        }
+        else if (!Character.isLetter(postalCode.charAt(0)) || !Character.isLetter(postalCode.charAt(2)) || !Character.isLetter(postalCode.charAt(4))) {
+            return false;
+        } else
+            return Character.isDigit(postalCode.charAt(1)) && Character.isDigit(postalCode.charAt(3)) && Character.isDigit(postalCode.charAt(5));
     }
 
     public void OnNext(View view) {
@@ -97,6 +107,12 @@ public class user_Type extends AppCompatActivity {
             AlertDialog.Builder  alert = new AlertDialog.Builder(this);
             alert.setTitle("Invalid date");
             alert.setMessage("Please enter a valid birthday");
+            alert.setPositiveButton("OK",null);
+            alert.show();
+        } else if (!verifyPostalCode(postalcode.getText().toString())) {
+            AlertDialog.Builder  alert = new AlertDialog.Builder(this);
+            alert.setTitle("Invalid Postal Code");
+            alert.setMessage("You need to enter a postal code following this format A1A1A1");
             alert.setPositiveButton("OK",null);
             alert.show();
         } else {

@@ -16,8 +16,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "userDB.db";
     public static final String TABLE_USERS = "users";
     public static final String COLUMN_ID = "_id";
-    public static final String COLUMN_FIRSTNAME = "firstname";
-    public static final String COLUMN_LASTNAME = "lastname";
+    public static final String COLUMN_FIRSTNAME = "name";
     public static final String COLUMN_USERNAME = "username";
     public static final String COLUMN_PASSWORD = "password";
     public static final String COLUMN_BIRTHDAY = "birthday";
@@ -52,19 +51,28 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public static final String FINAL_TIME = "final_time";
     public static final String SERVICEPROVIDERD = "userID";
 
+    public static final String TABLE_BOOKING = "bookings";
+    public static final String BOOKING_ID = "_id";
+    public static final String HOME_OWNER_ID = "home_owner_id";
+    public static final String SERVICE_PROVIDER_ID = "service_provider_id";
+    public static final String BOOKING_TIME = "booking_time";
+
 
     public static final String TABLE_FEEDBACK = "feedback";
     public static final String RATING_ID = "_id";
     public static final String COLUMN_COMMENTS = "comments";
     public static final String COLUMN_RATING = "ratings";
-    public static final String HOMEWONERID = "home_owner";
-    public static final String SERVICEPROVIDER_ID = "service_provider";
+    public static final String HOMEWONERIDBOOKING = "home_owner";
+    public static final String SERVICEPROVIDER_IDBOOKING = "service_provider";
+    public static final String FEEDBACK_BOOKING_ID = "booking_id";
+
+
 
 
     public static final  String  TABLE_1 = "CREATE TABLE " +
             TABLE_USERS + "("
             + COLUMN_ID + " INTEGER PRIMARY KEY," + COLUMN_FIRSTNAME
-            + " TEXT," + COLUMN_LASTNAME + " TEXT," +COLUMN_BIRTHDAY +
+            + " TEXT,"  + COLUMN_BIRTHDAY +
             " TEXT," +COLUMN_POSTALCODE + " TEXT," + COLUMN_USERTYPE + " TEXT," +
             COLUMN_USERNAME + " TEXT,"  +COLUMN_ADDRESS + " TEXT,"+
             COLUMN_PASSWORD + " TEXT" + ")";
@@ -100,12 +108,22 @@ public class MyDBHandler extends SQLiteOpenHelper {
             " TEXT," + SERVICEPROVIDERD + " TEXT," + " FOREIGN KEY ("+SERVICEPROVIDERD+") " +
             "REFERENCES "+TABLE_USERS+"("+COLUMN_ID+"));";
 
+
     public static final String TABLE_6 = "CREATE TABLE " +
+            TABLE_BOOKING + "("
+            + BOOKING_ID + " INTEGER PRIMARY KEY," + HOME_OWNER_ID +
+            " TEXT," +BOOKING_TIME +
+            " TEXT," + SERVICE_PROVIDER_ID + " TEXT," +" FOREIGN KEY ("+HOME_OWNER_ID+")" +
+            " REFERENCES "+ TABLE_USERS+ " ("+COLUMN_ID+"), "+ " FOREIGN KEY ("+SERVICE_PROVIDER_ID+")" +
+            "REFERENCES "+TABLE_USERS+"("+COLUMN_ID+"));";
+
+    public static final String TABLE_7 = "CREATE TABLE " +
             TABLE_FEEDBACK + "("
             + RATING_ID + " INTEGER PRIMARY KEY," + COLUMN_COMMENTS
-            + " TEXT," + COLUMN_RATING + " TEXT,"+ HOMEWONERID +
-            " TEXT," + SERVICEPROVIDER_ID + " TEXT," +" FOREIGN KEY ("+SERVICEPROVIDER_ID+")" +
-            " REFERENCES "+ TABLE_USERS+ " ("+COLUMN_ID+"), "+ " FOREIGN KEY ("+SERVICEPROVIDER_ID+")" +
+            + " TEXT," + FEEDBACK_BOOKING_ID + " TEXT,"+  COLUMN_RATING + " TEXT,"+ HOMEWONERIDBOOKING +
+            " TEXT," + SERVICEPROVIDER_IDBOOKING + " TEXT," +" FOREIGN KEY ("+HOMEWONERIDBOOKING+")" +
+            " REFERENCES "+ TABLE_USERS+ " ("+COLUMN_ID+"), "+ " FOREIGN KEY ("+HOMEWONERIDBOOKING+")" +
+            " REFERENCES "+ TABLE_BOOKING+ " ("+COLUMN_ID+"), "+" FOREIGN KEY ("+SERVICEPROVIDER_IDBOOKING+")" +
             "REFERENCES "+TABLE_USERS+"("+COLUMN_ID+"));";
 
 
@@ -117,6 +135,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.execSQL(TABLE_4);
         db.execSQL(TABLE_5);
         db.execSQL(TABLE_6);
+        db.execSQL(TABLE_7);
     }
 
     public MyDBHandler(Context context) {
@@ -131,6 +150,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SERVICE_PROVIDER_INFO);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SERVICE_PROVIDER_SERVICES);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SERVICE_PROVIDER_AVAILABILITIES);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_BOOKING);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_FEEDBACK);
         onCreate(db);
     }
@@ -150,7 +170,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
-        String  query = "SELECT * FROM " + TABLE_USERS +
+
+       String  query = "SELECT * FROM " + TABLE_USERS +
                         " LEFT JOIN " + TABLE_SERVICE_PROVIDER_SERVICES + " ON "
                         + TABLE_USERS + "." + COLUMN_ID + " = " +
                 TABLE_SERVICE_PROVIDER_SERVICES + "." +  USERID +
@@ -159,7 +180,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(query,null);
         List<User> users = new ArrayList<>();
         while(cursor.moveToNext()){
-            User user = new User(cursor.getString(0),cursor.getString(1), "", cursor.getString(3), cursor.getString(4),
+            User user = new User(cursor.getString(0),cursor.getString(1), cursor.getString(2), cursor.getString(4),
                     cursor.getString(5), cursor.getString(6),cursor.getString(7), cursor.getString(8)) ;
             users.add(user);
         }
@@ -167,6 +188,28 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.close();
 
         return users;
+    }
+
+    public List<Booking> findServiceProviderBooking(String id){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String query = "Select * FROM " + TABLE_BOOKING;
+
+
+      /*  String query = "Select * FROM " + TABLE_BOOKING + " WHERE " +
+                HOME_OWNER_ID + " = \"" + id + "\"";
+*/
+        Cursor cursor = db.rawQuery(query,null);
+        List<Booking> bookings = new ArrayList<>();
+        while(cursor.moveToNext()){
+            User usertemp  = findUserById(cursor.getString(3));
+            Booking booking = new Booking(cursor.getString(0),cursor.getString(1), usertemp.getFirstName(), cursor.getString(2)) ;
+            bookings.add(booking);
+        }
+
+        db.close();
+        return bookings;
     }
 
 
@@ -226,9 +269,9 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return services;
     }
 
-    public User findUser(String username) {
+    public User findUserById(String Id) {
         String query = "Select * FROM " + TABLE_USERS + " WHERE " +
-                COLUMN_USERNAME + " = \"" + username + "\"";
+                COLUMN_ID + " = \"" + Id + "\"";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
@@ -236,14 +279,41 @@ public class MyDBHandler extends SQLiteOpenHelper {
         User user = null;
 
         if (cursor.moveToFirst()) {
-            user = new User(cursor.getString(0),cursor.getString(1), cursor.getString(2), cursor.getString(3),
-                    cursor.getString(4), cursor.getString(5),
-                    cursor.getString(6),cursor.getString(8),cursor.getString(7));
+            user = new User(cursor.getString(0),cursor.getString(1), cursor.getString(2),
+                    cursor.getString(3), cursor.getString(4),
+                    cursor.getString(5),cursor.getString(6),cursor.getString(7));
             cursor.close();
         } else {
             user = null;
         }
         db.close();
+        return user;
+    }
+
+
+    public User findUser(String username) {
+        String query = "Select * FROM " + TABLE_USERS + " WHERE " +
+                COLUMN_USERNAME + " = \"" + username + "\"";
+
+
+
+
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        User user = null;
+
+        if (cursor.moveToFirst()) {
+            user = new User(cursor.getString(0),cursor.getString(1), cursor.getString(2),
+                    cursor.getString(3), cursor.getString(4),
+                    cursor.getString(5),cursor.getString(6),cursor.getString(7));
+            cursor.close();
+        } else {
+            user = null;
+        }
+        db.close();
+
         return user;
     }
 
@@ -296,7 +366,6 @@ public class MyDBHandler extends SQLiteOpenHelper {
             SQLiteDatabase db2 = this.getWritableDatabase();
             ContentValues values = new ContentValues();
             values.put(COLUMN_FIRSTNAME, user.getFirstName());
-            values.put(COLUMN_LASTNAME,user.getLastName());
             values.put(COLUMN_USERNAME, user.getUsername());
             values.put(COLUMN_PASSWORD,user.getPassword());
             values.put(COLUMN_BIRTHDAY,user.getBirthday());
@@ -319,12 +388,51 @@ public class MyDBHandler extends SQLiteOpenHelper {
             ContentValues values = new ContentValues();
             values.put(COLUMN_COMMENTS,feedback.getComments());
             values.put(COLUMN_RATING, feedback.getRatings());
-            values.put(HOMEWONERID,feedback.getHome_owner_id());
-            values.put(SERVICEPROVIDER_ID,feedback.getService_provider_id());
+            values.put(HOMEWONERIDBOOKING,feedback.getHome_owner_id());
+            values.put(SERVICEPROVIDER_IDBOOKING,feedback.getService_provider_id());
             long id = db2.insert(TABLE_FEEDBACK,null,values);
             db2.close();
             return id;
         }
+    }
+
+    public long addBooking (Booking booking){
+        SQLiteDatabase db2 = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(HOME_OWNER_ID,booking.getHome_owner_id());
+        values.put(SERVICE_PROVIDER_ID, booking.getService_provider_id());
+        values.put(BOOKING_TIME,booking.getDateOfBooking());
+        long id = db2.insert(TABLE_BOOKING,null,values);
+        db2.close();
+        return id;
+    }
+
+
+    public HashMap findServiceProviderInfo(String Id) {
+
+       String query = "Select * FROM " + TABLE_SERVICE_PROVIDER_INFO + " WHERE " +
+                COLUMN_USERID + " = \"" + Id + "\"";
+
+
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        HashMap<String, String> userInfo = new HashMap<String, String>();
+
+        Feedback feedback1 = null;
+
+        while (cursor.moveToNext()) {
+            userInfo.put("CompanyName",cursor.getString(1));
+            userInfo.put("Licensed",cursor.getString(2));
+            userInfo.put("Expertise",cursor.getString(3));
+            userInfo.put("ExperienceYears",cursor.getString(4));
+            userInfo.put("PhoneNumber",cursor.getString(5));
+            userInfo.put("Rating","5/10");
+            cursor.close();
+        }
+        db.close();
+        return userInfo;
     }
 
     public Feedback findFeedback(Feedback feedback) {
@@ -353,6 +461,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         values.put(COLUMN_COMPANYNAME, serviceProvider.getCompanyName());
         values.put(COLUMN_EXPERIENCEYEARS,serviceProvider.getexperienceYears());
         values.put(COLUMN_LICENSE, serviceProvider.getLicenseName());
+        values.put(COLUMN_EXPERTISE, serviceProvider.getExpertise());
         values.put(COLUMN_PHONENUMBER,serviceProvider.getPhoneNumber());
         values.put(COLUMN_USERID,serviceProviderId);
         db.insert(TABLE_SERVICE_PROVIDER_INFO,null,values);

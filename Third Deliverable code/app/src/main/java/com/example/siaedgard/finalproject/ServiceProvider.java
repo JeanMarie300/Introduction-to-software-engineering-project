@@ -3,9 +3,8 @@ package com.example.siaedgard.finalproject;
 public class ServiceProvider extends User {
     private String phoneNumber, companyName, licensed, expertise;
     private int experienceYears;
-    // Create Add the informations related to a service provider in the database
     public ServiceProvider(User user, String phoneNumber, String companyName, String license, int experienceYears, String expertise) {
-        super(user.getId(),user.getFirstName(), user.getLastName(), user.getBirthday(), user.getPostalCode(), user.getUserType(),
+        super(user.getId(),user.getFirstName(), user.getBirthday(), user.getPostalCode(), user.getUserType(),
                 user.getUsername(),  user.getPassword(), user.getAddress());
         this.phoneNumber = phoneNumber;
         this.companyName = companyName;

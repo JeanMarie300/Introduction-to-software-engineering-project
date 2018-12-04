@@ -15,11 +15,11 @@ import java.util.HashMap;
 public class ServiceProviderForm extends AppCompatActivity {
 
 
-    EditText PostalCode, UserName, Password, PhoneNumber , Company_name ,  License , expertise, address, number;
-    String LastName, FirstName ,Birthday, userType;
+    EditText PostalCode, UserName, Password, PhoneNumber , Company_name ,  License , expertise,  number;
+    String LastName, FirstName ,Birthday, userType, userId;
     TextView result;
     private Spinner spinner, secondSpinner;
-    private String [] answers = new String [12];
+    private String [] answers = new String [5];
     private Bundle bd;
     public static final String[] paths = {"Select your years of experience ...","Less than a year", "1", "2","3","4","5+"};
     public static final String [] yesOrNo = {"Are you licensed ?","yes","no"};
@@ -30,24 +30,21 @@ public class ServiceProviderForm extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service_provider);
-        Password = (EditText) findViewById(R.id.Password);
-        UserName = (EditText) findViewById(R.id.userName);
         PostalCode = (EditText) findViewById(R.id.PostalCode);
         expertise = (EditText) findViewById(R.id.expertise);
         PhoneNumber = (EditText) findViewById(R.id.PhoneNumber);
         Company_name= (EditText) findViewById(R.id.Company_name);
         spinner = (Spinner)findViewById(R.id.experienceYears);
         secondSpinner = (Spinner)findViewById(R.id.License);
-        address = (EditText) findViewById(R.id.streetName);
-        number = (EditText) findViewById(R.id.number);
+
         Intent intent = getIntent();
         Bundle bd = intent.getExtras();
         if(bd != null)
         {
             FirstName = bd.get("USER_FIRSTNAME").toString();
-            LastName = bd.get("USER_LASTNAME").toString();
             Birthday = bd.get("USER_BIRTHDAY").toString();
             userType = bd.get("USER_TYPE").toString();
+            userId =   bd.get("USER_ID") .toString();
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(ServiceProviderForm.this,
@@ -62,25 +59,23 @@ public class ServiceProviderForm extends AppCompatActivity {
 
     }
     public void newServiceProvider () {
-        User user = new User("1",userInfo.get("FirstName"),userInfo.get("LastName"), userInfo.get("Birthday"), userInfo.get("PostalCode"), userInfo.get("UserType"), userInfo.get("UserName"), userInfo.get("Password"), userInfo.get("address"));
+
         MyDBHandler dbHandler = new MyDBHandler(this);
-        long userID = dbHandler.addUsers(user);
-        user.setId(Long.toString(userID));
-        userInfo.put("userId", Long.toString(userID));
+        User user = dbHandler.findUserById(userId);
         if (userInfo.get("experience_years").equals(paths[1])) {
             int noExperienceYears = 0;
             ServiceProvider newServiceProvider = new ServiceProvider(user, userInfo.get("PhoneNumber"),
                     userInfo.get("Company_name"), userInfo.get("license"), noExperienceYears, userInfo.get("expertise"));
-            dbHandler.ServiceProviderInfo(newServiceProvider, Long.toString(userID));
+            dbHandler.ServiceProviderInfo(newServiceProvider, userId);
         } else if (userInfo.get("experience_years").equals(paths[5])) {
             int highExperienceYears = 5;
             ServiceProvider newServiceProvider = new ServiceProvider(user, userInfo.get("PhoneNumber"),
                     userInfo.get("Company_name"), userInfo.get("license"), highExperienceYears, userInfo.get("expertise"));
-            dbHandler.ServiceProviderInfo(newServiceProvider, Long.toString(userID));
+            dbHandler.ServiceProviderInfo(newServiceProvider, userId);
         } else {
             ServiceProvider newServiceProvider = new ServiceProvider(user, userInfo.get("PhoneNumber"),
                     userInfo.get("Company_name"), userInfo.get("license"),Integer.parseInt(userInfo.get("experience_years")), userInfo.get("expertise"));
-            dbHandler.ServiceProviderInfo(newServiceProvider, Long.toString(userID));
+            dbHandler.ServiceProviderInfo(newServiceProvider, userId);
         }
     }
 
@@ -96,18 +91,11 @@ public class ServiceProviderForm extends AppCompatActivity {
 
     public void OnFinish(View view) {
 
-        answers[0] = LastName.toString();
-        answers[1]=  FirstName.toString();
-        answers[2] = Birthday.toString();
-        answers[3] = PostalCode.getText().toString();
-        answers[4] =  PhoneNumber.getText().toString();
-        answers[5] = Company_name.getText().toString();
-        answers[6] = spinner.getSelectedItem().toString();
-        answers[7] = secondSpinner.getSelectedItem().toString();
-        answers[8] = UserName.getText().toString();
-        answers[9] =Password.getText().toString();
-        answers[10] = expertise.getText().toString();
-        answers[11] =number.getText().toString() +  address.getText().toString();
+        answers[0] =  PhoneNumber.getText().toString();
+        answers[1] = Company_name.getText().toString();
+        answers[2] = spinner.getSelectedItem().toString();
+        answers[3] = secondSpinner.getSelectedItem().toString();
+        answers[4] = expertise.getText().toString();
 
         boolean invalid = false;
         int i =0;
@@ -135,32 +123,17 @@ public class ServiceProviderForm extends AppCompatActivity {
             alert.setMessage("You need to choose yes or no to determine if you are licensed or no");
             alert.setPositiveButton("OK",null);
             alert.show();
-        } else if (!verifyPostalCode(PostalCode.getText().toString())) {
-            AlertDialog.Builder  alert = new AlertDialog.Builder(this);
-            alert.setTitle("Invalid Postal Code");
-            alert.setMessage("You need to enter a postal code following this format A1A1A1");
-            alert.setPositiveButton("OK",null);
-            alert.show();
-        } else{
-            userInfo.put("FirstName",answers[1]);
-            userInfo.put("LastName",answers[0]);
-            userInfo.put("Birthday",answers[2]);
-            userInfo.put("PostalCode",answers[3]);
-            userInfo.put("PhoneNumber",answers[4]);
-            userInfo.put("Company_name",answers[5]);
-            userInfo.put("experience_years",answers[6]);
-            userInfo.put("license",answers[7]);
-            userInfo.put("UserType",userType);
-            userInfo.put("UserName",answers[8]);
-            userInfo.put("Password",answers[9]);
-            userInfo.put("expertise",answers[10]);
-            userInfo.put("address",answers[11]);
+        }  else{
+            userInfo.put("PhoneNumber",answers[0]);
+            userInfo.put("Company_name",answers[1]);
+            userInfo.put("experience_years",answers[2]);
+            userInfo.put("license",answers[3]);
+            userInfo.put("expertise",answers[4]);
             newServiceProvider();
             Intent intent = new Intent(this, ServiceProviderWelcomePage.class);
             intent.putExtra("USER_TYPE",  userType);
-            intent.putExtra("FIRST_NAME",  userInfo.get("FirstName"));
-            intent.putExtra("LAST_NAME", userInfo.get("LastName"));
-            intent.putExtra("USER_ID", userInfo.get("userId"));
+            intent.putExtra("FIRST_NAME",  FirstName);
+            intent.putExtra("USER_ID", userId);
             startActivity(intent);
             finish();
         }

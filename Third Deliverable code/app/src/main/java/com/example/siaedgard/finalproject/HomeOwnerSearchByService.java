@@ -10,11 +10,18 @@ import android.widget.EditText;
 public class HomeOwnerSearchByService extends AppCompatActivity {
 
     EditText service;
+    String userId;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_owner_search_by_service);
         service = (EditText) findViewById(R.id.editText);
+        Intent intent = getIntent();
+        Bundle bd = intent.getExtras();
+        if(bd != null)
+        {
+            userId = bd.get("USER_ID").toString();
+        }
     }
 
     public void OnFinish(View view) {
@@ -32,6 +39,7 @@ public class HomeOwnerSearchByService extends AppCompatActivity {
         else {
             Intent intent = new Intent(this, ServiceProviderListByService.class);
             intent.putExtra("SERVICE_NAME",  inputService);
+            intent.putExtra("USER_ID",  userId);
             startActivity(intent);
             finish();
         }
