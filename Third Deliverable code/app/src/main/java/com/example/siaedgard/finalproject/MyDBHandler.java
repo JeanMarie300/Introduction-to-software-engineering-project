@@ -6,7 +6,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -638,6 +641,34 @@ public class MyDBHandler extends SQLiteOpenHelper {
             availabities.add(availability);
         }
         return availabities;
+    }
+
+    public List<User> FindServiceProviderbyAvailability(HashMap<String, String> map){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query =  "Select * FROM " + TABLE_SERVICE_PROVIDER_AVAILABILITIES ;
+        Cursor cursor = db.rawQuery(query,null);
+        List<User> users = new ArrayList<>();
+        String userInitialDate = map.get("initDate") + " "+map.get("initTime");
+        String userFinalDate = map.get("initDate") + " "+map.get("finalTime");
+        SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy/MM/dd hh:mm a");
+        while(cursor.moveToNext()){
+            String initialDate = cursor.getString(1) + " "+cursor.getString(2);
+            String finalDate = cursor.getString(1)+ " "+ cursor.getString(3);
+            try {
+                Date initialdate = formatter1.parse(userInitialDate);
+                Date finaldate = formatter1.parse(userInitialDate);
+                Date serviceProviderInitialDate = formatter1.parse(initialDate);
+                Date serviceProviderFinalDate = formatter1.parse(finalDate);
+                if (initialdate.compareTo(serviceProviderInitialDate) >=0 && finaldate.compareTo(serviceProviderFinalDate) <= 0) {
+                    users.add(findUserById(cursor.getString(4)));
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        cursor.close();
+
+        return users;
     }
 
     public void deleteServices (String serviceName){

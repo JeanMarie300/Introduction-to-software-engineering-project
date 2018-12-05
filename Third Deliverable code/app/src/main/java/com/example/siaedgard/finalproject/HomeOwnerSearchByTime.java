@@ -7,15 +7,18 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 
 public class HomeOwnerSearchByTime extends AppCompatActivity {
@@ -24,6 +27,8 @@ public class HomeOwnerSearchByTime extends AppCompatActivity {
     EditText initialDate, InitTime, EndTime;
     Calendar firstCalendar, thirdCalendar, FourthCalendar;
     String userId, userType, Name, lastName;
+
+
 
     DatePickerDialog.OnDateSetListener initialdate = new DatePickerDialog.OnDateSetListener() {
         @Override
@@ -60,19 +65,14 @@ public class HomeOwnerSearchByTime extends AppCompatActivity {
     };
 
 
-
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.home_owner_search_by_time);
+        setContentView(R.layout.service_provider_availabilities);
         Intent intent = getIntent();
         Bundle bd = intent.getExtras();
         if(bd != null)
         {
             userId = (String) bd.get("USER_ID");
-            userType = (String) bd.get("USER_TYPE");
-            Name = (String) bd.get("FIRST_NAME");
-            lastName = (String) bd.get("LAST_NAME");
         }
 
         dateInfo = new HashMap<>();
@@ -85,10 +85,33 @@ public class HomeOwnerSearchByTime extends AppCompatActivity {
         initialDate = (EditText) findViewById(R.id.Begining);
         InitTime = (EditText) findViewById(R.id.InitTime);
         EndTime = (EditText) findViewById(R.id.EndTime);
+        Button ButtonAction1 = findViewById(R.id.buttonFinish);
+        ButtonAction1.setText("Search Provider for this time range");
+
+        initialDate.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                new DatePickerDialog(HomeOwnerSearchByTime.this, initialdate, firstCalendar
+                        .get(Calendar.YEAR), firstCalendar.get(Calendar.MONTH),
+                        firstCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
 
 
+        InitTime.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                new TimePickerDialog(HomeOwnerSearchByTime.this, InitTimeListener, thirdCalendar
+                        .get(Calendar.HOUR_OF_DAY), thirdCalendar.get(Calendar.MINUTE),
+                        false).show();
+            }
+        });
 
-
+        EndTime.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                new TimePickerDialog(HomeOwnerSearchByTime.this, EndTimeListener, FourthCalendar
+                        .get(Calendar.HOUR_OF_DAY), FourthCalendar.get(Calendar.MINUTE),
+                        false).show();
+            }
+        });
     }
 
     public void updateFirstEditText() {
@@ -109,6 +132,31 @@ public class HomeOwnerSearchByTime extends AppCompatActivity {
         String myFormat = "hh:mm a";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         EndTime.setText(sdf.format(FourthCalendar.getTime()));
+    }
+
+    public void OnNext (View view) {
+        if (initialDate.getText().toString().matches("") || InitTime.getText().toString().matches("") || EndTime.getText().toString().matches("")) {
+            AlertDialog.Builder  alert = new AlertDialog.Builder(this);
+            alert.setTitle("Empty field");
+            alert.setMessage("You need to fill up all the empty fields");
+            alert.setPositiveButton("OK",null);
+            alert.show();
+        } else if (!isLegalDate(initialDate.getText().toString())) {
+            AlertDialog.Builder  alert = new AlertDialog.Builder(this);
+            alert.setTitle("Invalid date");
+            alert.setMessage("Please enter a time slot that is greater than today");
+            alert.setPositiveButton("OK",null);
+            alert.show();
+        } else {
+            dateInfo.put("initDate", initialDate.getText().toString());
+            dateInfo.put("initTime", InitTime.getText().toString());
+            dateInfo.put("finalTime", EndTime.getText().toString());
+            addAvailabilities (dateInfo,userId);
+            finish();
+            Intent intent = new Intent(this, ConfirmationPage.class);
+            intent.putExtra("USER_ID", userId);
+            startActivity(intent);
+        }
     }
 
     private boolean isLegalDate(String date) {
@@ -137,32 +185,19 @@ public class HomeOwnerSearchByTime extends AppCompatActivity {
         return value;
     }
 
-    public void OnNext (View view) {
-        if (initialDate.getText().toString().matches("") || InitTime.getText().toString().matches("") || EndTime.getText().toString().matches("")) {
+    public void addAvailabilities (HashMap<String, String> map, String Id) {
+        MyDBHandler dbHandler = new MyDBHandler(this);
+        List<User> users = new ArrayList<>();
+        users = dbHandler.FindServiceProviderbyAvailability(map);
+        if (users.isEmpty()) {
             AlertDialog.Builder  alert = new AlertDialog.Builder(this);
-            alert.setTitle("Empty field");
-            alert.setMessage("You need to fill up all the empty fields");
-            alert.setPositiveButton("OK",null);
-            alert.show();
-        } else if (!isLegalDate(initialDate.getText().toString())) {
-            AlertDialog.Builder  alert = new AlertDialog.Builder(this);
-            alert.setTitle("Invalid date");
-            alert.setMessage("Please enter a time slot that is greater than today");
+            alert.setTitle("No service provider found");
+            alert.setMessage("No service providers are available for this period of time");
             alert.setPositiveButton("OK",null);
             alert.show();
         } else {
-            Intent intent = new Intent(this, ServiceProviderAvailabilities.class);
-            startActivity(intent);
-            finish();
+
         }
+
     }
-
-
-
-
-
-
-
-
-
 }
