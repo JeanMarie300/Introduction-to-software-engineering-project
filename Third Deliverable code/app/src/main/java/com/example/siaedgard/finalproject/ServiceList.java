@@ -29,7 +29,7 @@ public class ServiceList extends ArrayAdapter<Services> {
 
         Services service = services.get(position);
         textViewName.setText(service.getName());
-        textViewRate.setText(String.valueOf(service.gethourRate()));
+        textViewRate.setText(String.valueOf(service.gethourRate()) + "/hr");
         return listViewItem;
     }
 }

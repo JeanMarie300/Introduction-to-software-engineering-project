@@ -43,6 +43,9 @@
         <activity android:name=".ConfirmBooking" />
         <activity android:name=".HomeOwnerBookingList" />
         <activity android:name=".ConfirmServiceCreation" />
+        <activity android:name=".ServiceProviderListByAvailability" />
+        <activity android:name=".HomeOwnerSearchByTimeSlot" />
+        <activity android:name=".HomeOwnerBookByTimeSlot" />
     </application>
 
 </manifest>

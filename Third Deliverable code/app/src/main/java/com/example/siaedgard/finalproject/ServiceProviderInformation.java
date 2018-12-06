@@ -6,8 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 
 public class ServiceProviderInformation extends AppCompatActivity {
@@ -36,6 +34,8 @@ public class ServiceProviderInformation extends AppCompatActivity {
             expertisevalue.setText(serviceProviderInfo.get("Expertise").toString());
             if (serviceProviderInfo.get("ExperienceYears").toString().equals("0")) {
                 experienceYearsValue.setText("Less than a year");
+            } else if(serviceProviderInfo.get("ExperienceYears").toString().equals("5")) {
+                experienceYearsValue.setText("More than 5 years");
             } else {
                 experienceYearsValue.setText(serviceProviderInfo.get("ExperienceYears").toString());
             }
@@ -56,15 +56,9 @@ public class ServiceProviderInformation extends AppCompatActivity {
     }
 
     public void OnBook(View view) {
-        MyDBHandler dbHandler = new MyDBHandler(this);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
-        Date date = new Date();
-        String dateTime = dateFormat.format(date);
-        Booking booking = new Booking ("1",  home_owner_id, service_provider_id, dateTime);
-        long id = dbHandler.addBooking(booking);
-        booking.setId(String.valueOf(id));
-        Intent intent = new Intent(this, ConfirmBooking.class);
+        Intent intent = new Intent(this, HomeOwnerBookByTimeSlot.class);
         intent.putExtra("USER_ID", home_owner_id);
+        intent.putExtra("SERVICE_PROVIDER_ID", service_provider_id);
         startActivity(intent);
     }
 

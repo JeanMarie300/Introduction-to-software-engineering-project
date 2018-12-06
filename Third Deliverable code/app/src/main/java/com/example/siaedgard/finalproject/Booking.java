@@ -10,8 +10,6 @@ public class Booking {
         this.service_provider_id = service_provider_id;
         this.dateOfBooking = dateOfBooking;
         this.rating = "-1";
-
-
     }
 
     public String getDateOfBooking() {

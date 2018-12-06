@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
@@ -82,6 +83,9 @@ public class ServiceProviderEditAvailability extends AppCompatActivity {
             availabilityId = (String)bd.get("AVAILABILITY_ID");
         }
 
+        Button ButtonSubmit = findViewById(R.id.buttonFinish);
+        ButtonSubmit.setText("Edit availability");
+
         dateInfo = new HashMap<>();
         dateInfo.put("userId",userId);
 
@@ -136,13 +140,15 @@ public class ServiceProviderEditAvailability extends AppCompatActivity {
     }
 
     public void OnNext (View view) {
+        String initialDateInput = initialDate.getText().toString()+ " "+ InitTime.getText().toString();
+        String finalDateInput = initialDate.getText().toString() + " "+ EndTime.getText().toString();
         if (initialDate.getText().toString().matches("") || InitTime.getText().toString().matches("") || EndTime.getText().toString().matches("")) {
             AlertDialog.Builder  alert = new AlertDialog.Builder(this);
             alert.setTitle("Empty field");
             alert.setMessage("You need to fill up all the empty fields");
             alert.setPositiveButton("OK",null);
             alert.show();
-        } else if (!isLegalDate(initialDate.getText().toString())) {
+        } else if (!isLegalDate(initialDateInput,finalDateInput)) {
             AlertDialog.Builder  alert = new AlertDialog.Builder(this);
             alert.setTitle("Invalid date");
             alert.setMessage("Please enter a time slot that is greater than today");
@@ -160,45 +166,22 @@ public class ServiceProviderEditAvailability extends AppCompatActivity {
         }
     }
 
-    private boolean isLegalDate(String date) {
-
-        SimpleDateFormat sdfrmt = new SimpleDateFormat("yyyy/MM/dd");
-        SimpleDateFormat finalDate = new SimpleDateFormat("yyyy/MM/dd");
+    private boolean isLegalDate(String initialDate, String finalDate) {
 
 
-        sdfrmt.setLenient(false);
+        SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy/MM/dd hh:mm a");
+
+
+        formatter1.setLenient(false);
         boolean value = false;
         try
         {
-            sdfrmt.parse(date);
-            if (new Date().after(sdfrmt.parse(date))) {
+            if (new Date().after(formatter1.parse(initialDate)) || (formatter1.parse(initialDate).after(formatter1.parse(finalDate)))) {
                 value = false;
             } else {
                 value = true;
             }
 
-        }
-        catch (ParseException e)
-        {
-            value = false;
-            return value ;
-        }
-        return value;
-    }
-
-    private boolean dateConflicting (String date1, String date2) {
-        SimpleDateFormat sdfrmt = new SimpleDateFormat("yyyy/MM/dd");
-        SimpleDateFormat finalDate = new SimpleDateFormat("yyyy/MM/dd");
-        boolean value = false;
-        try
-        {
-            sdfrmt.parse(date1);
-            sdfrmt.parse(date2);
-            if (sdfrmt.parse(date1).after(sdfrmt.parse(date2))) {
-                value = false;
-            } else {
-                value = true;
-            }
         }
         catch (ParseException e)
         {

@@ -69,7 +69,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="OnFinish"
-                android:text="Finished"
+                android:text="Create new service"
                 tools:text="Create" />
         </LinearLayout>
 

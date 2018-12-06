@@ -382,6 +382,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
 
+
         User user = null;
 
         if (cursor.moveToFirst()) {
@@ -656,10 +657,10 @@ public class MyDBHandler extends SQLiteOpenHelper {
             String finalDate = cursor.getString(1)+ " "+ cursor.getString(3);
             try {
                 Date initialdate = formatter1.parse(userInitialDate);
-                Date finaldate = formatter1.parse(userInitialDate);
+                Date finaldate = formatter1.parse(userFinalDate);
                 Date serviceProviderInitialDate = formatter1.parse(initialDate);
                 Date serviceProviderFinalDate = formatter1.parse(finalDate);
-                if (initialdate.compareTo(serviceProviderInitialDate) >=0 && finaldate.compareTo(serviceProviderFinalDate) <= 0) {
+                if ( (initialdate.after(serviceProviderInitialDate) || initialdate.equals(serviceProviderInitialDate) ) && (serviceProviderFinalDate.after(finaldate) || serviceProviderFinalDate.equals(finaldate))) {
                     users.add(findUserById(cursor.getString(4)));
                 }
             } catch (ParseException e) {

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeOwnerSearchProvider">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/optional_view"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:textAlignment="center"
+            android:padding="15dp"
+            android:text="Select your options" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/search_by_service"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="OnByService"
+                android:text="Search by Service" />
+
+            <Button
+                android:id="@+id/search_by_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="OnByTime"
+                android:text="Search by time" />
+
+            <Button
+                android:id="@+id/search_by_rating"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="OnByRating"
+                android:text="Search by rating" />
+        </LinearLayout>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

@@ -126,7 +126,13 @@ public class ServiceProviderForm extends AppCompatActivity {
         }  else{
             userInfo.put("PhoneNumber",answers[0]);
             userInfo.put("Company_name",answers[1]);
-            userInfo.put("experience_years",answers[2]);
+            if(answers[2].equals("Less than a year")) {
+                userInfo.put("experience_years","0");
+            } else if (answers[2].equals("5+")) {
+                userInfo.put("experience_years","5");
+            } else {
+                userInfo.put("experience_years",answers[2]);
+            }
             userInfo.put("license",answers[3]);
             userInfo.put("expertise",answers[4]);
             newServiceProvider();

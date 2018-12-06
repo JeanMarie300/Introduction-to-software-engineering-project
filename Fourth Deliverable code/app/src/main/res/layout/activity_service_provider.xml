@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ServiceProviderForm">
+
+    <LinearLayout
+        android:id="@+id/vertical_Layout2"
+        android:layout_width="380dp"
+        android:layout_height="515dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+        <EditText
+            android:id="@+id/PhoneNumber"
+            android:layout_width="match_parent"
+            android:layout_height="96dp"
+            android:digits="0123456789"
+            android:ems="10"
+            android:hint="Phone number"
+            android:inputType="phone" />
+
+        <EditText
+            android:id="@+id/Company_name"
+            android:layout_width="match_parent"
+            android:layout_height="81dp"
+            android:ems="10"
+            android:hint="Company Name"
+            android:inputType="textPersonName" />
+
+        <Spinner
+            android:id="@+id/License"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dropdown" />
+
+        <EditText
+            android:id="@+id/expertise"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:ems="10"
+            android:hint="Expertise"
+            android:inputType="textPersonName" />
+
+        <Spinner
+            android:id="@+id/experienceYears"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dropdown" />
+
+        <Button
+            android:id="@+id/buttonFinish"
+            android:layout_width="match_parent"
+            android:layout_height="86dp"
+            android:onClick="OnFinish"
+            android:text="Finish"
+            tools:text="Finish" />
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
+

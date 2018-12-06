@@ -9,10 +9,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ServiceProviderListByAvailability extends AppCompatActivity {
     TextView ServiceProviderName;
+    HashMap<String, String> dateInfo;
     ListView listViewProvider;
     List<ServiceProvider> providers;
     String userId, userType, Name, providerId;
@@ -27,9 +29,12 @@ public class ServiceProviderListByAvailability extends AppCompatActivity {
         MyDBHandler dbHandler = new MyDBHandler(this);
         Bundle bd = intent.getExtras();
         if (bd != null) {
-            String rating = bd.get("RATING").toString();
+            dateInfo = new HashMap<>();
             userId = bd.get("USER_ID").toString();
-            final List<User> providers = dbHandler.findServiceProviderByRating(rating);
+            dateInfo.put("initDate",bd.getString("INIT_DATE").toString());
+            dateInfo.put("initTime", bd.getString("INIT_TIME").toString());
+            dateInfo.put("finalTime", bd.getString("FINAL_TIME").toString());
+            final List<User> providers = dbHandler.FindServiceProviderbyAvailability(dateInfo);
             UserList productsAdapter = new UserList(ServiceProviderListByAvailability.this, providers);
             listViewProvider.setAdapter(productsAdapter);
 

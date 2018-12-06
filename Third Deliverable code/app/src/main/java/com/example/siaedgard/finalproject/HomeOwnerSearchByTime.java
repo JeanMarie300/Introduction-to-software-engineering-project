@@ -14,7 +14,6 @@ import android.widget.TimePicker;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -135,13 +134,15 @@ public class HomeOwnerSearchByTime extends AppCompatActivity {
     }
 
     public void OnNext (View view) {
+        String initialInput = initialDate.getText()+ " " + InitTime.getText().toString();
+        String finalInput = initialDate.getText()+ " " + EndTime.getText().toString();
         if (initialDate.getText().toString().matches("") || InitTime.getText().toString().matches("") || EndTime.getText().toString().matches("")) {
             AlertDialog.Builder  alert = new AlertDialog.Builder(this);
             alert.setTitle("Empty field");
             alert.setMessage("You need to fill up all the empty fields");
             alert.setPositiveButton("OK",null);
             alert.show();
-        } else if (!isLegalDate(initialDate.getText().toString())) {
+        } else if (!isLegalDate(initialInput,finalInput)) {
             AlertDialog.Builder  alert = new AlertDialog.Builder(this);
             alert.setTitle("Invalid date");
             alert.setMessage("Please enter a time slot that is greater than today");
@@ -151,26 +152,33 @@ public class HomeOwnerSearchByTime extends AppCompatActivity {
             dateInfo.put("initDate", initialDate.getText().toString());
             dateInfo.put("initTime", InitTime.getText().toString());
             dateInfo.put("finalTime", EndTime.getText().toString());
-            addAvailabilities (dateInfo,userId);
-            finish();
-            Intent intent = new Intent(this, ConfirmationPage.class);
-            intent.putExtra("USER_ID", userId);
-            startActivity(intent);
+            List serviceProviderId =  addAvailabilities (dateInfo);
+            if (serviceProviderId.isEmpty()) {
+                    AlertDialog.Builder  alert = new AlertDialog.Builder(this);
+                    alert.setTitle("No service provider found");
+                    alert.setMessage("No service providers are available for this period of time");
+                    alert.setPositiveButton("OK",null);
+                    alert.show();
+                } else {
+                Intent intent = new Intent(this, ServiceProviderListByAvailability.class);
+                intent.putExtra("USER_ID", userId);
+                intent.putExtra("INIT_DATE", dateInfo.get("initDate"));
+                intent.putExtra("INIT_TIME", dateInfo.get("initTime"));
+                intent.putExtra("FINAL_TIME", dateInfo.get("finalTime"));
+                startActivity(intent);
+            }
         }
     }
 
-    private boolean isLegalDate(String date) {
+    private boolean isLegalDate(String InitialDate, String finalDate) {
 
-        SimpleDateFormat sdfrmt = new SimpleDateFormat("yyyy/MM/dd");
-        SimpleDateFormat finalDate = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy/MM/dd hh:mm a");
 
-
-        sdfrmt.setLenient(false);
+        formatter1.setLenient(false);
         boolean value = false;
         try
         {
-            sdfrmt.parse(date);
-            if (new Date().after(sdfrmt.parse(date))) {
+            if (new Date().after(formatter1.parse(InitialDate)) || (formatter1.parse(InitialDate).after(formatter1.parse(finalDate)))) {
                 value = false;
             } else {
                 value = true;
@@ -185,19 +193,10 @@ public class HomeOwnerSearchByTime extends AppCompatActivity {
         return value;
     }
 
-    public void addAvailabilities (HashMap<String, String> map, String Id) {
+    public List<User> addAvailabilities (HashMap<String, String> map) {
         MyDBHandler dbHandler = new MyDBHandler(this);
-        List<User> users = new ArrayList<>();
+        List<User> users;
         users = dbHandler.FindServiceProviderbyAvailability(map);
-        if (users.isEmpty()) {
-            AlertDialog.Builder  alert = new AlertDialog.Builder(this);
-            alert.setTitle("No service provider found");
-            alert.setMessage("No service providers are available for this period of time");
-            alert.setPositiveButton("OK",null);
-            alert.show();
-        } else {
-
-        }
-
+        return users;
     }
 }

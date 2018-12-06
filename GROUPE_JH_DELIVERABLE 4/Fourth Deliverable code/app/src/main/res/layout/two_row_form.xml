@@ -1,0 +1,207 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    tools:context=".ServiceProviderInformation">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Service provider info"
+            android:textSize="36sp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/company_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:textSize="18dp"
+                android:text="Company name:"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/company_name_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:textSize="18dp"
+                android:text="Company name:"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/licensed"
+                android:layout_width="123dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:textSize="18dp"
+                android:text="Licensed :"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/licensedvalue"
+                android:layout_width="123dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:textSize="18dp"
+                android:text="Licensed :"
+                android:textAlignment="center" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/expertise"
+                android:layout_width="123dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:textSize="18dp"
+                android:text="Expertise :"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/expertisevalue"
+                android:layout_width="123dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:textSize="18dp"
+                android:text="Expertise :"
+                android:textAlignment="center" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/experienceYears"
+                android:layout_width="123dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:textSize="18dp"
+                android:text="Years of experience :"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/experienceYearsValue"
+                android:layout_width="123dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:textSize="18dp"
+                android:text="Years of experience :"
+                android:textAlignment="center" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/PhoneNumber"
+                android:layout_width="123dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="Phone number :"
+                android:textSize="18dp"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/PhoneNumberValue"
+                android:layout_width="123dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="Phone number :"
+                android:textSize="18dp"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/Rating"
+                android:layout_width="123dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="Rating:"
+                android:textSize="18dp"
+                android:textAlignment="center" />
+
+
+            <TextView
+                android:id="@+id/RatingValue"
+                android:layout_width="123dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="Rating:"
+                android:textSize="15dp"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/goback"
+                android:text="See other service provider"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:onClick="OnGoback"
+                android:layout_weight="1"
+                android:gravity="center"/>
+
+            <Button
+                android:id="@+id/bookServiceProvider"
+                android:text="Book service provider"
+                android:onClick="OnBook"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

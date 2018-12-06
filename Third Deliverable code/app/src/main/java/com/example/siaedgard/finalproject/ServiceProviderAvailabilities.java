@@ -132,16 +132,18 @@ public class ServiceProviderAvailabilities extends AppCompatActivity {
     }
 
     public void OnNext (View view) {
+        String initialInput = initialDate.getText()+ " " + InitTime.getText().toString();
+        String finalInput = initialDate.getText()+ " " + EndTime.getText().toString();
         if (initialDate.getText().toString().matches("") || InitTime.getText().toString().matches("") || EndTime.getText().toString().matches("")) {
             AlertDialog.Builder  alert = new AlertDialog.Builder(this);
             alert.setTitle("Empty field");
-            alert.setMessage("You need to fill up all the empty fields");
+            alert.setMessage("All the fields are mandatory");
             alert.setPositiveButton("OK",null);
             alert.show();
-        } else if (!isLegalDate(initialDate.getText().toString())) {
+        } else if (!isLegalDate(initialInput,finalInput )) {
             AlertDialog.Builder  alert = new AlertDialog.Builder(this);
-            alert.setTitle("Invalid date");
-            alert.setMessage("Please enter a time slot that is greater than today");
+            alert.setTitle("Invalid Time Slot");
+            alert.setMessage("Please enter a time slot that is greater than now");
             alert.setPositiveButton("OK",null);
             alert.show();
         } else {
@@ -156,18 +158,16 @@ public class ServiceProviderAvailabilities extends AppCompatActivity {
         }
     }
 
-    private boolean isLegalDate(String date) {
+    private boolean isLegalDate(String InitialDate, String finalDate) {
 
-            SimpleDateFormat sdfrmt = new SimpleDateFormat("yyyy/MM/dd");
-            SimpleDateFormat finalDate = new SimpleDateFormat("yyyy/MM/dd");
-
-
-        sdfrmt.setLenient(false);
+            SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy/MM/dd hh:mm a");
+            formatter1.setLenient(false);
             boolean value = false;
             try
             {
-                sdfrmt.parse(date);
-                if (new Date().after(sdfrmt.parse(date))) {
+                formatter1.parse(InitialDate);
+                formatter1.parse(finalDate);
+                if (new Date().after(formatter1.parse(InitialDate)) || (formatter1.parse(InitialDate).after(formatter1.parse(finalDate)))) {
                     value = false;
                 } else {
                     value = true;

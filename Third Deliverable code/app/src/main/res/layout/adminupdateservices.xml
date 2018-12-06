@@ -35,6 +35,8 @@
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="10dp"
                 android:text="Services list"
                 android:textSize="32dp"
                 tools:text="Update services" />

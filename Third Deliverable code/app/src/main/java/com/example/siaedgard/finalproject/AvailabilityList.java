@@ -47,7 +47,7 @@ public class AvailabilityList extends ArrayAdapter<Availability> {
         TextView textViewRate = (TextView) listViewItem.findViewById(R.id.textViewRate);
 
         textViewName.setText(stringDate);
-        textViewRate.setText(availability.getInitialTime() + " to " + availability.getFinalTime());
+        textViewRate.setText("From "+ availability.getInitialTime() + " to " + availability.getFinalTime());
         return listViewItem;
     }
 }

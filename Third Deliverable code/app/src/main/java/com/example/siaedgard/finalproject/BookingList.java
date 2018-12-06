@@ -28,8 +28,10 @@ public class BookingList extends ArrayAdapter<Booking> {
         View listViewItem = inflater.inflate(R.layout.booking_list, null, true);
         Booking booking= bookings.get(position);
         Date date = null;
+        String random = booking.getDateOfBooking();
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd hh:mm a");
         try
         {
             date = format.parse(booking.getDateOfBooking());
@@ -39,7 +41,9 @@ public class BookingList extends ArrayAdapter<Booking> {
             System.out.println("Problem while parsing the date");
         }
 
-        SimpleDateFormat formatter = new SimpleDateFormat("EEE MMM dd");
+        Date randomDate = date;
+
+        SimpleDateFormat formatter = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss");
         String stringDate = formatter.format(date);
 
 

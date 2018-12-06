@@ -33,7 +33,7 @@
                 android:ems="10"
                 android:inputType="text"
                 android:focusable="false"
-                android:hint="Initial time interval" />
+                android:hint="Initial time " />
 
             <EditText
                 android:id="@+id/EndTime"
@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:focusable="false"
-                android:hint="Final time interval"
+                android:hint="Final time "
                 android:inputType="text" />
 
             <Button
@@ -49,7 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="OnNext"
-                android:text="Enter availabilities"
+                android:text="Enter availability"
                 tools:text="Next" />
         </LinearLayout>
 

@@ -58,7 +58,6 @@ public class HomeOwnerSearchByRatings extends AppCompatActivity {
             intent.putExtra("USER_ID", userId);
             intent.putExtra("RATING", inputRate);
             startActivity(intent);
-            finish();
         }
     }
 }

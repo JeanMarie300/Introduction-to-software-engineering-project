@@ -41,7 +41,6 @@ public class HomeOwnerSearchByService extends AppCompatActivity {
             intent.putExtra("SERVICE_NAME",  inputService);
             intent.putExtra("USER_ID",  userId);
             startActivity(intent);
-            finish();
         }
     }
 }

@@ -59,7 +59,16 @@ public class user_Type extends AppCompatActivity {
     public boolean newUser () {
         User user = new User("1",userInfo.get("FirstName"), userInfo.get("Birthday"), userInfo.get("PostalCode"), userType, userInfo.get("UserName"), userInfo.get("Password"),userInfo.get("address"));
         MyDBHandler dbHandler = new MyDBHandler(this);
-        long userID = dbHandler.addUsers(user);
+        long userID = 0;
+        if (userType.equals("Admin")) {
+            Admin admin = new Admin(user);
+            userID = dbHandler.addUsers(admin);
+        } else if (userType.equals("Home owner")){
+            HomeOwner homeOwner = new HomeOwner(user);
+            userID = dbHandler.addUsers(homeOwner);
+        } else {
+            userID = dbHandler.addUsers(user);
+        }
         if(userID == -2) {
             return false;
         } else {
